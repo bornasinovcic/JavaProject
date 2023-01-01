@@ -25,7 +25,7 @@ public class TestingMain {
                         food.getItemQuantity() + "] -> [" +
                         food.getTotalPriceOfItem() + "] -> [" +
                         food.getNutritionalValue().getFinalCaloricValueOfItem() + "] -> [" +
-                        food.caloricValueOfAllItems() + "]");
+                        food.getCaloricValueOfAllItems() + "]");
             if (item instanceof Gadget gadget) {
                 System.out.println("[" +
                         gadget.getItemId() + "] -> [" +
