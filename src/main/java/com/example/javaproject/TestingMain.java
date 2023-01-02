@@ -36,5 +36,25 @@ public class TestingMain {
                         gadget.getItemWarrantyInMonths() + "]");
             }
         }
+//        example 1
+        BigDecimal total = BigDecimal.ZERO;
+        for (Item value : items) {
+            total = total.add(value.getTotalPriceOfItem());
+        }
+        System.out.println("total -> " + total);
+//        example 2
+        total = BigDecimal.ZERO;
+        System.out.println("total -> " + total);
+        total = items.stream()
+                .map(item -> item.getItemPrice().multiply(BigDecimal.valueOf(item.getItemQuantity())))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        System.out.println("total -> " + total);
+//        example 3
+        total = BigDecimal.ZERO;
+        System.out.println("total -> " + total);
+        total = items.stream()
+                .map(Item::getTotalPriceOfItem)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        System.out.println("total -> " + total);
     }
 }
