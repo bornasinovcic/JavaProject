@@ -116,11 +116,11 @@ public class TestingMain {
     private static void duplicateFood(List<Food> foodList, Food food1) throws DuplicateItem {
         for (Food food2 : foodList)
             if (food2.getItemId().equals(food1.getItemId()))
-                throw new DuplicateItem("Duplicate food");
+                throw new DuplicateItem("DuplicateItem -> exception -> food");
     }
     private static void duplicateGadget(List<Gadget> foodList, Gadget gadget1) throws DuplicateItem {
         for (Gadget gadget2 : foodList)
             if (gadget2.getItemId().equals(gadget1.getItemId()))
-                throw new DuplicateItem("Duplicate gadget");
+                throw new DuplicateItem("DuplicateItem -> exception -> gadget");
     }
 }
