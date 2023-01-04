@@ -1,17 +1,17 @@
 package com.example.javaproject.entities;
 
 public abstract class ItemId {
-    private Long itemId;
+    private String itemId;
 
-    public ItemId(Long itemId) {
+    public ItemId(String itemId) {
         this.itemId = itemId;
     }
 
-    public Long getItemId() {
+    public String getItemId() {
         return itemId;
     }
 
-    public void setItemId(Long itemId) {
+    public void setItemId(String itemId) {
         this.itemId = itemId;
     }
 }

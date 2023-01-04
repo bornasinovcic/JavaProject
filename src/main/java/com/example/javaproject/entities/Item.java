@@ -9,7 +9,7 @@ public class Item extends ItemId {
     private BigDecimal itemPrice;
     private Integer itemQuantity;
 
-    public Item(Long itemId, String itemName, BigDecimal itemPrice, Integer itemQuantity) {
+    public Item(String itemId, String itemName, BigDecimal itemPrice, Integer itemQuantity) {
         super(itemId);
         this.itemName = itemName;
         this.itemPrice = itemPrice;
@@ -42,4 +42,5 @@ public class Item extends ItemId {
     public void setItemQuantity(Integer itemQuantity) {
         this.itemQuantity = itemQuantity;
     }
+    
 }

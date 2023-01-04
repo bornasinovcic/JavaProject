@@ -6,7 +6,7 @@ public class Food extends Item implements CaloricValues {
 
     private final NutritionalValue nutritionalValue;
 
-    public Food(Long itemId, String itemName, BigDecimal itemPrice, Integer itemQuantity, NutritionalValue nutritionalValue) {
+    public Food(String itemId, String itemName, BigDecimal itemPrice, Integer itemQuantity, NutritionalValue nutritionalValue) {
         super(itemId, itemName, itemPrice, itemQuantity);
         this.nutritionalValue = nutritionalValue;
     }
