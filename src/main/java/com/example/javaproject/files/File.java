@@ -3,9 +3,7 @@ package com.example.javaproject.files;
 import com.example.javaproject.entities.Food;
 import com.example.javaproject.entities.NutritionalValue;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,5 +25,19 @@ public class File {
             list.add(new Food(itemId, itemName, itemPrice, itemQuantity, new NutritionalValue(amountOfProteins, amountOfCarbohydrates, amountOfFats)));
         }
         return list;
+    }
+    public static void addNewFoodItem(List<Food>list) throws IOException {
+        FileWriter fileWriter = new FileWriter("files/foods.txt");
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+        for (Food food : list) {
+            printWriter.println(food.getItemId());
+            printWriter.println(food.getItemName());
+            printWriter.println(food.getItemPrice());
+            printWriter.println(food.getItemQuantity());
+            printWriter.println(food.getNutritionalValue().getAmountOfProtein());
+            printWriter.println(food.getNutritionalValue().getAmountOfCarbohydrate());
+            printWriter.println(food.getNutritionalValue().getAmountOfFat());
+        }
+        printWriter.flush();
     }
 }

@@ -6,7 +6,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.List;
+
+import static com.example.javaproject.files.File.addNewFoodItem;
+import static com.example.javaproject.files.File.getFoodItems;
 
 public class NewFoodController {
     @FXML
@@ -23,6 +28,7 @@ public class NewFoodController {
     private TextField textFieldCarbohydrates;
     @FXML
     private TextField textFieldFats;
+
     @FXML
     protected void onButtonClick() {
         String itemId = textFieldId.getText();
@@ -49,16 +55,14 @@ public class NewFoodController {
             Integer amountOfProteins = Integer.valueOf(itemProteinsString);
             Integer amountOfCarbohydrates = Integer.valueOf(itemCarbohydratesString);
             Integer amountOfFats = Integer.valueOf(itemFatsString);
+            try {
+                List<Food> list = getFoodItems();
+                list.add(new Food(itemId, itemName, itemPrice, itemQuantity, new NutritionalValue(amountOfProteins, amountOfCarbohydrates, amountOfFats)));
+                addNewFoodItem(list);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-            Food food = new Food(itemId, itemName, itemPrice, itemQuantity, new NutritionalValue(amountOfProteins, amountOfCarbohydrates, amountOfFats));
-
-            System.out.println("food.getItemId() -> " + food.getItemId());
-            System.out.println("food.getItemName() -> " + food.getItemName());
-            System.out.println("food.getItemPrice() -> " + food.getItemPrice());
-            System.out.println("food.getItemQuantity() -> " + food.getItemQuantity());
-            System.out.println("food.getNutritionalValue().getAmountOfProtein() -> " + food.getNutritionalValue().getAmountOfProtein());
-            System.out.println("food.getNutritionalValue().getAmountOfCarbohydrate() -> " + food.getNutritionalValue().getAmountOfCarbohydrate());
-            System.out.println("food.getNutritionalValue().getAmountOfFat() -> " + food.getNutritionalValue().getAmountOfFat());
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error alert message");

@@ -19,13 +19,13 @@
     <TextField fx:id="textField" layoutX="300.0" layoutY="100.0" onKeyTyped="#onKeyTyped" />
     <TableView fx:id="tableViewFood" layoutY="200.0" prefHeight="200.0" prefWidth="600.0">
         <columns>
-            <TableColumn fx:id="tableColumnId" prefWidth="130.0" text="Id" />
-            <TableColumn fx:id="tableColumnName" prefWidth="98.0" text="Name" />
-            <TableColumn fx:id="tableColumnPrice" prefWidth="60.0" text="Price" />
-            <TableColumn fx:id="tableColumnQuantity" prefWidth="60.0" text="Quantity" />
-            <TableColumn fx:id="tableColumnProteins" prefWidth="70.0" text="Proteins" />
-            <TableColumn fx:id="tableColumnCarbohydrates" prefWidth="90.0" text="Carbohydrates" />
-            <TableColumn fx:id="tableColumnFats" prefWidth="90.0" text="Fats" />
+            <TableColumn fx:id="tableColumnId" prefWidth="129.0" text="Id" />
+            <TableColumn fx:id="tableColumnName" prefWidth="200.0" text="Name" />
+            <TableColumn fx:id="tableColumnPrice" prefWidth="50.0" text="Price" />
+            <TableColumn fx:id="tableColumnQuantity" prefWidth="54.0" text="Quantity" />
+            <TableColumn fx:id="tableColumnProteins" prefWidth="51.0" text="Proteins" />
+            <TableColumn fx:id="tableColumnCarbohydrates" prefWidth="87.0" text="Carbohydrates" />
+            <TableColumn fx:id="tableColumnFats" prefWidth="27.0" text="Fats" />
         </columns>
     </TableView>
 </Pane>
