@@ -9,11 +9,11 @@ public class NutritionalValue {
             amountOfFat,
             finalCaloricValue;
 
-    public NutritionalValue(Integer amountOfProtein, Integer amountOfCarbohydrate, Integer amountOfFat) {
-        this.amountOfProtein = amountOfProtein;
-        this.amountOfCarbohydrate = amountOfCarbohydrate;
-        this.amountOfFat = amountOfFat;
-        this.finalCaloricValue = (amountOfProtein * caloriesPerProtein) + (amountOfCarbohydrate * caloriesPerCarbohydrate) + (amountOfFat * caloriesPerFat);
+    public NutritionalValue(Integer amountOfProteins, Integer amountOfCarbohydrates, Integer amountOfFats) {
+        this.amountOfProtein = amountOfProteins;
+        this.amountOfCarbohydrate = amountOfCarbohydrates;
+        this.amountOfFat = amountOfFats;
+        this.finalCaloricValue = (amountOfProteins * caloriesPerProtein) + (amountOfCarbohydrates * caloriesPerCarbohydrate) + (amountOfFats * caloriesPerFat);
     }
 
     public Integer getCaloriesInProtein() {
