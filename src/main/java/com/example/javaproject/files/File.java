@@ -1,6 +1,7 @@
 package com.example.javaproject.files;
 
 import com.example.javaproject.entities.Food;
+import com.example.javaproject.entities.Gadget;
 import com.example.javaproject.entities.NutritionalValue;
 
 import java.io.*;
@@ -9,20 +10,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class File {
+    public static List<Gadget> getGadgetItems() throws IOException {
+        List<Gadget> list = new ArrayList<>();
+        FileReader fileReader = new FileReader("files/gadgets.txt");
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        String line;
+        while ((line = bufferedReader.readLine()) != null) {
+            String itemName = bufferedReader.readLine();
+            BigDecimal itemPrice = new BigDecimal(bufferedReader.readLine());
+            Integer itemQuantity = Integer.valueOf(bufferedReader.readLine());
+            Integer itemWarrantyInMonths = Integer.valueOf(bufferedReader.readLine());
+            list.add(new Gadget(line, itemName, itemPrice, itemQuantity, itemWarrantyInMonths));
+        }
+        return list;
+    }
     public static List<Food> getFoodItems() throws IOException {
         List<Food> list = new ArrayList<>();
         FileReader fileReader = new FileReader("files/foods.txt");
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         String line;
         while ((line = bufferedReader.readLine()) != null) {
-            String itemId = line;
             String itemName = bufferedReader.readLine();
             BigDecimal itemPrice = new BigDecimal(bufferedReader.readLine());
             Integer itemQuantity = Integer.valueOf(bufferedReader.readLine());
             Integer amountOfProteins = Integer.valueOf(bufferedReader.readLine());
             Integer amountOfCarbohydrates = Integer.valueOf(bufferedReader.readLine());
             Integer amountOfFats = Integer.valueOf(bufferedReader.readLine());
-            list.add(new Food(itemId, itemName, itemPrice, itemQuantity, new NutritionalValue(amountOfProteins, amountOfCarbohydrates, amountOfFats)));
+            list.add(new Food(line, itemName, itemPrice, itemQuantity, new NutritionalValue(amountOfProteins, amountOfCarbohydrates, amountOfFats)));
         }
         return list;
     }

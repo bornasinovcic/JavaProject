@@ -35,12 +35,12 @@ public class FoodController {
     private TableColumn<Food, Integer> tableColumnFats;
     @FXML
     private TableView<Food> tableViewFood;
-    private static List<Food> FOOD_LIST = new ArrayList<>();
+    private static List<Food> foodList = new ArrayList<>();
 
     @FXML
     protected void onKeyTyped() {
         String s = textField.getText();
-        List<Food> list = new ArrayList<>(FOOD_LIST);
+        List<Food> list = new ArrayList<>(foodList);
         list = list.stream()
                 .filter(food -> food.getItemName().contains(s))
                 .toList();
@@ -51,8 +51,8 @@ public class FoodController {
     @FXML
     public void initialize() {
         try {
-            FOOD_LIST.clear();
-            FOOD_LIST = getFoodItems();
+            foodList.clear();
+            foodList = getFoodItems();
             tableColumnId.setCellValueFactory(foodStringCellDataFeatures -> new SimpleStringProperty(foodStringCellDataFeatures.getValue().getItemId()));
             tableColumnName.setCellValueFactory(foodStringCellDataFeatures -> new SimpleStringProperty(foodStringCellDataFeatures.getValue().getItemName()));
             tableColumnPrice.setCellValueFactory(foodBigDecimalCellDataFeatures -> new SimpleObjectProperty<>(foodBigDecimalCellDataFeatures.getValue().getItemPrice()));
@@ -60,7 +60,7 @@ public class FoodController {
             tableColumnProteins.setCellValueFactory(foodIntegerCellDataFeatures -> new SimpleObjectProperty<>(foodIntegerCellDataFeatures.getValue().getNutritionalValue().getAmountOfProtein()));
             tableColumnCarbohydrates.setCellValueFactory(foodIntegerCellDataFeatures -> new SimpleObjectProperty<>(foodIntegerCellDataFeatures.getValue().getNutritionalValue().getAmountOfCarbohydrate()));
             tableColumnFats.setCellValueFactory(foodIntegerCellDataFeatures -> new SimpleObjectProperty<>(foodIntegerCellDataFeatures.getValue().getNutritionalValue().getAmountOfFat()));
-            tableViewFood.setItems(FXCollections.observableList(FOOD_LIST));
+            tableViewFood.setItems(FXCollections.observableList(foodList));
         } catch (IOException e) {
             e.printStackTrace();
         }
