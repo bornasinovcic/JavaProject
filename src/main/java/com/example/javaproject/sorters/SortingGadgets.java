@@ -1,4 +1,6 @@
-package com.example.javaproject.entities;
+package com.example.javaproject.sorters;
+
+import com.example.javaproject.entities.Gadget;
 
 import java.util.Comparator;
 

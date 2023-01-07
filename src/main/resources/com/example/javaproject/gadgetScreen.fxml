@@ -21,8 +21,8 @@
     <TableView fx:id="tableViewGadget" layoutY="200.0" prefHeight="200.0" prefWidth="600.0">
         <columns>
             <TableColumn fx:id="tableColumnId" prefWidth="150.0" text="Id"/>
-            <TableColumn fx:id="tableColumnName" prefWidth="238.0" text="Name"/>
-            <TableColumn fx:id="tableColumnPrice" prefWidth="70" text="Price"/>
+            <TableColumn fx:id="tableColumnName" prefWidth="230.0" text="Name"/>
+            <TableColumn fx:id="tableColumnPrice" prefWidth="78" text="Price"/>
             <TableColumn fx:id="tableColumnQuantity" prefWidth="70.0" text="Quantity"/>
             <TableColumn fx:id="tableColumnWarranty" prefWidth="70.0" text="Warranty"/>
         </columns>

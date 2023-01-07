@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Locale;
 
 import static com.example.javaproject.files.File.addNewFoodItem;
 import static com.example.javaproject.files.File.getFoodItems;
@@ -59,6 +60,26 @@ public class NewFoodController {
                 List<Food> list = getFoodItems();
                 list.add(new Food(itemId, itemName, itemPrice, itemQuantity, new NutritionalValue(amountOfProteins, amountOfCarbohydrates, amountOfFats)));
                 addNewFoodItem(list);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Correct input of data for food object.");
+                alert.setTitle("New food added.");
+                alert.setContentText(
+                        "itemId -> " + itemId +
+                        "\nitemName -> " + itemName +
+                        "\nitemPrice -> " + itemPrice +
+                        "\nitemQuantity -> " + itemQuantity +
+                        "\namountOfProteins -> " + list.get(list.size() - 1).getNutritionalValue().getAmountOfProtein() +
+                        "\namountOfCarbohydrates -> " + list.get(list.size() - 1).getNutritionalValue().getAmountOfCarbohydrate() +
+                        "\namountOfFats -> " + list.get(list.size() - 1).getNutritionalValue().getAmountOfFat()
+                );
+                alert.showAndWait();
+                textFieldId.clear();
+                textFieldName.clear();
+                textFieldPrice.clear();
+                textFieldQuantity.clear();
+                textFieldProteins.clear();
+                textFieldCarbohydrates.clear();
+                textFieldFats.clear();
             } catch (IOException e) {
                 e.printStackTrace();
             }

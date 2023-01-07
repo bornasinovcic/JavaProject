@@ -1,7 +1,7 @@
 package com.example.javaproject.controllers;
 
 import com.example.javaproject.entities.Food;
-import com.example.javaproject.entities.SortingFoods;
+import com.example.javaproject.sorters.SortingFoods;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;

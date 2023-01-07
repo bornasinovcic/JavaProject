@@ -48,6 +48,21 @@ public class NewGadgetController {
                 List<Gadget> list = getGadgetItems();
                 list.add(new Gadget(itemId, itemName, itemPrice, itemQuantity, itemWarrantyInMonths));
                 addNewGadgetItem(list);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Correct input of data for gadget object.");
+                alert.setTitle("New gadget added.");
+                alert.setContentText(
+                        "itemId -> " + itemId +
+                        "\nitemName -> " + itemName +
+                        "\nitemPrice -> " + itemPrice +
+                        "\nitemQuantity -> " + itemQuantity +
+                        "\nitemWarrantyInMonths -> " + itemWarrantyInMonths);
+                alert.showAndWait();
+                textFieldId.clear();
+                textFieldName.clear();
+                textFieldPrice.clear();
+                textFieldQuantity.clear();
+                textFieldWarranty.clear();
             } catch (IOException e) {
                 e.printStackTrace();
             }
