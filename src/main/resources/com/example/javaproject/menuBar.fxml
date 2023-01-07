@@ -18,7 +18,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Gadget">
                 <items>
-                    <MenuItem mnemonicParsing="false" text="Insert new gadget item"/>
+                    <MenuItem mnemonicParsing="false" onAction="#showNewGadgetScreen" text="Insert new gadget item"/>
                     <MenuItem mnemonicParsing="false" onAction="#showGadgetScreen" text="Search gadget items"/>
                 </items>
             </Menu>

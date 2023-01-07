@@ -40,6 +40,18 @@ public class File {
         }
         return list;
     }
+    public static void addNewGadgetItem(List<Gadget>list) throws IOException {
+        FileWriter fileWriter = new FileWriter("files/gadgets.txt");
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+        for (Gadget gadget : list) {
+            printWriter.println(gadget.getItemId());
+            printWriter.println(gadget.getItemName());
+            printWriter.println(gadget.getItemPrice());
+            printWriter.println(gadget.getItemQuantity());
+            printWriter.println(gadget.getItemWarrantyInMonths());
+        }
+        printWriter.flush();
+    }
     public static void addNewFoodItem(List<Food>list) throws IOException {
         FileWriter fileWriter = new FileWriter("files/foods.txt");
         PrintWriter printWriter = new PrintWriter(fileWriter);

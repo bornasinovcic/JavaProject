@@ -19,6 +19,18 @@ public class MenuBarController {
         Main.getStage().setScene(scene);
         Main.getStage().show();
     }
+    public void showNewGadgetScreen() {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("newGadgetScreen.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 600, 400);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Main.getStage().setTitle("New Gadget Screen");
+        Main.getStage().setScene(scene);
+        Main.getStage().show();
+    }
     public void showFoodScreen() {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("foodScreen.fxml"));
         Scene scene = null;

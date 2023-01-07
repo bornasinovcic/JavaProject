@@ -17,8 +17,8 @@
         </font>
     </Label>
     <Text layoutX="212.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filter by name:"/>
-    <TextField layoutX="300.0" layoutY="100.0"/>
-    <TableView fx:id="tableViewFood" layoutY="200.0" prefHeight="200.0" prefWidth="600.0">
+    <TextField fx:id="textField" layoutX="300.0" layoutY="100.0" onKeyTyped="#onKeyTyped"/>
+    <TableView fx:id="tableViewGadget" layoutY="200.0" prefHeight="200.0" prefWidth="600.0">
         <columns>
             <TableColumn fx:id="tableColumnId" prefWidth="150.0" text="Id"/>
             <TableColumn fx:id="tableColumnName" prefWidth="238.0" text="Name"/>

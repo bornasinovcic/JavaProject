@@ -41,13 +41,13 @@ public class NewFoodController {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        if (itemId.isEmpty()) stringBuilder.append("You forgot to input id of food.\n");
-        if (itemName.isEmpty()) stringBuilder.append("You forgot to input name of food.\n");
-        if (itemPriceString.isEmpty()) stringBuilder.append("You forgot to input price of food.\n");
-        if (itemQuantityString.isEmpty()) stringBuilder.append("You forgot to input quantity of food.\n");
-        if (itemProteinsString.isEmpty()) stringBuilder.append("You forgot to input protein value of food.\n");
-        if (itemCarbohydratesString.isEmpty()) stringBuilder.append("You forgot to input carbohydrate value of food.\n");
-        if (itemFatsString.isEmpty()) stringBuilder.append("You forgot to input fat value of food.\n");
+        if (itemId.isEmpty()) stringBuilder.append("You forgot to input id of that food.\n");
+        if (itemName.isEmpty()) stringBuilder.append("You forgot to input name of that food.\n");
+        if (itemPriceString.isEmpty()) stringBuilder.append("You forgot to input price of that food.\n");
+        if (itemQuantityString.isEmpty()) stringBuilder.append("You forgot to input quantity of that food.\n");
+        if (itemProteinsString.isEmpty()) stringBuilder.append("You forgot to input protein value of that food.\n");
+        if (itemCarbohydratesString.isEmpty()) stringBuilder.append("You forgot to input carbohydrate value of that food.\n");
+        if (itemFatsString.isEmpty()) stringBuilder.append("You forgot to input fat value of that food.\n");
 
         if (stringBuilder.isEmpty()) {
             BigDecimal itemPrice = new BigDecimal(itemPriceString);

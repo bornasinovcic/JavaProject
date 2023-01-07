@@ -1,6 +1,7 @@
 package com.example.javaproject.controllers;
 
 import com.example.javaproject.entities.Food;
+import com.example.javaproject.entities.SortingFoods;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -45,7 +46,6 @@ public class FoodController {
                 .filter(food -> food.getItemName().contains(s))
                 .toList();
         tableViewFood.setItems(FXCollections.observableList(list));
-        System.out.println("onKeyTyped");
     }
 
     @FXML
@@ -53,6 +53,7 @@ public class FoodController {
         try {
             foodList.clear();
             foodList = getFoodItems();
+            foodList.sort(new SortingFoods());
             tableColumnId.setCellValueFactory(foodStringCellDataFeatures -> new SimpleStringProperty(foodStringCellDataFeatures.getValue().getItemId()));
             tableColumnName.setCellValueFactory(foodStringCellDataFeatures -> new SimpleStringProperty(foodStringCellDataFeatures.getValue().getItemName()));
             tableColumnPrice.setCellValueFactory(foodBigDecimalCellDataFeatures -> new SimpleObjectProperty<>(foodBigDecimalCellDataFeatures.getValue().getItemPrice()));
