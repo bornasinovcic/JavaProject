@@ -9,7 +9,6 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Locale;
 
 import static com.example.javaproject.files.File.addNewFoodItem;
 import static com.example.javaproject.files.File.getFoodItems;
