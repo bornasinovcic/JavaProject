@@ -1,4 +1,4 @@
-package com.example.javaproject.entities;
+package com.example.javaproject.exceptions;
 
 public class DuplicateItem extends Exception {
     public DuplicateItem() {

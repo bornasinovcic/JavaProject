@@ -1,6 +1,7 @@
 package com.example.javaproject;
 
 import com.example.javaproject.entities.*;
+import com.example.javaproject.exceptions.DuplicateItem;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
