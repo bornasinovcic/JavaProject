@@ -2,6 +2,7 @@ package com.example.javaproject.entities;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Objects;
 
 public class Item extends ItemId {
     private String itemName;
@@ -41,5 +42,18 @@ public class Item extends ItemId {
     public void setItemQuantity(Integer itemQuantity) {
         this.itemQuantity = itemQuantity;
     }
-    
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Item item = (Item) o;
+        return Objects.equals(itemName, item.itemName) && Objects.equals(itemPrice, item.itemPrice) && Objects.equals(itemQuantity, item.itemQuantity);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), itemName, itemPrice, itemQuantity);
+    }
 }

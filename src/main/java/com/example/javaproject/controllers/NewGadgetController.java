@@ -1,6 +1,8 @@
 package com.example.javaproject.controllers;
 
+import com.example.javaproject.entities.Food;
 import com.example.javaproject.entities.Gadget;
+import com.example.javaproject.exceptions.DuplicateItem;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
@@ -46,7 +48,9 @@ public class NewGadgetController {
             Integer itemWarrantyInMonths = Integer.valueOf(itemWarrantyInMonthsString);
             try {
                 List<Gadget> list = getGadgetItems();
-                list.add(new Gadget(itemId, itemName, itemPrice, itemQuantity, itemWarrantyInMonths));
+                Gadget gadget = new Gadget(itemId, itemName, itemPrice, itemQuantity, itemWarrantyInMonths);
+                testForDuplicateFoodItem(list, gadget);
+                list.add(gadget);
                 addNewGadgetItem(list);
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Correct input of data for gadget object.");
@@ -65,6 +69,8 @@ public class NewGadgetController {
                 textFieldWarranty.clear();
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (DuplicateItem e) {
+                System.out.println(e.getMessage());
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -74,4 +80,12 @@ public class NewGadgetController {
             alert.showAndWait();
         }
     }
+    private void testForDuplicateFoodItem(List<Gadget> list, Gadget gadget0) throws DuplicateItem {
+        for (Gadget gadget1 : list) {
+            if (gadget1.equals(gadget0)) {
+                throw new DuplicateItem("This gadget already exists.");
+            }
+        }
+    }
+
 }

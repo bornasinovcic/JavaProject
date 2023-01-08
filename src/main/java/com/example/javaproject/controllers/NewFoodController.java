@@ -2,6 +2,7 @@ package com.example.javaproject.controllers;
 
 import com.example.javaproject.entities.Food;
 import com.example.javaproject.entities.NutritionalValue;
+import com.example.javaproject.exceptions.DuplicateItem;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
@@ -57,7 +58,9 @@ public class NewFoodController {
             Integer amountOfFats = Integer.valueOf(itemFatsString);
             try {
                 List<Food> list = getFoodItems();
-                list.add(new Food(itemId, itemName, itemPrice, itemQuantity, new NutritionalValue(amountOfProteins, amountOfCarbohydrates, amountOfFats)));
+                Food food = new Food(itemId, itemName, itemPrice, itemQuantity, new NutritionalValue(amountOfProteins, amountOfCarbohydrates, amountOfFats));
+                testForDuplicateFoodItem(list, food);
+                list.add(food);
                 addNewFoodItem(list);
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Correct input of data for food object.");
@@ -81,14 +84,23 @@ public class NewFoodController {
                 textFieldFats.clear();
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (DuplicateItem e) {
+                System.out.println(e.getMessage());
             }
-
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error alert message");
             alert.setHeaderText("Please fill out empty fields");
             alert.setContentText(stringBuilder.toString());
             alert.showAndWait();
+        }
+    }
+
+    private void testForDuplicateFoodItem(List<Food> list, Food food0) throws DuplicateItem {
+        for (Food food1 : list) {
+            if (food1.equals(food0)) {
+                throw new DuplicateItem("This food already exists.");
+            }
         }
     }
 }
