@@ -39,10 +39,10 @@ public class FoodController {
 
     @FXML
     protected void onKeyTyped() {
-        String s = textField.getText();
+        String s = textField.getText().toLowerCase();
         List<Food> list = new ArrayList<>(foodList);
         list = list.stream()
-                .filter(food -> food.getItemName().contains(s))
+                .filter(food -> food.getItemName().toLowerCase().contains(s))
                 .toList();
         tableViewFood.setItems(FXCollections.observableList(list));
     }

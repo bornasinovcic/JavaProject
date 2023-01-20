@@ -35,10 +35,10 @@ public class GadgetController {
     private static List<Gadget> gadgetList = new ArrayList<>();
     @FXML
     protected void onKeyTyped() {
-        String s = textField.getText();
+        String s = textField.getText().toLowerCase();
         List<Gadget> list = new ArrayList<>(gadgetList);
         list = list.stream()
-                .filter(gadget -> gadget.getItemName().contains(s))
+                .filter(gadget -> gadget.getItemName().toLowerCase().contains(s))
                 .toList();
         tableViewGadget.setItems(FXCollections.observableList(list));
     }
