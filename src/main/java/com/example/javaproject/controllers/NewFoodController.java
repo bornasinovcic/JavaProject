@@ -11,8 +11,8 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
+import static com.example.javaproject.database.DatabaseHandling.getAllFoodItems;
 import static com.example.javaproject.files.File.addNewFoodItem;
-import static com.example.javaproject.files.File.getFoodItems;
 
 public class NewFoodController {
     @FXML
@@ -57,7 +57,7 @@ public class NewFoodController {
                 Integer amountOfProteins = Integer.valueOf(itemProteinsString);
                 Integer amountOfCarbohydrates = Integer.valueOf(itemCarbohydratesString);
                 Integer amountOfFats = Integer.valueOf(itemFatsString);
-                List<Food> list = getFoodItems();
+                List<Food> list = getAllFoodItems();
                 Food food = new Food(itemId, itemName, itemPrice, itemQuantity, new NutritionalValue(amountOfProteins, amountOfCarbohydrates, amountOfFats));
                 testForDuplicateFoodItem(list, food);
                 list.add(food);

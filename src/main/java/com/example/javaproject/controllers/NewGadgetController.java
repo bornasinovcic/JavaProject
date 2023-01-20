@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
+import static com.example.javaproject.database.DatabaseHandling.getAllGadgetItems;
 import static com.example.javaproject.files.File.*;
 
 public class NewGadgetController {
@@ -47,7 +48,7 @@ public class NewGadgetController {
                 BigDecimal itemPrice = new BigDecimal(itemPriceString);
                 Integer itemQuantity  = Integer.valueOf(itemQuantityString);
                 Integer itemWarrantyInMonths = Integer.valueOf(itemWarrantyInMonthsString);
-                List<Gadget> list = getGadgetItems();
+                List<Gadget> list = getAllGadgetItems();
                 Gadget gadget = new Gadget(itemId, itemName, itemPrice, itemQuantity, itemWarrantyInMonths);
                 testForDuplicateFoodItem(list, gadget);
                 list.add(gadget);
