@@ -1,18 +1,16 @@
 package com.example.javaproject.controllers;
 
-import com.example.javaproject.entities.Food;
 import com.example.javaproject.entities.Gadget;
 import com.example.javaproject.exceptions.DuplicateItem;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
 import static com.example.javaproject.database.DatabaseHandling.getAllGadgetItems;
-import static com.example.javaproject.files.File.*;
+import static com.example.javaproject.database.DatabaseHandling.insertNewGadgetItem;
 
 public class NewGadgetController {
     @FXML
@@ -50,9 +48,8 @@ public class NewGadgetController {
                 Integer itemWarrantyInMonths = Integer.valueOf(itemWarrantyInMonthsString);
                 List<Gadget> list = getAllGadgetItems();
                 Gadget gadget = new Gadget(itemId, itemName, itemPrice, itemQuantity, itemWarrantyInMonths);
-                testForDuplicateFoodItem(list, gadget);
-                list.add(gadget);
-                addNewGadgetItem(list);
+                testForDuplicateFoodItem(list, itemId);
+                insertNewGadgetItem(gadget);
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Correct input of data for gadget object.");
                 alert.setTitle("New gadget added.");
@@ -68,10 +65,11 @@ public class NewGadgetController {
                 textFieldPrice.clear();
                 textFieldQuantity.clear();
                 textFieldWarranty.clear();
-            } catch (IOException e) {
-                e.printStackTrace();
             } catch (DuplicateItem e) {
-                System.out.println(e.getMessage());
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error alert message");
+                alert.setHeaderText(e.getMessage());
+                alert.showAndWait();
             } catch (NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error alert message");
@@ -87,12 +85,10 @@ public class NewGadgetController {
             alert.showAndWait();
         }
     }
-    private void testForDuplicateFoodItem(List<Gadget> list, Gadget gadget0) throws DuplicateItem {
-        for (Gadget gadget1 : list) {
-            if (gadget1.equals(gadget0)) {
+    private void testForDuplicateFoodItem(List<Gadget> list, String id) throws DuplicateItem {
+        for (Gadget gadget : list)
+            if (gadget.getItemId().equals(id))
                 throw new DuplicateItem("This gadget already exists.");
-            }
-        }
     }
 
 }

@@ -63,4 +63,37 @@ public class DatabaseHandling {
         }
         return list;
     }
+
+    public static void insertNewFoodItem(Food food) {
+        try (Connection connection = connectingToDatabase()) {
+            if (connection != null) System.out.println("Connected to database.");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO food (food_id, food_name, food_price, food_quantity, food_proteins, food_carbohydrates, food_fats) VALUES (?, ?, ?, ?, ?, ?, ?) ;");
+            preparedStatement.setString(1, food.getItemId());
+            preparedStatement.setString(2, food.getItemName());
+            preparedStatement.setBigDecimal(3, food.getItemPrice());
+            preparedStatement.setInt(4, food.getItemQuantity());
+            preparedStatement.setInt(5, food.getNutritionalValue().getAmountOfProtein());
+            preparedStatement.setInt(6, food.getNutritionalValue().getAmountOfCarbohydrate());
+            preparedStatement.setInt(7, food.getNutritionalValue().getCaloriesInFat());
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("There was a problem connecting to database.");
+        }
+    }
+    public static void insertNewGadgetItem(Gadget gadget) {
+        try (Connection connection = connectingToDatabase()) {
+            if (connection != null) System.out.println("Connected to database.");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO gadget (gadget_id, gadget_name, gadget_price, gadget_quantity, gadget_warranty) VALUES (?, ?, ?, ?, ?) ;");
+            preparedStatement.setString(1, gadget.getItemId());
+            preparedStatement.setString(2, gadget.getItemName());
+            preparedStatement.setBigDecimal(3, gadget.getItemPrice());
+            preparedStatement.setInt(4, gadget.getItemQuantity());
+            preparedStatement.setInt(5, gadget.getItemWarrantyInMonths());
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("There was a problem connecting to database.");
+        }
+    }
 }

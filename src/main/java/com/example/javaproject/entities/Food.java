@@ -1,7 +1,6 @@
 package com.example.javaproject.entities;
 
 import java.math.BigDecimal;
-import java.util.Objects;
 
 public class Food extends Item implements CaloricValues {
 
@@ -19,18 +18,5 @@ public class Food extends Item implements CaloricValues {
         return nutritionalValue;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Food food = (Food) o;
-        return nutritionalValue.equals(food.nutritionalValue);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), nutritionalValue);
-    }
 
 }
