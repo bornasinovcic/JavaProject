@@ -43,10 +43,10 @@ public class NewGadgetController {
             stringBuilder.append("You forgot to input warranty of that gadget.\n");
 
         if (stringBuilder.isEmpty()) {
-            BigDecimal itemPrice = new BigDecimal(itemPriceString);
-            Integer itemQuantity = Integer.valueOf(itemQuantityString);
-            Integer itemWarrantyInMonths = Integer.valueOf(itemWarrantyInMonthsString);
             try {
+                BigDecimal itemPrice = new BigDecimal(itemPriceString);
+                Integer itemQuantity  = Integer.valueOf(itemQuantityString);
+                Integer itemWarrantyInMonths = Integer.valueOf(itemWarrantyInMonthsString);
                 List<Gadget> list = getGadgetItems();
                 Gadget gadget = new Gadget(itemId, itemName, itemPrice, itemQuantity, itemWarrantyInMonths);
                 testForDuplicateFoodItem(list, gadget);
@@ -57,10 +57,10 @@ public class NewGadgetController {
                 alert.setTitle("New gadget added.");
                 alert.setContentText(
                         "itemId -> " + itemId +
-                        "\nitemName -> " + itemName +
-                        "\nitemPrice -> " + itemPrice +
-                        "\nitemQuantity -> " + itemQuantity +
-                        "\nitemWarrantyInMonths -> " + itemWarrantyInMonths);
+                                "\nitemName -> " + itemName +
+                                "\nitemPrice -> " + itemPrice +
+                                "\nitemQuantity -> " + itemQuantity +
+                                "\nitemWarrantyInMonths -> " + itemWarrantyInMonths);
                 alert.showAndWait();
                 textFieldId.clear();
                 textFieldName.clear();
@@ -71,6 +71,12 @@ public class NewGadgetController {
                 e.printStackTrace();
             } catch (DuplicateItem e) {
                 System.out.println(e.getMessage());
+            } catch (NumberFormatException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error alert message");
+                alert.setHeaderText("Some of the fields have a wrong data type.\n" +
+                        "Please make sure you have inputted everything correctly.");
+                alert.showAndWait();
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);

@@ -10,14 +10,14 @@
     <menus>
         <Menu mnemonicParsing="false" text="Food">
             <items>
-                <MenuItem mnemonicParsing="false" onAction="#showNewFoodScreen" text="Insert new food item"/>
                 <MenuItem mnemonicParsing="false" onAction="#showFoodScreen" text="Search food items"/>
+                <MenuItem mnemonicParsing="false" onAction="#showNewFoodScreen" text="Insert new food item"/>
             </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Gadget">
             <items>
-                <MenuItem mnemonicParsing="false" onAction="#showNewGadgetScreen" text="Insert new gadget item"/>
                 <MenuItem mnemonicParsing="false" onAction="#showGadgetScreen" text="Search gadget items"/>
+                <MenuItem mnemonicParsing="false" onAction="#showNewGadgetScreen" text="Insert new gadget item"/>
             </items>
         </Menu>
     </menus>

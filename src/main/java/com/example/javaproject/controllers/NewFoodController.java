@@ -51,12 +51,12 @@ public class NewFoodController {
         if (itemFatsString.isEmpty()) stringBuilder.append("You forgot to input fat value of that food.\n");
 
         if (stringBuilder.isEmpty()) {
-            BigDecimal itemPrice = new BigDecimal(itemPriceString);
-            Integer itemQuantity = Integer.valueOf(itemQuantityString);
-            Integer amountOfProteins = Integer.valueOf(itemProteinsString);
-            Integer amountOfCarbohydrates = Integer.valueOf(itemCarbohydratesString);
-            Integer amountOfFats = Integer.valueOf(itemFatsString);
             try {
+                BigDecimal itemPrice = new BigDecimal(itemPriceString);
+                Integer itemQuantity = Integer.valueOf(itemQuantityString);
+                Integer amountOfProteins = Integer.valueOf(itemProteinsString);
+                Integer amountOfCarbohydrates = Integer.valueOf(itemCarbohydratesString);
+                Integer amountOfFats = Integer.valueOf(itemFatsString);
                 List<Food> list = getFoodItems();
                 Food food = new Food(itemId, itemName, itemPrice, itemQuantity, new NutritionalValue(amountOfProteins, amountOfCarbohydrates, amountOfFats));
                 testForDuplicateFoodItem(list, food);
@@ -86,6 +86,12 @@ public class NewFoodController {
                 e.printStackTrace();
             } catch (DuplicateItem e) {
                 System.out.println(e.getMessage());
+            } catch (NumberFormatException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error alert message");
+                alert.setHeaderText("Some of the fields have a wrong data type.\n" +
+                        "Please make sure you have inputted everything correctly.");
+                alert.showAndWait();
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
