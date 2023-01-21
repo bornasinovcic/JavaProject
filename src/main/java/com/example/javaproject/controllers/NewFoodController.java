@@ -2,7 +2,8 @@ package com.example.javaproject.controllers;
 
 import com.example.javaproject.entities.Food;
 import com.example.javaproject.entities.NutritionalValue;
-import com.example.javaproject.exceptions.DuplicateItem;
+import com.example.javaproject.exceptions.DuplicateItemId;
+import com.example.javaproject.exceptions.DuplicateItemName;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
@@ -58,7 +59,8 @@ public class NewFoodController {
                 Integer amountOfFats = Integer.valueOf(itemFatsString);
                 List<Food> list = getAllFoodItems();
                 Food food = new Food(itemId, itemName, itemPrice, itemQuantity, new NutritionalValue(amountOfProteins, amountOfCarbohydrates, amountOfFats));
-                testForDuplicateFoodItem(list, itemId);
+                testForDuplicateFoodId(list, itemId);
+                testForDuplicateFoodName(list, itemName);
                 insertNewFoodItem(food);
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Correct input of data for food object.");
@@ -80,12 +82,11 @@ public class NewFoodController {
                 textFieldProteins.clear();
                 textFieldCarbohydrates.clear();
                 textFieldFats.clear();
-            } catch (DuplicateItem e) {
+            } catch (DuplicateItemId | DuplicateItemName e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error alert message");
                 alert.setHeaderText(e.getMessage());
                 alert.showAndWait();
-
             } catch (NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error alert message");
@@ -102,9 +103,14 @@ public class NewFoodController {
         }
     }
 
-    private void testForDuplicateFoodItem(List<Food> list, String id) throws DuplicateItem {
+    private void testForDuplicateFoodId(List<Food> list, String id) throws DuplicateItemId {
         for (Food food : list)
             if (food.getItemId().equals(id))
-                throw new DuplicateItem("This food already exists.");
+                throw new DuplicateItemId("This food id already exists.");
+    }
+    private void testForDuplicateFoodName(List<Food> list, String itemName) throws DuplicateItemName {
+        for (Food food : list)
+            if (food.getItemName().equals(itemName))
+                throw new DuplicateItemName("This food name already exists.");
     }
 }
