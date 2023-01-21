@@ -25,8 +25,9 @@ public class DatabaseHandling {
         List<Food> list = new ArrayList<>();
         try (Connection connection = connectingToDatabase()) {
             if (connection != null) System.out.println("Connected to database.");
+            String query = "SELECT * FROM food ;";
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM food ;");
+            ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 String food_id = resultSet.getString("food_id");
                 String food_name = resultSet.getString("food_name");
@@ -47,8 +48,9 @@ public class DatabaseHandling {
         List<Gadget> list = new ArrayList<>();
         try (Connection connection = connectingToDatabase()) {
             if (connection != null) System.out.println("Connected to database.");
+            String query = "SELECT * FROM gadget ;";
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM gadget ;");
+            ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 String gadget_id = resultSet.getString("gadget_id");
                 String gadget_name = resultSet.getString("gadget_name");
@@ -67,7 +69,8 @@ public class DatabaseHandling {
     public static void insertNewFoodItem(Food food) {
         try (Connection connection = connectingToDatabase()) {
             if (connection != null) System.out.println("Connected to database.");
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO food (food_id, food_name, food_price, food_quantity, food_proteins, food_carbohydrates, food_fats) VALUES (?, ?, ?, ?, ?, ?, ?) ;");
+            String query = "INSERT INTO food (food_id, food_name, food_price, food_quantity, food_proteins, food_carbohydrates, food_fats) VALUES (?, ?, ?, ?, ?, ?, ?) ;";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, food.getItemId());
             preparedStatement.setString(2, food.getItemName());
             preparedStatement.setBigDecimal(3, food.getItemPrice());
@@ -84,12 +87,38 @@ public class DatabaseHandling {
     public static void insertNewGadgetItem(Gadget gadget) {
         try (Connection connection = connectingToDatabase()) {
             if (connection != null) System.out.println("Connected to database.");
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO gadget (gadget_id, gadget_name, gadget_price, gadget_quantity, gadget_warranty) VALUES (?, ?, ?, ?, ?) ;");
+            String query = "INSERT INTO gadget (gadget_id, gadget_name, gadget_price, gadget_quantity, gadget_warranty) VALUES (?, ?, ?, ?, ?) ;";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, gadget.getItemId());
             preparedStatement.setString(2, gadget.getItemName());
             preparedStatement.setBigDecimal(3, gadget.getItemPrice());
             preparedStatement.setInt(4, gadget.getItemQuantity());
             preparedStatement.setInt(5, gadget.getItemWarrantyInMonths());
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("There was a problem connecting to database.");
+        }
+    }
+
+    public static void deleteFoodWithId(String id) {
+        try (Connection connection = connectingToDatabase()) {
+            if (connection != null) System.out.println("Connected to database.");
+            String query = "DELETE FROM food WHERE food_id = ? ;";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, id);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("There was a problem connecting to database.");
+        }
+    }
+    public static void deleteGadgetWithId(String id) {
+        try (Connection connection = connectingToDatabase()) {
+            if (connection != null) System.out.println("Connected to database.");
+            String query = "DELETE FROM gadget WHERE gadget_id = ? ;";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, id);
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

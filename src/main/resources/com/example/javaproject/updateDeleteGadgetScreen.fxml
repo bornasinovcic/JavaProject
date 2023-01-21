@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javaproject.controllers.UpdateDeleteGadgetController">
+    <fx:include source="menuBar.fxml" />
+    <TableView fx:id="tableViewGadget" layoutY="200.0" prefHeight="200.0" prefWidth="600.0">
+        <columns>
+            <TableColumn fx:id="tableColumnId" prefWidth="150.0" text="Id" />
+            <TableColumn fx:id="tableColumnName" prefWidth="230.0" text="Name" />
+            <TableColumn fx:id="tableColumnPrice" prefWidth="78" text="Price" />
+            <TableColumn fx:id="tableColumnQuantity" prefWidth="70.0" text="Quantity" />
+            <TableColumn fx:id="tableColumnWarranty" prefWidth="70.0" text="Warranty" />
+        </columns>
+    </TableView>
+   <Button layoutX="450.0" layoutY="150.0" mnemonicParsing="false" onAction="#onDeleteButtonClick" text="Delete" />
+</Pane>

@@ -55,4 +55,28 @@ public class MenuBarController {
         Main.getStage().setScene(scene);
         Main.getStage().show();
     }
+    public void showUpdateDeleteFoodScreen() {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("updateDeleteFoodScreen.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 600, 400);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Main.getStage().setTitle("Update/Delete gadget Screen");
+        Main.getStage().setScene(scene);
+        Main.getStage().show();
+    }
+    public void showUpdateDeleteGadgetScreen() {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("updateDeleteGadgetScreen.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 600, 400);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Main.getStage().setTitle("Update/Delete food Screen");
+        Main.getStage().setScene(scene);
+        Main.getStage().show();
+    }
 }

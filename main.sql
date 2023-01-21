@@ -34,4 +34,4 @@ VALUES ('fkVjhvCBJHvV6Zwn', 'Laptop (Predator Triton)', 4559.05, 1, 36),
        ('sP7dRqeZeE37Y3vw', 'Laptop (GIGABYTE AERO 17)', 3052.49, 1, 60),
        ('gxYmMSKdbKSBXnm5', 'Laptop (APPLE MacBook Pro 16)', 4277.52, 1, 36),
        ('wT4v5S2aVAvBaSra', 'Laptop (ASUS ROG Zephyrus)', 4738.07, 2, 12),
-       ('mm7r*%JzpzG3JQp^', 'Monitor 24" DELL', 149.00, 3, 36);
+       ('z9cu2sjBhSX7fWUn', 'Monitor 24" DELL', 149.00, 3, 36);

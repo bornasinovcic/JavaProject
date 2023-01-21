@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javaproject.controllers.UpdateDeleteFoodController">
+    <fx:include source="menuBar.fxml" />
+    <TableView fx:id="tableViewFood" layoutY="200.0" prefHeight="200.0" prefWidth="600.0">
+        <columns>
+            <TableColumn fx:id="tableColumnId" prefWidth="129.0" text="Id" />
+            <TableColumn fx:id="tableColumnName" prefWidth="190.0" text="Name" />
+            <TableColumn fx:id="tableColumnPrice" prefWidth="60.0" text="Price" />
+            <TableColumn fx:id="tableColumnQuantity" prefWidth="54.0" text="Quantity" />
+            <TableColumn fx:id="tableColumnProteins" prefWidth="51.0" text="Proteins" />
+            <TableColumn fx:id="tableColumnCarbohydrates" prefWidth="87.0" text="Carbohydrates" />
+            <TableColumn fx:id="tableColumnFats" prefWidth="27.0" text="Fats" />
+        </columns>
+    </TableView>
+   <Button layoutX="450.0" layoutY="150.0" mnemonicParsing="false" onAction="#onDeleteButtonClick" text="Delete" />
+</Pane>
