@@ -1,6 +1,7 @@
 package com.example.javaproject.controllers;
 
 import com.example.javaproject.entities.Food;
+import com.example.javaproject.entities.NutritionalValue;
 import com.example.javaproject.sorters.SortingFoods;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -8,15 +9,29 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.javaproject.database.DatabaseHandling.deleteFoodWithId;
-import static com.example.javaproject.database.DatabaseHandling.getAllFoodItems;
+import static com.example.javaproject.database.DatabaseHandling.*;
 
 public class UpdateDeleteFoodController {
+    @FXML
+    private TextField textFieldId;
+    @FXML
+    private TextField textFieldName;
+    @FXML
+    private TextField textFieldPrice;
+    @FXML
+    private TextField textFieldQuantity;
+    @FXML
+    private TextField textFieldProteins;
+    @FXML
+    private TextField textFieldCarbohydrates;
+    @FXML
+    private TextField textFieldFats;
     @FXML
     private TableColumn<Food, String> tableColumnId;
     @FXML
@@ -34,6 +49,33 @@ public class UpdateDeleteFoodController {
     @FXML
     private TableView<Food> tableViewFood;
     private static List<Food> foodList = new ArrayList<>();
+
+    @FXML
+    protected void onUpdateButtonClick() {
+        String itemId = textFieldId.getText();
+        String itemName = textFieldName.getText();
+        String itemPriceString = textFieldPrice.getText();
+        String itemQuantityString = textFieldQuantity.getText();
+        String itemProteinsString = textFieldProteins.getText();
+        String itemCarbohydratesString = textFieldCarbohydrates.getText();
+        String itemFatsString = textFieldFats.getText();
+
+        Food selectedItem = tableViewFood.getSelectionModel().getSelectedItem();
+        Food newMadeItem = new Food();
+        NutritionalValue nutritionalValue = new NutritionalValue();
+
+        newMadeItem.setItemId(itemId.isEmpty() ? selectedItem.getItemId() : itemId);
+        newMadeItem.setItemName(itemName.isEmpty() ? selectedItem.getItemName() : itemName);
+        newMadeItem.setItemPrice(itemPriceString.isEmpty() ? selectedItem.getItemPrice() : new BigDecimal(itemPriceString));
+        newMadeItem.setItemQuantity(itemQuantityString.isEmpty() ? selectedItem.getItemQuantity() : Integer.valueOf(itemQuantityString));
+        nutritionalValue.setAmountOfProtein(itemProteinsString.isEmpty() ? selectedItem.getNutritionalValue().getAmountOfProtein() : Integer.valueOf(itemProteinsString));
+        nutritionalValue.setAmountOfCarbohydrate(itemCarbohydratesString.isEmpty() ? selectedItem.getNutritionalValue().getAmountOfCarbohydrate() : Integer.valueOf(itemCarbohydratesString));
+        nutritionalValue.setAmountOfFat(itemFatsString.isEmpty() ? selectedItem.getNutritionalValue().getAmountOfFat() : Integer.valueOf(itemFatsString));
+        newMadeItem.setNutritionalValue(nutritionalValue);
+
+        updateFoodWithId(newMadeItem, selectedItem.getItemId());
+        initialize();
+    }
 
     @FXML
     protected void onDeleteButtonClick() {

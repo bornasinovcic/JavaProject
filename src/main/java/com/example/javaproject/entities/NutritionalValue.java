@@ -1,7 +1,7 @@
 package com.example.javaproject.entities;
 
 public class NutritionalValue {
-    private final Integer caloriesPerProtein = 4,
+    private Integer caloriesPerProtein = 4,
             caloriesPerCarbohydrate = 4,
             caloriesPerFat = 9,
             amountOfProtein,
@@ -15,33 +15,63 @@ public class NutritionalValue {
         this.amountOfFat = amountOfFats;
         this.finalCaloricValue = (amountOfProteins * caloriesPerProtein) + (amountOfCarbohydrates * caloriesPerCarbohydrate) + (amountOfFats * caloriesPerFat);
     }
+    public NutritionalValue() {
 
-    public Integer getCaloriesInProtein() {
+    }
+
+    public Integer getCaloriesPerProtein() {
         return caloriesPerProtein;
     }
 
-    public Integer getCaloriesInCarbohydrate() {
+    public void setCaloriesPerProtein(Integer caloriesPerProtein) {
+        this.caloriesPerProtein = caloriesPerProtein;
+    }
+
+    public Integer getCaloriesPerCarbohydrate() {
         return caloriesPerCarbohydrate;
     }
 
-    public Integer getCaloriesInFat() {
+    public void setCaloriesPerCarbohydrate(Integer caloriesPerCarbohydrate) {
+        this.caloriesPerCarbohydrate = caloriesPerCarbohydrate;
+    }
+
+    public Integer getCaloriesPerFat() {
         return caloriesPerFat;
+    }
+
+    public void setCaloriesPerFat(Integer caloriesPerFat) {
+        this.caloriesPerFat = caloriesPerFat;
     }
 
     public Integer getAmountOfProtein() {
         return amountOfProtein;
     }
 
+    public void setAmountOfProtein(Integer amountOfProtein) {
+        this.amountOfProtein = amountOfProtein;
+    }
+
     public Integer getAmountOfCarbohydrate() {
         return amountOfCarbohydrate;
+    }
+
+    public void setAmountOfCarbohydrate(Integer amountOfCarbohydrate) {
+        this.amountOfCarbohydrate = amountOfCarbohydrate;
     }
 
     public Integer getAmountOfFat() {
         return amountOfFat;
     }
 
-    public Integer getFinalCaloricValueOfItem() {
+    public void setAmountOfFat(Integer amountOfFat) {
+        this.amountOfFat = amountOfFat;
+    }
+
+    public Integer getFinalCaloricValue() {
         return finalCaloricValue;
     }
 
+    public void setFinalCaloricValue(Integer finalCaloricValue) {
+        this.finalCaloricValue = finalCaloricValue;
+    }
 }

@@ -44,6 +44,7 @@ public class DatabaseHandling {
         }
         return list;
     }
+
     public static List<Gadget> getAllGadgetItems() {
         List<Gadget> list = new ArrayList<>();
         try (Connection connection = connectingToDatabase()) {
@@ -77,13 +78,14 @@ public class DatabaseHandling {
             preparedStatement.setInt(4, food.getItemQuantity());
             preparedStatement.setInt(5, food.getNutritionalValue().getAmountOfProtein());
             preparedStatement.setInt(6, food.getNutritionalValue().getAmountOfCarbohydrate());
-            preparedStatement.setInt(7, food.getNutritionalValue().getCaloriesInFat());
+            preparedStatement.setInt(7, food.getNutritionalValue().getAmountOfFat());
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("There was a problem connecting to database.");
         }
     }
+
     public static void insertNewGadgetItem(Gadget gadget) {
         try (Connection connection = connectingToDatabase()) {
             if (connection != null) System.out.println("Connected to database.");
@@ -113,6 +115,7 @@ public class DatabaseHandling {
             System.out.println("There was a problem connecting to database.");
         }
     }
+
     public static void deleteGadgetWithId(String id) {
         try (Connection connection = connectingToDatabase()) {
             if (connection != null) System.out.println("Connected to database.");
@@ -125,4 +128,25 @@ public class DatabaseHandling {
             System.out.println("There was a problem connecting to database.");
         }
     }
+
+    public static void updateFoodWithId(Food madeItem, String id) {
+        try (Connection connection = connectingToDatabase()) {
+            if (connection != null) System.out.println("Connected to database.");
+            String query = "UPDATE food SET food_id = ?, food_name = ?, food_price = ?, food_quantity = ?, food_proteins = ?, food_carbohydrates = ?, food_fats = ? WHERE food_id = ? ;";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, madeItem.getItemId());
+            preparedStatement.setString(2, madeItem.getItemName());
+            preparedStatement.setBigDecimal(3, madeItem.getItemPrice());
+            preparedStatement.setInt(4, madeItem.getItemQuantity());
+            preparedStatement.setInt(5, madeItem.getNutritionalValue().getAmountOfProtein());
+            preparedStatement.setInt(6, madeItem.getNutritionalValue().getAmountOfCarbohydrate());
+            preparedStatement.setInt(7, madeItem.getNutritionalValue().getAmountOfFat());
+            preparedStatement.setString(8, id);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("There was a problem connecting to database.");
+        }
+    }
+
 }

@@ -7,6 +7,10 @@ public abstract class ItemId {
         this.itemId = itemId;
     }
 
+    public ItemId() {
+
+    }
+
     public String getItemId() {
         return itemId;
     }

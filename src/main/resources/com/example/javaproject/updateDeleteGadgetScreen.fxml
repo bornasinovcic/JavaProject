@@ -16,5 +16,6 @@
             <TableColumn fx:id="tableColumnWarranty" prefWidth="70.0" text="Warranty" />
         </columns>
     </TableView>
-   <Button layoutX="450.0" layoutY="150.0" mnemonicParsing="false" onAction="#onDeleteButtonClick" text="Delete" />
+   <Button layoutX="450.0" layoutY="120.0" mnemonicParsing="false" onAction="#onDeleteButtonClick" text="Delete" />
+   <Button layoutX="450.0" layoutY="80.0" mnemonicParsing="false" onAction="#onDeleteButtonClick" text="Update" />
 </Pane>
