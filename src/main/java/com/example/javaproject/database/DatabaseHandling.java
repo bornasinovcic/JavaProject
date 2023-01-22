@@ -16,9 +16,7 @@ public class DatabaseHandling {
     private static Connection connectingToDatabase() throws IOException, SQLException {
         Properties properties = new Properties();
         properties.load(new FileInputStream("files/database.properties"));
-        return DriverManager.getConnection(properties.getProperty("link"),
-                properties.getProperty("ime"),
-                properties.getProperty("lozinka"));
+        return DriverManager.getConnection(properties.getProperty("link"), properties.getProperty("ime"), properties.getProperty("lozinka"));
     }
 
     public static List<Food> getAllFoodItems() {
@@ -142,6 +140,24 @@ public class DatabaseHandling {
             preparedStatement.setInt(6, madeItem.getNutritionalValue().getAmountOfCarbohydrate());
             preparedStatement.setInt(7, madeItem.getNutritionalValue().getAmountOfFat());
             preparedStatement.setString(8, id);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("There was a problem connecting to database.");
+        }
+    }
+
+    public static void updateGadgetWithId(Gadget madeItem, String id) {
+        try (Connection connection = connectingToDatabase()) {
+            if (connection != null) System.out.println("Connected to database.");
+            String query = "UPDATE gadget SET gadget_id = ?, gadget_name = ?, gadget_price = ?, gadget_quantity = ?, gadget_warranty = ? WHERE gadget_id = ? ;";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, madeItem.getItemId());
+            preparedStatement.setString(2, madeItem.getItemName());
+            preparedStatement.setBigDecimal(3, madeItem.getItemPrice());
+            preparedStatement.setInt(4, madeItem.getItemQuantity());
+            preparedStatement.setInt(5, madeItem.getItemWarrantyInMonths());
+            preparedStatement.setString(6, id);
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
