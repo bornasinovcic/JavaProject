@@ -91,7 +91,6 @@ public class UpdateDeleteFoodController {
             alert.setTitle(e.getMessage());
             alert.setHeaderText(e.getMessage());
             alert.showAndWait();
-            System.out.println();
         }
     }
 
@@ -108,7 +107,6 @@ public class UpdateDeleteFoodController {
             alert.setTitle(e.getMessage());
             alert.setHeaderText(e.getMessage());
             alert.showAndWait();
-            System.out.println();
         }
     }
     private void isSelectedItemNull(Food selectedItem) throws SelectedItemException {

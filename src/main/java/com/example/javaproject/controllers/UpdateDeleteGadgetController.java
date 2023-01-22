@@ -75,7 +75,6 @@ public class UpdateDeleteGadgetController {
             alert.setTitle(e.getMessage());
             alert.setHeaderText(e.getMessage());
             alert.showAndWait();
-            System.out.println();
         }
 
     }
@@ -92,7 +91,6 @@ public class UpdateDeleteGadgetController {
             alert.setTitle(e.getMessage());
             alert.setHeaderText(e.getMessage());
             alert.showAndWait();
-            System.out.println();
         }
     }
 
