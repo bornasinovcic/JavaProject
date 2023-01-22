@@ -62,6 +62,12 @@ public class UpdateDeleteGadgetController {
 
         updateGadgetWithId(newMadeItem, selectedItem.getItemId());
         initialize();
+        textFieldId.clear();
+        textFieldName.clear();
+        textFieldPrice.clear();
+        textFieldQuantity.clear();
+        textFieldWarranty.clear();
+
     }
 
     @FXML

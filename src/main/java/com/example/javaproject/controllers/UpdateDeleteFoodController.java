@@ -75,6 +75,14 @@ public class UpdateDeleteFoodController {
 
         updateFoodWithId(newMadeItem, selectedItem.getItemId());
         initialize();
+        textFieldId.clear();
+        textFieldName.clear();
+        textFieldPrice.clear();
+        textFieldQuantity.clear();
+        textFieldProteins.clear();
+        textFieldCarbohydrates.clear();
+        textFieldFats.clear();
+
     }
 
     @FXML
