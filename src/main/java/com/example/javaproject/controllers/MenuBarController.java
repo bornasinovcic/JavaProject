@@ -63,7 +63,7 @@ public class MenuBarController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Main.getStage().setTitle("Update/Delete gadget Screen");
+        Main.getStage().setTitle("Update/Delete food Screen");
         Main.getStage().setScene(scene);
         Main.getStage().show();
     }
@@ -75,7 +75,7 @@ public class MenuBarController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Main.getStage().setTitle("Update/Delete food Screen");
+        Main.getStage().setTitle("Update/Delete gadget Screen");
         Main.getStage().setScene(scene);
         Main.getStage().show();
     }

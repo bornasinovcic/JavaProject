@@ -1,8 +1,8 @@
 package com.example.javaproject.controllers;
 
 import com.example.javaproject.entities.Gadget;
-import com.example.javaproject.exceptions.DuplicateItemId;
-import com.example.javaproject.exceptions.DuplicateItemName;
+import com.example.javaproject.exceptions.DuplicateItemIdException;
+import com.example.javaproject.exceptions.DuplicateItemNameException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
@@ -67,7 +67,7 @@ public class NewGadgetController {
                 textFieldPrice.clear();
                 textFieldQuantity.clear();
                 textFieldWarranty.clear();
-            } catch (DuplicateItemId | DuplicateItemName e) {
+            } catch (DuplicateItemIdException | DuplicateItemNameException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error alert message");
                 alert.setHeaderText(e.getMessage());
@@ -87,15 +87,15 @@ public class NewGadgetController {
             alert.showAndWait();
         }
     }
-    private void testForDuplicateGadgetId(List<Gadget> list, String id) throws DuplicateItemId {
+    private void testForDuplicateGadgetId(List<Gadget> list, String id) throws DuplicateItemIdException {
         for (Gadget gadget : list)
             if (gadget.getItemId().equals(id))
-                throw new DuplicateItemId("This gadget id already exists.");
+                throw new DuplicateItemIdException("This gadget id already exists.");
     }
-    private void testForDuplicateGadgetName(List<Gadget> list, String itemName) throws DuplicateItemName {
+    private void testForDuplicateGadgetName(List<Gadget> list, String itemName) throws DuplicateItemNameException {
         for (Gadget gadget : list)
             if (gadget.getItemName().equals(itemName))
-                throw new DuplicateItemName("This gadget name already exists.");
+                throw new DuplicateItemNameException("This gadget name already exists.");
     }
 
 }

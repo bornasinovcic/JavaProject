@@ -2,11 +2,13 @@ package com.example.javaproject.controllers;
 
 import com.example.javaproject.entities.Food;
 import com.example.javaproject.entities.NutritionalValue;
+import com.example.javaproject.exceptions.SelectedItemException;
 import com.example.javaproject.sorters.SortingFoods;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -61,36 +63,59 @@ public class UpdateDeleteFoodController {
         String itemFatsString = textFieldFats.getText();
 
         Food selectedItem = tableViewFood.getSelectionModel().getSelectedItem();
-        Food newMadeItem = new Food();
-        NutritionalValue nutritionalValue = new NutritionalValue();
+        try {
+            isSelectedItemNull(selectedItem);
+            Food newMadeItem = new Food();
+            NutritionalValue nutritionalValue = new NutritionalValue();
 
-        newMadeItem.setItemId(itemId.isEmpty() ? selectedItem.getItemId() : itemId);
-        newMadeItem.setItemName(itemName.isEmpty() ? selectedItem.getItemName() : itemName);
-        newMadeItem.setItemPrice(itemPriceString.isEmpty() ? selectedItem.getItemPrice() : new BigDecimal(itemPriceString));
-        newMadeItem.setItemQuantity(itemQuantityString.isEmpty() ? selectedItem.getItemQuantity() : Integer.valueOf(itemQuantityString));
-        nutritionalValue.setAmountOfProtein(itemProteinsString.isEmpty() ? selectedItem.getNutritionalValue().getAmountOfProtein() : Integer.valueOf(itemProteinsString));
-        nutritionalValue.setAmountOfCarbohydrate(itemCarbohydratesString.isEmpty() ? selectedItem.getNutritionalValue().getAmountOfCarbohydrate() : Integer.valueOf(itemCarbohydratesString));
-        nutritionalValue.setAmountOfFat(itemFatsString.isEmpty() ? selectedItem.getNutritionalValue().getAmountOfFat() : Integer.valueOf(itemFatsString));
-        newMadeItem.setNutritionalValue(nutritionalValue);
+            newMadeItem.setItemId(itemId.isEmpty() ? selectedItem.getItemId() : itemId);
+            newMadeItem.setItemName(itemName.isEmpty() ? selectedItem.getItemName() : itemName);
+            newMadeItem.setItemPrice(itemPriceString.isEmpty() ? selectedItem.getItemPrice() : new BigDecimal(itemPriceString));
+            newMadeItem.setItemQuantity(itemQuantityString.isEmpty() ? selectedItem.getItemQuantity() : Integer.valueOf(itemQuantityString));
+            nutritionalValue.setAmountOfProtein(itemProteinsString.isEmpty() ? selectedItem.getNutritionalValue().getAmountOfProtein() : Integer.valueOf(itemProteinsString));
+            nutritionalValue.setAmountOfCarbohydrate(itemCarbohydratesString.isEmpty() ? selectedItem.getNutritionalValue().getAmountOfCarbohydrate() : Integer.valueOf(itemCarbohydratesString));
+            nutritionalValue.setAmountOfFat(itemFatsString.isEmpty() ? selectedItem.getNutritionalValue().getAmountOfFat() : Integer.valueOf(itemFatsString));
+            newMadeItem.setNutritionalValue(nutritionalValue);
 
-        updateFoodWithId(newMadeItem, selectedItem.getItemId());
-        initialize();
-        textFieldId.clear();
-        textFieldName.clear();
-        textFieldPrice.clear();
-        textFieldQuantity.clear();
-        textFieldProteins.clear();
-        textFieldCarbohydrates.clear();
-        textFieldFats.clear();
-
+            updateFoodWithId(newMadeItem, selectedItem.getItemId());
+            initialize();
+            textFieldId.clear();
+            textFieldName.clear();
+            textFieldPrice.clear();
+            textFieldQuantity.clear();
+            textFieldProteins.clear();
+            textFieldCarbohydrates.clear();
+            textFieldFats.clear();
+        } catch (SelectedItemException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle(e.getMessage());
+            alert.setHeaderText(e.getMessage());
+            alert.showAndWait();
+            System.out.println();
+        }
     }
+
 
     @FXML
     protected void onDeleteButtonClick() {
         Food food = tableViewFood.getSelectionModel().getSelectedItem();
-        deleteFoodWithId(food.getItemId());
-        initialize();
+        try {
+            isSelectedItemNull(food);
+            deleteFoodWithId(food.getItemId());
+            initialize();
+        } catch (SelectedItemException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle(e.getMessage());
+            alert.setHeaderText(e.getMessage());
+            alert.showAndWait();
+            System.out.println();
+        }
     }
+    private void isSelectedItemNull(Food selectedItem) throws SelectedItemException {
+        if (selectedItem == null)
+            throw new SelectedItemException("You did not select an item in table view");
+    }
+
 
     public void initialize() {
         foodList.clear();
