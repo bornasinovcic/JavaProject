@@ -18,7 +18,9 @@ import static com.example.javaproject.database.DatabaseHandling.getAllGadgetItem
 
 public class GadgetController {
     @FXML
-    private TextField textField;
+    private TextField textFieldName;
+    @FXML
+    private TextField textFieldWarranty;
     @FXML
     private TableColumn<Gadget, String> tableColumnId;
     @FXML
@@ -34,10 +36,12 @@ public class GadgetController {
     private static List<Gadget> gadgetList = new ArrayList<>();
     @FXML
     protected void onKeyTyped() {
-        String s = textField.getText().toLowerCase();
+        String name = textFieldName.getText().toLowerCase();
+        String warranty = textFieldWarranty.getText().toLowerCase();
         List<Gadget> list = new ArrayList<>(gadgetList);
         list = list.stream()
-                .filter(gadget -> gadget.getItemName().toLowerCase().contains(s))
+                .filter(gadget -> gadget.getItemName().toLowerCase().contains(name))
+                .filter(gadget -> gadget.getItemWarrantyInMonths().toString().toLowerCase().contains(warranty))
                 .toList();
         tableViewGadget.setItems(FXCollections.observableList(list));
     }
