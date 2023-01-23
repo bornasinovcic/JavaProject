@@ -2,6 +2,8 @@ package com.example.javaproject.controllers;
 
 import com.example.javaproject.entities.Food;
 import com.example.javaproject.entities.NutritionalValue;
+import com.example.javaproject.exceptions.DuplicateItemIdException;
+import com.example.javaproject.exceptions.DuplicateItemNameException;
 import com.example.javaproject.exceptions.SelectedItemException;
 import com.example.javaproject.sorters.SortingFoods;
 import javafx.beans.property.SimpleObjectProperty;
@@ -77,6 +79,11 @@ public class UpdateDeleteFoodController {
             nutritionalValue.setAmountOfFat(itemFatsString.isEmpty() ? selectedItem.getNutritionalValue().getAmountOfFat() : Integer.valueOf(itemFatsString));
             newMadeItem.setNutritionalValue(nutritionalValue);
 
+            List<Food> list = getAllFoodItems();
+
+            testForDuplicateFoodId(list, itemId);
+            testForDuplicateFoodName(list, itemName);
+
             updateFoodWithId(newMadeItem, selectedItem.getItemId());
             initialize();
             textFieldId.clear();
@@ -86,6 +93,11 @@ public class UpdateDeleteFoodController {
             textFieldProteins.clear();
             textFieldCarbohydrates.clear();
             textFieldFats.clear();
+        } catch (DuplicateItemIdException | DuplicateItemNameException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error alert message");
+            alert.setHeaderText(e.getMessage());
+            alert.showAndWait();
         } catch (SelectedItemException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle(e.getMessage());
@@ -93,6 +105,18 @@ public class UpdateDeleteFoodController {
             alert.showAndWait();
         }
     }
+
+    private void testForDuplicateFoodId(List<Food> list, String id) throws DuplicateItemIdException {
+        for (Food food : list)
+            if (food.getItemId().equals(id))
+                throw new DuplicateItemIdException("This food id already exists.");
+    }
+    private void testForDuplicateFoodName(List<Food> list, String itemName) throws DuplicateItemNameException {
+        for (Food food : list)
+            if (food.getItemName().equals(itemName))
+                throw new DuplicateItemNameException("This food name already exists.");
+    }
+
 
 
     @FXML

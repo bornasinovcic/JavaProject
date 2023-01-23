@@ -1,6 +1,9 @@
 package com.example.javaproject.controllers;
 
+import com.example.javaproject.entities.Food;
 import com.example.javaproject.entities.Gadget;
+import com.example.javaproject.exceptions.DuplicateItemIdException;
+import com.example.javaproject.exceptions.DuplicateItemNameException;
 import com.example.javaproject.exceptions.SelectedItemException;
 import com.example.javaproject.sorters.SortingGadgets;
 import javafx.beans.property.SimpleObjectProperty;
@@ -43,6 +46,7 @@ public class UpdateDeleteGadgetController {
     @FXML
     private TableView<Gadget> tableViewGadget;
     private static List<Gadget> gadgetList = new ArrayList<>();
+
     @FXML
     protected void onUpdateButtonClick() {
         String itemId = textFieldId.getText();
@@ -62,6 +66,11 @@ public class UpdateDeleteGadgetController {
             newMadeItem.setItemQuantity(itemQuantityString.isEmpty() ? selectedItem.getItemQuantity() : Integer.valueOf(itemQuantityString));
             newMadeItem.setItemWarrantyInMonths(itemWarrantyInMonthsString.isEmpty() ? selectedItem.getItemWarrantyInMonths() : Integer.valueOf(itemWarrantyInMonthsString));
 
+            List<Gadget> list = getAllGadgetItems();
+
+            testForDuplicateFoodId(list, itemId);
+            testForDuplicateFoodName(list, itemName);
+
             updateGadgetWithId(newMadeItem, selectedItem.getItemId());
             initialize();
             textFieldId.clear();
@@ -69,6 +78,11 @@ public class UpdateDeleteGadgetController {
             textFieldPrice.clear();
             textFieldQuantity.clear();
             textFieldWarranty.clear();
+        } catch (DuplicateItemIdException | DuplicateItemNameException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error alert message");
+            alert.setHeaderText(e.getMessage());
+            alert.showAndWait();
         } catch (SelectedItemException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle(e.getMessage());
@@ -77,6 +91,19 @@ public class UpdateDeleteGadgetController {
         }
 
     }
+
+    private void testForDuplicateFoodId(List<Gadget> list, String id) throws DuplicateItemIdException {
+        for (Gadget gadget : list)
+            if (gadget.getItemId().equals(id))
+                throw new DuplicateItemIdException("This food id already exists.");
+    }
+
+    private void testForDuplicateFoodName(List<Gadget> list, String itemName) throws DuplicateItemNameException {
+        for (Gadget gadget : list)
+            if (gadget.getItemName().equals(itemName))
+                throw new DuplicateItemNameException("This food name already exists.");
+    }
+
 
     @FXML
     protected void onDeleteButtonClick() {
