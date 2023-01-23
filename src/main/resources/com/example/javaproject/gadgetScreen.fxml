@@ -17,6 +17,7 @@
     </Label>
     <Text layoutX="212.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filter by name:" />
     <TextField fx:id="textFieldName" layoutX="300.0" layoutY="100.0" onKeyTyped="#onKeyTyped" />
+   <TextField fx:id="textFieldWarranty" layoutX="300.0" layoutY="130.0" onKeyTyped="#onKeyTyped" />
     <TableView fx:id="tableViewGadget" layoutY="200.0" prefHeight="200.0" prefWidth="600.0">
         <columns>
             <TableColumn fx:id="tableColumnId" prefWidth="150.0" text="Id" />
@@ -27,5 +28,4 @@
         </columns>
     </TableView>
    <Text layoutX="196.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filter by warranty:" />
-   <TextField fx:id="textFieldWarranty" layoutX="300.0" layoutY="130.0" onKeyTyped="#onKeyTyped" />
 </Pane>
