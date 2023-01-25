@@ -70,9 +70,9 @@ public class NewFoodController {
                         "\nitemName -> " + itemName +
                         "\nitemPrice -> " + itemPrice +
                         "\nitemQuantity -> " + itemQuantity +
-                        "\namountOfProteins -> " + list.get(list.size() - 1).getNutritionalValue().getAmountOfProtein() +
-                        "\namountOfCarbohydrates -> " + list.get(list.size() - 1).getNutritionalValue().getAmountOfCarbohydrate() +
-                        "\namountOfFats -> " + list.get(list.size() - 1).getNutritionalValue().getAmountOfFat()
+                        "\namountOfProteins -> " + food.getNutritionalValue().getAmountOfProtein() +
+                        "\namountOfCarbohydrates -> " + food.getNutritionalValue().getAmountOfCarbohydrate() +
+                        "\namountOfFats -> " + food.getNutritionalValue().getAmountOfFat()
                 );
                 alert.showAndWait();
                 textFieldId.clear();

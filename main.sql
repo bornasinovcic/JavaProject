@@ -21,6 +21,8 @@ CREATE TABLE gadget
     PRIMARY KEY (gadget_id),
     UNIQUE (gadget_name)
 );
+TRUNCATE TABLE food;
+TRUNCATE TABLE gadget;
 INSERT INTO food (food_id, food_name, food_price, food_quantity, food_proteins, food_carbohydrates, food_fats)
 VALUES ('T7xnke6YI955Idfx', 'Hamburger peciva 300 g', 1.33, 5, 8, 53, 5),
        ('fPBkRxk4LBsWtdYd', 'Donut okus čokolade 56 g', 0.62, 5, 6, 45, 28),
