@@ -73,8 +73,8 @@ public class NewGadgetController {
                 alert.setHeaderText(e.getMessage());
                 alert.showAndWait();
             } catch (NumberFormatException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error alert message");
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning alert message");
                 alert.setHeaderText("Some of the fields have a wrong data type.\n" +
                         "Please make sure you have inputted everything correctly.");
                 alert.showAndWait();
