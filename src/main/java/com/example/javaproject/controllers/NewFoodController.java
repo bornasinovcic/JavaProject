@@ -30,6 +30,20 @@ public class NewFoodController {
     @FXML
     private TextField textFieldFats;
 
+
+    @FXML
+    protected void onRandomButtonClick() {
+        int n = 16;
+        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvxyz0123456789";
+        StringBuilder stringBuilder = new StringBuilder(n);
+        for (int i = 0; i < n; i++) {
+            int index = (int)(AlphaNumericString.length() * Math.random());
+            stringBuilder.append(AlphaNumericString.charAt(index));
+        }
+        String madeString = stringBuilder.toString();
+        textFieldId.setText(madeString);
+    }
+
     @FXML
     protected void onButtonClick() {
         String itemId = textFieldId.getText();

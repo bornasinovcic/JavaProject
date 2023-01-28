@@ -25,4 +25,5 @@
     <Text layoutX="242.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:" />
     <Text layoutX="239.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Warranty:" />
     <Button layoutX="275.0" layoutY="320.0" mnemonicParsing="false" onAction="#onButtonClick" text="Button" />
+    <Button layoutX="460.0" layoutY="100.0" mnemonicParsing="false" onAction="#onRandomButtonClick" text="Random id" />
 </Pane>
