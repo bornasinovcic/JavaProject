@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.javaproject.database.DatabaseHandling.getAllFoodItems;
@@ -66,9 +65,9 @@ public class InfoScreenController {
                 .sum();
         totalCaloricValue.setText(totalCalories + " kcal");
         BigDecimal bigDecimal = BigDecimal.ZERO;
-        for (Food food : foodlist) {
+        for (Food food : foodlist)
             bigDecimal = bigDecimal.add(food.getItemPrice().multiply(BigDecimal.valueOf(food.getItemQuantity())));
-        }
-        totalFoodCost.setText(bigDecimal + " €");
+
+        totalFoodCost.setText(bigDecimal.multiply(BigDecimal.valueOf(3))  + " €");
     }
 }

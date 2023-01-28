@@ -5,34 +5,41 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javaproject.controllers.InfoScreenController">
-    <fx:include source="menuBar.fxml" />
-   <Label layoutX="242.0" layoutY="40.0" text="Info screen">
-      <font>
-         <Font size="24.0" />
-      </font>
-   </Label>
-   <Label layoutX="30.0" layoutY="90.0" text="Food items">
-      <font>
-         <Font name="System Bold Italic" size="14.0" />
-      </font>
-   </Label>
-   <Label layoutX="30.0" layoutY="120.0" text="Proteins:" />
-   <Label layoutX="30.0" layoutY="150.0" text="Carbohydrates:" />
-   <Label layoutX="30.0" layoutY="180.0" text="Fats:" />
-   <Label layoutX="140.0" layoutY="90.0" text="Values:" />
-   <Label fx:id="amountOfProteins" layoutX="150.0" layoutY="120.0" />
-   <Label fx:id="amountOfCarbohydrates" layoutX="150.0" layoutY="150.0" />
-   <Label fx:id="amountOfFats" layoutX="150.0" layoutY="180.0" />
-   <Label layoutX="190.0" layoutY="90.0" text="Caloric values:" />
-   <Label fx:id="caloricAmountOfProteins" layoutX="210.0" layoutY="120.0" />
-   <Label fx:id="caloricAmountOfCarbohydrates" layoutX="210.0" layoutY="150.0" />
-   <Label fx:id="caloricAmountOfFats" layoutX="210.0" layoutY="180.0" />
-   <Line endX="150.0" layoutX="130.0" layoutY="200.0" startX="-100.0" />
-   <Label layoutX="30.0" layoutY="210.0" text="Total caloric value:" />
-   <Label fx:id="totalCaloricValue" layoutX="210.0" layoutY="210.0" />
-   <Line endX="150.0" layoutX="130.0" layoutY="240.0" startX="-100.0" />
-   <Label layoutX="30.0" layoutY="250.0" text="Total cost:" />
-   <Label fx:id="totalFoodCost" layoutX="210.0" layoutY="250.0" text="€" />
-   <Line endX="150.0" layoutX="130.0" layoutY="280.0" startX="-100.0" />
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+      prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.javaproject.controllers.InfoScreenController">
+    <fx:include source="menuBar.fxml"/>
+    <Label layoutX="242.0" layoutY="40.0" text="Info screen">
+        <font>
+            <Font size="24.0"/>
+        </font>
+    </Label>
+    <Label layoutX="30.0" layoutY="90.0" text="Food items">
+        <font>
+            <Font name="System Bold Italic" size="14.0"/>
+        </font>
+    </Label>
+    <Label layoutX="30.0" layoutY="120.0" text="Proteins:"/>
+    <Label layoutX="30.0" layoutY="150.0" text="Carbohydrates:"/>
+    <Label layoutX="30.0" layoutY="180.0" text="Fats:"/>
+    <Label layoutX="140.0" layoutY="90.0" text="Values:"/>
+    <Label fx:id="amountOfProteins" layoutX="150.0" layoutY="120.0"/>
+    <Label fx:id="amountOfCarbohydrates" layoutX="150.0" layoutY="150.0"/>
+    <Label fx:id="amountOfFats" layoutX="150.0" layoutY="180.0"/>
+    <Label layoutX="190.0" layoutY="90.0" text="Caloric values:"/>
+    <Label fx:id="caloricAmountOfProteins" layoutX="210.0" layoutY="120.0"/>
+    <Label fx:id="caloricAmountOfCarbohydrates" layoutX="210.0" layoutY="150.0"/>
+    <Label fx:id="caloricAmountOfFats" layoutX="210.0" layoutY="180.0"/>
+    <Line endX="150.0" layoutX="130.0" layoutY="200.0" startX="-100.0"/>
+    <Label layoutX="30.0" layoutY="210.0" text="Total caloric value:"/>
+    <Label fx:id="totalCaloricValue" layoutX="210.0" layoutY="210.0"/>
+    <Line endX="150.0" layoutX="130.0" layoutY="240.0" startX="-100.0"/>
+    <Label layoutX="30.0" layoutY="250.0" text="Total cost:"/>
+    <Label fx:id="totalFoodCost" layoutX="210.0" layoutY="250.0"/>
+    <Line endX="150.0" layoutX="130.0" layoutY="280.0" startX="-100.0"/>
+    <Label layoutX="300.0" layoutY="90.0" text="Gadget items">
+        <font>
+            <Font name="System Bold Italic" size="14.0"/>
+        </font>
+    </Label>
 </Pane>
