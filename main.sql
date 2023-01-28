@@ -37,3 +37,14 @@ VALUES ('fkVjhvCBJHvV6Zwn', 'Laptop (Predator Triton)', 4559.05, 1, 36),
        ('gxYmMSKdbKSBXnm5', 'Laptop (APPLE MacBook Pro 16)', 4277.52, 1, 36),
        ('wT4v5S2aVAvBaSra', 'Laptop (ASUS ROG Zephyrus)', 4738.07, 2, 12),
        ('z9cu2sjBhSX7fWUn', 'Monitor 24" DELL', 149.00, 3, 36);
+SELECT SUM(food_quantity * food_price) FROM food;
+SELECT SUM(food_quantity * food_proteins) FROM food;
+SELECT SUM(food_quantity * food_proteins * 4) FROM food;
+SELECT SUM(food_quantity * food_carbohydrates) FROM food;
+SELECT SUM(food_quantity * food_carbohydrates * 4) FROM food;
+SELECT SUM(food_quantity * food_fats) FROM food;
+SELECT SUM(food_quantity * food_fats * 9) FROM food;
+SELECT SUM((food_quantity * food_proteins * 4) +
+           (food_quantity * food_carbohydrates * 4) +
+           (food_quantity * food_fats * 9))
+FROM food;

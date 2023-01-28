@@ -1,6 +1,5 @@
 package com.example.javaproject.controllers;
 
-import com.example.javaproject.entities.Food;
 import com.example.javaproject.entities.Gadget;
 import com.example.javaproject.exceptions.DuplicateItemIdException;
 import com.example.javaproject.exceptions.DuplicateItemNameException;
