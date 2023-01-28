@@ -2,6 +2,7 @@ package com.example.javaproject.controllers;
 
 import com.example.javaproject.entities.Food;
 import com.example.javaproject.entities.NutritionalValue;
+import com.example.javaproject.entities.Random;
 import com.example.javaproject.exceptions.DuplicateItemIdException;
 import com.example.javaproject.exceptions.DuplicateItemNameException;
 import com.example.javaproject.exceptions.SelectedItemException;
@@ -53,6 +54,12 @@ public class UpdateDeleteFoodController {
     @FXML
     private TableView<Food> tableViewFood;
     private static List<Food> foodList = new ArrayList<>();
+
+    @FXML
+    protected void onRandomButtonClick() {
+        String madeString = new Random().randomString();
+        textFieldId.setText(madeString);
+    }
 
     @FXML
     protected void onUpdateButtonClick() {

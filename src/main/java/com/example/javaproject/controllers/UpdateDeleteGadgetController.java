@@ -1,6 +1,7 @@
 package com.example.javaproject.controllers;
 
 import com.example.javaproject.entities.Gadget;
+import com.example.javaproject.entities.Random;
 import com.example.javaproject.exceptions.DuplicateItemIdException;
 import com.example.javaproject.exceptions.DuplicateItemNameException;
 import com.example.javaproject.exceptions.SelectedItemException;
@@ -45,6 +46,12 @@ public class UpdateDeleteGadgetController {
     @FXML
     private TableView<Gadget> tableViewGadget;
     private static List<Gadget> gadgetList = new ArrayList<>();
+
+    @FXML
+    protected void onRandomButtonClick() {
+        String madeString = new Random().randomString();
+        textFieldId.setText(madeString);
+    }
 
     @FXML
     protected void onUpdateButtonClick() {

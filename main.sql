@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS food, gadget;
 CREATE TABLE food
 (
-    food_id            VARCHAR(22)   NOT NULL,
+    food_id            VARCHAR(20)   NOT NULL,
     food_name          VARCHAR(33)   NOT NULL,
     food_price         DECIMAL(7, 2) NOT NULL,
     food_quantity      INT           NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE food
 );
 CREATE TABLE gadget
 (
-    gadget_id       VARCHAR(22)   NOT NULL,
+    gadget_id       VARCHAR(20)   NOT NULL,
     gadget_name     VARCHAR(33)   NOT NULL,
     gadget_price    DECIMAL(7, 2) NOT NULL,
     gadget_quantity INT           NOT NULL,
