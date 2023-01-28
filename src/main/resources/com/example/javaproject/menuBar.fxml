@@ -22,5 +22,10 @@
                 <MenuItem mnemonicParsing="false" onAction="#showUpdateDeleteGadgetScreen" text="Delete/Update gadget item"/>
             </items>
         </Menu>
+        <Menu mnemonicParsing="false" text="Info">
+            <items>
+                <MenuItem mnemonicParsing="false" onAction="#showInfoScreen" text="Show info screen"/>
+            </items>
+        </Menu>
     </menus>
 </MenuBar>
