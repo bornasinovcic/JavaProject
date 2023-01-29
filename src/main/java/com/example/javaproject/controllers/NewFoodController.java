@@ -55,7 +55,8 @@ public class NewFoodController {
         if (itemPriceString.isEmpty()) stringBuilder.append("You forgot to input price of that food.\n");
         if (itemQuantityString.isEmpty()) stringBuilder.append("You forgot to input quantity of that food.\n");
         if (itemProteinsString.isEmpty()) stringBuilder.append("You forgot to input protein value of that food.\n");
-        if (itemCarbohydratesString.isEmpty()) stringBuilder.append("You forgot to input carbohydrate value of that food.\n");
+        if (itemCarbohydratesString.isEmpty())
+            stringBuilder.append("You forgot to input carbohydrate value of that food.\n");
         if (itemFatsString.isEmpty()) stringBuilder.append("You forgot to input fat value of that food.\n");
 
         if (stringBuilder.isEmpty()) {
@@ -69,20 +70,20 @@ public class NewFoodController {
                 Food food = new Food(itemId, itemName, itemPrice, itemQuantity, new NutritionalValue(amountOfProteins, amountOfCarbohydrates, amountOfFats));
                 testForDuplicateFoodId(list, itemId);
                 testForDuplicateFoodName(list, itemName);
-                insertNewFoodItem(food);
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Correct input of data for food object.");
                 alert.setTitle("New food added.");
-                alert.setContentText(
-                        "itemId -> " + itemId +
-                        "\nitemName -> " + itemName +
-                        "\nitemPrice -> " + itemPrice +
-                        "\nitemQuantity -> " + itemQuantity +
-                        "\namountOfProteins -> " + food.getNutritionalValue().getAmountOfProtein() +
-                        "\namountOfCarbohydrates -> " + food.getNutritionalValue().getAmountOfCarbohydrate() +
-                        "\namountOfFats -> " + food.getNutritionalValue().getAmountOfFat()
-                );
+                alert.setHeaderText("Information about new food item.");
+                String string = "Id -> [" + itemId + "]" +
+                        "\nName -> [" + itemName + "]" +
+                        "\nPrice -> [" + itemPrice + "]" +
+                        "\nQuantity -> [" + itemQuantity + "]" +
+                        "\nProteins -> [" + food.getNutritionalValue().getAmountOfProtein() + "]" +
+                        "\nCarbohydrates -> [" + food.getNutritionalValue().getAmountOfCarbohydrate() + "]" +
+                        "\nFats -> [" + food.getNutritionalValue().getAmountOfFat() + "]";
+
+                alert.setContentText(string);
                 alert.showAndWait();
+                insertNewFoodItem(food);
                 textFieldId.clear();
                 textFieldName.clear();
                 textFieldPrice.clear();
@@ -116,6 +117,7 @@ public class NewFoodController {
             if (food.getItemId().equals(id))
                 throw new DuplicateItemIdException("This food id already exists.");
     }
+
     private void testForDuplicateFoodName(List<Food> list, String itemName) throws DuplicateItemNameException {
         for (Food food : list)
             if (food.getItemName().equals(itemName))

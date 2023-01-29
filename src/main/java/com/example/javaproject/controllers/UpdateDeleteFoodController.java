@@ -11,14 +11,12 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static com.example.javaproject.database.DatabaseHandling.*;
 
@@ -91,15 +89,29 @@ public class UpdateDeleteFoodController {
             testForDuplicateFoodId(list, itemId);
             testForDuplicateFoodName(list, itemName);
 
-            updateFoodWithId(newMadeItem, selectedItem.getItemId());
-            initialize();
-            textFieldId.clear();
-            textFieldName.clear();
-            textFieldPrice.clear();
-            textFieldQuantity.clear();
-            textFieldProteins.clear();
-            textFieldCarbohydrates.clear();
-            textFieldFats.clear();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Food item changed.");
+            alert.setHeaderText("All changes are listed bellow.");
+            String string = "old Id [" + selectedItem.getItemId() + "] new Id [" + newMadeItem.getItemId() + "]" +
+                    "\nold Name [" + selectedItem.getItemName() + "] new Name [" + newMadeItem.getItemName() + "]" +
+                    "\nold Price [" + selectedItem.getItemPrice() + "] new Price [" + newMadeItem.getItemPrice() + "]" +
+                    "\nold Quantity [" + selectedItem.getItemQuantity() + "] new Quantity [" + newMadeItem.getItemQuantity() + "]" +
+                    "\nold Proteins [" + selectedItem.getNutritionalValue().getAmountOfProtein() + "] new Proteins [" + newMadeItem.getNutritionalValue().getAmountOfProtein() + "]" +
+                    "\nold Carbohydrates [" + selectedItem.getNutritionalValue().getAmountOfCarbohydrate() + "] new Carbohydrates [" + newMadeItem.getNutritionalValue().getAmountOfCarbohydrate() + "]" +
+                    "\nold Fats [" + selectedItem.getNutritionalValue().getAmountOfFat() + "] new Fats [" + newMadeItem.getNutritionalValue().getAmountOfFat() + "]";
+            alert.setContentText(string);
+            Optional<ButtonType> buttonType = alert.showAndWait();
+            if (buttonType.isPresent() && buttonType.get() == ButtonType.OK) {
+                updateFoodWithId(newMadeItem, selectedItem.getItemId());
+                initialize();
+                textFieldId.clear();
+                textFieldName.clear();
+                textFieldPrice.clear();
+                textFieldQuantity.clear();
+                textFieldProteins.clear();
+                textFieldCarbohydrates.clear();
+                textFieldFats.clear();
+            }
         } catch (DuplicateItemIdException | DuplicateItemNameException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error alert message");
@@ -124,21 +136,31 @@ public class UpdateDeleteFoodController {
             if (food.getItemId().equals(id))
                 throw new DuplicateItemIdException("This food id already exists.");
     }
+
     private void testForDuplicateFoodName(List<Food> list, String itemName) throws DuplicateItemNameException {
         for (Food food : list)
             if (food.getItemName().equals(itemName))
                 throw new DuplicateItemNameException("This food name already exists.");
     }
 
-
+    private void isSelectedItemNull(Food selectedItem) throws SelectedItemException {
+        if (selectedItem == null)
+            throw new SelectedItemException("You did not select an item in table view");
+    }
 
     @FXML
     protected void onDeleteButtonClick() {
         Food food = tableViewFood.getSelectionModel().getSelectedItem();
         try {
             isSelectedItemNull(food);
-            deleteFoodWithId(food.getItemId());
-            initialize();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Deletion of item");
+            alert.setHeaderText("Selected item will be deleted.");
+            Optional<ButtonType> buttonType = alert.showAndWait();
+            if (buttonType.isPresent() && buttonType.get() == ButtonType.OK) {
+                deleteFoodWithId(food.getItemId());
+                initialize();
+            }
         } catch (SelectedItemException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle(e.getMessage());
@@ -146,10 +168,7 @@ public class UpdateDeleteFoodController {
             alert.showAndWait();
         }
     }
-    private void isSelectedItemNull(Food selectedItem) throws SelectedItemException {
-        if (selectedItem == null)
-            throw new SelectedItemException("You did not select an item in table view");
-    }
+
 
 
     public void initialize() {

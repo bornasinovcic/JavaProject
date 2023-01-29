@@ -53,23 +53,23 @@ public class NewGadgetController {
         if (stringBuilder.isEmpty()) {
             try {
                 BigDecimal itemPrice = new BigDecimal(itemPriceString);
-                Integer itemQuantity  = Integer.valueOf(itemQuantityString);
+                Integer itemQuantity = Integer.valueOf(itemQuantityString);
                 Integer itemWarrantyInMonths = Integer.valueOf(itemWarrantyInMonthsString);
                 List<Gadget> list = getAllGadgetItems();
                 Gadget gadget = new Gadget(itemId, itemName, itemPrice, itemQuantity, itemWarrantyInMonths);
                 testForDuplicateGadgetId(list, itemId);
                 testForDuplicateGadgetName(list, itemName);
-                insertNewGadgetItem(gadget);
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Correct input of data for gadget object.");
                 alert.setTitle("New gadget added.");
-                alert.setContentText(
-                        "itemId -> " + itemId +
-                                "\nitemName -> " + itemName +
-                                "\nitemPrice -> " + itemPrice +
-                                "\nitemQuantity -> " + itemQuantity +
-                                "\nitemWarrantyInMonths -> " + itemWarrantyInMonths);
+                alert.setHeaderText("Information about new gadget item.");
+                String string = "Id -> [" + itemId + "]" +
+                        "\nName -> [" + itemName + "]" +
+                        "\nPrice -> [" + itemPrice + "]" +
+                        "\nQuantity -> [" + itemQuantity + "]" +
+                        "\nWarranty -> [" + itemWarrantyInMonths + "]";
+                alert.setContentText(string);
                 alert.showAndWait();
+                insertNewGadgetItem(gadget);
                 textFieldId.clear();
                 textFieldName.clear();
                 textFieldPrice.clear();
@@ -95,11 +95,13 @@ public class NewGadgetController {
             alert.showAndWait();
         }
     }
+
     private void testForDuplicateGadgetId(List<Gadget> list, String id) throws DuplicateItemIdException {
         for (Gadget gadget : list)
             if (gadget.getItemId().equals(id))
                 throw new DuplicateItemIdException("This gadget id already exists.");
     }
+
     private void testForDuplicateGadgetName(List<Gadget> list, String itemName) throws DuplicateItemNameException {
         for (Gadget gadget : list)
             if (gadget.getItemName().equals(itemName))

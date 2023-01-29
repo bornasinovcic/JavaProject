@@ -10,14 +10,12 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static com.example.javaproject.database.DatabaseHandling.*;
 
@@ -74,16 +72,28 @@ public class UpdateDeleteGadgetController {
 
             List<Gadget> list = getAllGadgetItems();
 
-            testForDuplicateFoodId(list, itemId);
-            testForDuplicateFoodName(list, itemName);
+            testForDuplicateGadgetId(list, itemId);
+            testForDuplicateGadgetName(list, itemName);
 
-            updateGadgetWithId(newMadeItem, selectedItem.getItemId());
-            initialize();
-            textFieldId.clear();
-            textFieldName.clear();
-            textFieldPrice.clear();
-            textFieldQuantity.clear();
-            textFieldWarranty.clear();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Gadget item changed.");
+            alert.setHeaderText("All changes are listed bellow.");
+            String string = "old Id [" + selectedItem.getItemId() + "] new Id [" + newMadeItem.getItemId() + "]" +
+                    "\nold Name [" + selectedItem.getItemName() + "] new Name [" + newMadeItem.getItemName() + "]" +
+                    "\nold Price [" + selectedItem.getItemPrice() + "] new Price [" + newMadeItem.getItemPrice() + "]" +
+                    "\nold Quantity [" + selectedItem.getItemQuantity() + "] new Quantity [" + newMadeItem.getItemQuantity() + "]" +
+                    "\nold Warranty [" + selectedItem.getItemWarrantyInMonths() + "] new Warranty [" + newMadeItem.getItemWarrantyInMonths() + "]";
+            alert.setContentText(string);
+            Optional<ButtonType> buttonType = alert.showAndWait();
+            if (buttonType.isPresent() && buttonType.get() == ButtonType.OK) {
+                updateGadgetWithId(newMadeItem, selectedItem.getItemId());
+                initialize();
+                textFieldId.clear();
+                textFieldName.clear();
+                textFieldPrice.clear();
+                textFieldQuantity.clear();
+                textFieldWarranty.clear();
+            }
         } catch (DuplicateItemIdException | DuplicateItemNameException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error alert message");
@@ -103,37 +113,42 @@ public class UpdateDeleteGadgetController {
         }
     }
 
-    private void testForDuplicateFoodId(List<Gadget> list, String id) throws DuplicateItemIdException {
+    private void testForDuplicateGadgetId(List<Gadget> list, String id) throws DuplicateItemIdException {
         for (Gadget gadget : list)
             if (gadget.getItemId().equals(id))
                 throw new DuplicateItemIdException("This food id already exists.");
     }
 
-    private void testForDuplicateFoodName(List<Gadget> list, String itemName) throws DuplicateItemNameException {
+    private void testForDuplicateGadgetName(List<Gadget> list, String itemName) throws DuplicateItemNameException {
         for (Gadget gadget : list)
             if (gadget.getItemName().equals(itemName))
                 throw new DuplicateItemNameException("This food name already exists.");
     }
 
+    private void isSelectedItemNull(Gadget selectedItem) throws SelectedItemException {
+        if (selectedItem == null)
+            throw new SelectedItemException("You did not select an item in table view");
+    }
 
     @FXML
     protected void onDeleteButtonClick() {
         Gadget gadget = tableViewGadget.getSelectionModel().getSelectedItem();
         try {
             isSelectedItemNull(gadget);
-            deleteGadgetWithId(gadget.getItemId());
-            initialize();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Deletion of item");
+            alert.setHeaderText("Selected item will be deleted.");
+            Optional<ButtonType> buttonType = alert.showAndWait();
+            if (buttonType.isPresent() && buttonType.get() == ButtonType.OK) {
+                deleteGadgetWithId(gadget.getItemId());
+                initialize();
+            }
         } catch (SelectedItemException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle(e.getMessage());
             alert.setHeaderText(e.getMessage());
             alert.showAndWait();
         }
-    }
-
-    private void isSelectedItemNull(Gadget selectedItem) throws SelectedItemException {
-        if (selectedItem == null)
-            throw new SelectedItemException("You did not select an item in table view");
     }
 
 
