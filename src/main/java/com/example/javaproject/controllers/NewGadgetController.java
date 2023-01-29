@@ -1,7 +1,6 @@
 package com.example.javaproject.controllers;
 
 import com.example.javaproject.entities.Gadget;
-import com.example.javaproject.entities.Random;
 import com.example.javaproject.exceptions.DuplicateItemIdException;
 import com.example.javaproject.exceptions.DuplicateItemNameException;
 import javafx.fxml.FXML;
@@ -13,6 +12,7 @@ import java.util.List;
 
 import static com.example.javaproject.database.DatabaseHandling.getAllGadgetItems;
 import static com.example.javaproject.database.DatabaseHandling.insertNewGadgetItem;
+import static com.example.javaproject.entities.Random.randomString;
 
 public class NewGadgetController {
     @FXML
@@ -28,7 +28,7 @@ public class NewGadgetController {
 
     @FXML
     protected void onRandomButtonClick() {
-        String madeString = new Random().randomString();
+        String madeString = randomString();
         textFieldId.setText(madeString);
     }
 

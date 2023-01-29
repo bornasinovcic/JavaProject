@@ -2,7 +2,6 @@ package com.example.javaproject.controllers;
 
 import com.example.javaproject.entities.Food;
 import com.example.javaproject.entities.NutritionalValue;
-import com.example.javaproject.entities.Random;
 import com.example.javaproject.exceptions.DuplicateItemIdException;
 import com.example.javaproject.exceptions.DuplicateItemNameException;
 import javafx.fxml.FXML;
@@ -14,6 +13,7 @@ import java.util.List;
 
 import static com.example.javaproject.database.DatabaseHandling.getAllFoodItems;
 import static com.example.javaproject.database.DatabaseHandling.insertNewFoodItem;
+import static com.example.javaproject.entities.Random.randomString;
 
 public class NewFoodController {
     @FXML
@@ -34,7 +34,7 @@ public class NewFoodController {
 
     @FXML
     protected void onRandomButtonClick() {
-        String madeString = new Random().randomString();
+        String madeString = randomString();
         textFieldId.setText(madeString);
     }
 

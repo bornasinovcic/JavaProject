@@ -1,7 +1,7 @@
 package com.example.javaproject.entities;
 
 public class Random {
-    public String randomString() {
+    public static String randomString() {
         int n = 16;
         String arrayOfValues = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvxyz0123456789";
         StringBuilder stringBuilder = new StringBuilder(n);
