@@ -68,6 +68,6 @@ public class InfoScreenController {
         for (Food food : foodlist)
             bigDecimal = bigDecimal.add(food.getItemPrice().multiply(BigDecimal.valueOf(food.getItemQuantity())));
 
-        totalFoodCost.setText(bigDecimal.multiply(BigDecimal.valueOf(3))  + " €");
+        totalFoodCost.setText(bigDecimal + " €");
     }
 }
