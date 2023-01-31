@@ -43,4 +43,11 @@
    <Label layoutX="30.0" layoutY="320.0" text="Total cost:" />
    <Label fx:id="totalGadgetCost" layoutX="210.0" layoutY="320.0" />
    <Line endX="150.0" layoutX="130.0" layoutY="351.0" startX="-100.0" />
+   <Line endX="-100.0" endY="289.0" layoutX="400.0" layoutY="90.0" startX="-100.0" />
+   <Label layoutX="370.0" layoutY="150.0" text="Total price of all items">
+      <font>
+         <Font name="System Bold Italic" size="14.0" />
+      </font>
+   </Label>
+   <Label fx:id="totalCost" layoutX="416.0" layoutY="197.0" text="Label" />
 </Pane>

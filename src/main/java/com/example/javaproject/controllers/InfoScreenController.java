@@ -31,6 +31,8 @@ public class InfoScreenController {
     private Label totalFoodCost;
     @FXML
     private Label totalGadgetCost;
+    @FXML
+    private Label totalCost;
 
 
     public void initialize() {
@@ -76,5 +78,7 @@ public class InfoScreenController {
 
         totalFoodCost.setText(bigDecimalFoodCost + " €");
         totalGadgetCost.setText(bigDecimalGadgetCost + " €");
+
+        totalCost.setText(bigDecimalFoodCost.add(bigDecimalGadgetCost) + " €");
     }
 }
