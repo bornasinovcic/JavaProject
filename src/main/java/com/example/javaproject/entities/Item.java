@@ -15,9 +15,6 @@ public class Item extends ItemId {
         this.itemQuantity = itemQuantity;
     }
 
-    public Item() {
-        super();
-    }
 
     public BigDecimal getTotalPriceOfItem() {
         return itemPrice.multiply(BigDecimal.valueOf(itemQuantity)).setScale(2, RoundingMode.HALF_UP);

@@ -56,7 +56,13 @@ public class NewGadgetController {
                 Integer itemQuantity = Integer.valueOf(itemQuantityString);
                 Integer itemWarrantyInMonths = Integer.valueOf(itemWarrantyInMonthsString);
                 List<Gadget> list = getAllGadgetItems();
-                Gadget gadget = new Gadget(itemId, itemName, itemPrice, itemQuantity, itemWarrantyInMonths);
+                Gadget gadget = new Gadget.GadgetBuilder()
+                        .setItemId(itemId)
+                        .setItemName(itemName)
+                        .setItemPrice(itemPrice)
+                        .setItemQuantity(itemQuantity)
+                        .setItemWarrantyInMonths(itemWarrantyInMonths)
+                        .createGadget();
                 testForDuplicateGadgetId(list, itemId);
                 testForDuplicateGadgetName(list, itemName);
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

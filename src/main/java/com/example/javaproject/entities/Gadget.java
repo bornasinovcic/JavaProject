@@ -9,9 +9,6 @@ public class Gadget extends Item {
         this.itemWarrantyInMonths = itemWarrantyInMonths;
     }
 
-    public Gadget() {
-        super();
-    }
 
     public Integer getItemWarrantyInMonths() {
         return itemWarrantyInMonths;
@@ -19,5 +16,42 @@ public class Gadget extends Item {
 
     public void setItemWarrantyInMonths(Integer itemWarrantyInMonths) {
         this.itemWarrantyInMonths = itemWarrantyInMonths;
+    }
+
+    public static class GadgetBuilder {
+        private String itemId;
+        private String itemName;
+        private BigDecimal itemPrice;
+        private Integer itemQuantity;
+        private Integer itemWarrantyInMonths;
+
+        public GadgetBuilder setItemId(String itemId) {
+            this.itemId = itemId;
+            return this;
+        }
+
+        public GadgetBuilder setItemName(String itemName) {
+            this.itemName = itemName;
+            return this;
+        }
+
+        public GadgetBuilder setItemPrice(BigDecimal itemPrice) {
+            this.itemPrice = itemPrice;
+            return this;
+        }
+
+        public GadgetBuilder setItemQuantity(Integer itemQuantity) {
+            this.itemQuantity = itemQuantity;
+            return this;
+        }
+
+        public GadgetBuilder setItemWarrantyInMonths(Integer itemWarrantyInMonths) {
+            this.itemWarrantyInMonths = itemWarrantyInMonths;
+            return this;
+        }
+
+        public Gadget createGadget() {
+            return new Gadget(itemId, itemName, itemPrice, itemQuantity, itemWarrantyInMonths);
+        }
     }
 }

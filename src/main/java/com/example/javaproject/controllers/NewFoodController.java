@@ -67,7 +67,17 @@ public class NewFoodController {
                 Integer amountOfCarbohydrates = Integer.valueOf(itemCarbohydratesString);
                 Integer amountOfFats = Integer.valueOf(itemFatsString);
                 List<Food> list = getAllFoodItems();
-                Food food = new Food(itemId, itemName, itemPrice, itemQuantity, new NutritionalValue(amountOfProteins, amountOfCarbohydrates, amountOfFats));
+                Food food = new Food.FoodBuilder()
+                        .setItemId(itemId)
+                        .setItemName(itemName)
+                        .setItemPrice(itemPrice)
+                        .setItemQuantity(itemQuantity)
+                        .setNutritionalValue(new NutritionalValue.NutritionalValueBuilder()
+                                .setAmountOfProteins(amountOfProteins)
+                                .setAmountOfCarbohydrates(amountOfCarbohydrates)
+                                .setAmountOfFats(amountOfFats)
+                                .createNutritionalValue())
+                        .createFood();
                 testForDuplicateFoodId(list, itemId);
                 testForDuplicateFoodName(list, itemName);
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

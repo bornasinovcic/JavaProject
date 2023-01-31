@@ -62,14 +62,13 @@ public class UpdateDeleteGadgetController {
         Gadget selectedItem = tableViewGadget.getSelectionModel().getSelectedItem();
         try {
             isSelectedItemNull(selectedItem);
-            Gadget newMadeItem = new Gadget();
-
-            newMadeItem.setItemId(itemId.isEmpty() ? selectedItem.getItemId() : itemId);
-            newMadeItem.setItemName(itemName.isEmpty() ? selectedItem.getItemName() : itemName);
-            newMadeItem.setItemPrice(itemPriceString.isEmpty() ? selectedItem.getItemPrice() : new BigDecimal(itemPriceString));
-            newMadeItem.setItemQuantity(itemQuantityString.isEmpty() ? selectedItem.getItemQuantity() : Integer.valueOf(itemQuantityString));
-            newMadeItem.setItemWarrantyInMonths(itemWarrantyInMonthsString.isEmpty() ? selectedItem.getItemWarrantyInMonths() : Integer.valueOf(itemWarrantyInMonthsString));
-
+            Gadget newMadeItem = new Gadget.GadgetBuilder()
+                    .setItemId(itemId.isEmpty() ? selectedItem.getItemId() : itemId)
+                    .setItemName(itemName.isEmpty() ? selectedItem.getItemName() : itemName)
+                    .setItemPrice(itemPriceString.isEmpty() ? selectedItem.getItemPrice() : new BigDecimal(itemPriceString))
+                    .setItemQuantity(itemQuantityString.isEmpty() ? selectedItem.getItemQuantity() : Integer.valueOf(itemQuantityString))
+                    .setItemWarrantyInMonths(itemWarrantyInMonthsString.isEmpty() ? selectedItem.getItemWarrantyInMonths() : Integer.valueOf(itemWarrantyInMonthsString))
+                    .createGadget();
             List<Gadget> list = getAllGadgetItems();
 
             System.out.println("itemId -> " + itemId);

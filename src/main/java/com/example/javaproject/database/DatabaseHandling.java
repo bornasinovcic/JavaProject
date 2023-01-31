@@ -34,7 +34,7 @@ public class DatabaseHandling {
                 Integer food_proteins = resultSet.getInt("food_proteins");
                 Integer food_carbohydrates = resultSet.getInt("food_carbohydrates");
                 Integer food_fats = resultSet.getInt("food_fats");
-                list.add(new Food(food_id, food_name, food_price, food_quantity, new NutritionalValue(food_proteins, food_carbohydrates, food_fats)));
+                list.add(new Food.FoodBuilder().setItemId(food_id).setItemName(food_name).setItemPrice(food_price).setItemQuantity(food_quantity).setNutritionalValue(new NutritionalValue.NutritionalValueBuilder().setAmountOfProteins(food_proteins).setAmountOfCarbohydrates(food_carbohydrates).setAmountOfFats(food_fats).createNutritionalValue()).createFood());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,7 +56,7 @@ public class DatabaseHandling {
                 BigDecimal gadget_price = resultSet.getBigDecimal("gadget_price");
                 Integer gadget_quantity = resultSet.getInt("gadget_quantity");
                 Integer gadget_warranty = resultSet.getInt("gadget_warranty");
-                list.add(new Gadget(gadget_id, gadget_name, gadget_price, gadget_quantity, gadget_warranty));
+                list.add(new Gadget.GadgetBuilder().setItemId(gadget_id).setItemName(gadget_name).setItemPrice(gadget_price).setItemQuantity(gadget_quantity).setItemWarrantyInMonths(gadget_warranty).createGadget());
             }
         } catch (Exception e) {
             e.printStackTrace();

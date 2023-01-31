@@ -72,17 +72,16 @@ public class UpdateDeleteFoodController {
         Food selectedItem = tableViewFood.getSelectionModel().getSelectedItem();
         try {
             isSelectedItemNull(selectedItem);
-            Food newMadeItem = new Food();
-            NutritionalValue nutritionalValue = new NutritionalValue();
-
-            newMadeItem.setItemId(itemId.isEmpty() ? selectedItem.getItemId() : itemId);
-            newMadeItem.setItemName(itemName.isEmpty() ? selectedItem.getItemName() : itemName);
-            newMadeItem.setItemPrice(itemPriceString.isEmpty() ? selectedItem.getItemPrice() : new BigDecimal(itemPriceString));
-            newMadeItem.setItemQuantity(itemQuantityString.isEmpty() ? selectedItem.getItemQuantity() : Integer.valueOf(itemQuantityString));
-            nutritionalValue.setAmountOfProtein(itemProteinsString.isEmpty() ? selectedItem.getNutritionalValue().getAmountOfProtein() : Integer.valueOf(itemProteinsString));
-            nutritionalValue.setAmountOfCarbohydrate(itemCarbohydratesString.isEmpty() ? selectedItem.getNutritionalValue().getAmountOfCarbohydrate() : Integer.valueOf(itemCarbohydratesString));
-            nutritionalValue.setAmountOfFat(itemFatsString.isEmpty() ? selectedItem.getNutritionalValue().getAmountOfFat() : Integer.valueOf(itemFatsString));
-            newMadeItem.setNutritionalValue(nutritionalValue);
+            Food newMadeItem = new Food.FoodBuilder()
+                    .setItemId(itemId.isEmpty() ? selectedItem.getItemId() : itemId)
+                    .setItemName(itemName.isEmpty() ? selectedItem.getItemName() : itemName)
+                    .setItemPrice(itemPriceString.isEmpty() ? selectedItem.getItemPrice() : new BigDecimal(itemPriceString))
+                    .setItemQuantity(itemQuantityString.isEmpty() ? selectedItem.getItemQuantity() : Integer.valueOf(itemQuantityString))
+                    .setNutritionalValue(new NutritionalValue.NutritionalValueBuilder()
+                        .setAmountOfProteins(itemProteinsString.isEmpty() ? selectedItem.getNutritionalValue().getAmountOfProtein() : Integer.valueOf(itemProteinsString))
+                        .setAmountOfCarbohydrates(itemCarbohydratesString.isEmpty() ? selectedItem.getNutritionalValue().getAmountOfCarbohydrate() : Integer.valueOf(itemCarbohydratesString))
+                        .setAmountOfFats(itemFatsString.isEmpty() ? selectedItem.getNutritionalValue().getAmountOfFat() : Integer.valueOf(itemFatsString))
+                    .createNutritionalValue()).createFood();
 
             List<Food> list = getAllFoodItems();
 

@@ -1,46 +1,30 @@
 package com.example.javaproject.entities;
 
 public class NutritionalValue {
-    private Integer caloriesPerProtein = 4,
-            caloriesPerCarbohydrate = 4,
-            caloriesPerFat = 9,
-            amountOfProtein,
-            amountOfCarbohydrate,
-            amountOfFat,
-            finalCaloricValue;
+    private final Integer caloriesPerProtein = 4, caloriesPerCarbohydrate = 4, caloriesPerFat = 9;
+    private Integer amountOfProtein, amountOfCarbohydrate, amountOfFat, finalCaloricValue;
 
     public NutritionalValue(Integer amountOfProteins, Integer amountOfCarbohydrates, Integer amountOfFats) {
         this.amountOfProtein = amountOfProteins;
         this.amountOfCarbohydrate = amountOfCarbohydrates;
         this.amountOfFat = amountOfFats;
-        this.finalCaloricValue = (amountOfProteins * caloriesPerProtein) + (amountOfCarbohydrates * caloriesPerCarbohydrate) + (amountOfFats * caloriesPerFat);
+        this.finalCaloricValue = (amountOfProteins * caloriesPerProtein) +
+                (amountOfCarbohydrates * caloriesPerCarbohydrate) +
+                (amountOfFats * caloriesPerFat);
     }
     public NutritionalValue() {
-
     }
 
     public Integer getCaloriesPerProtein() {
         return caloriesPerProtein;
     }
 
-    public void setCaloriesPerProtein(Integer caloriesPerProtein) {
-        this.caloriesPerProtein = caloriesPerProtein;
-    }
-
     public Integer getCaloriesPerCarbohydrate() {
         return caloriesPerCarbohydrate;
     }
 
-    public void setCaloriesPerCarbohydrate(Integer caloriesPerCarbohydrate) {
-        this.caloriesPerCarbohydrate = caloriesPerCarbohydrate;
-    }
-
     public Integer getCaloriesPerFat() {
         return caloriesPerFat;
-    }
-
-    public void setCaloriesPerFat(Integer caloriesPerFat) {
-        this.caloriesPerFat = caloriesPerFat;
     }
 
     public Integer getAmountOfProtein() {
@@ -73,5 +57,30 @@ public class NutritionalValue {
 
     public void setFinalCaloricValue(Integer finalCaloricValue) {
         this.finalCaloricValue = finalCaloricValue;
+    }
+
+    public static class NutritionalValueBuilder {
+        private Integer amountOfProteins;
+        private Integer amountOfCarbohydrates;
+        private Integer amountOfFats;
+
+        public NutritionalValueBuilder setAmountOfProteins(Integer amountOfProteins) {
+            this.amountOfProteins = amountOfProteins;
+            return this;
+        }
+
+        public NutritionalValueBuilder setAmountOfCarbohydrates(Integer amountOfCarbohydrates) {
+            this.amountOfCarbohydrates = amountOfCarbohydrates;
+            return this;
+        }
+
+        public NutritionalValueBuilder setAmountOfFats(Integer amountOfFats) {
+            this.amountOfFats = amountOfFats;
+            return this;
+        }
+
+        public NutritionalValue createNutritionalValue() {
+            return new NutritionalValue(amountOfProteins, amountOfCarbohydrates, amountOfFats);
+        }
     }
 }
