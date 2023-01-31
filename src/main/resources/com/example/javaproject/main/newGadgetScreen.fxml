@@ -15,6 +15,7 @@
         </font>
     </Label>
     <TextField fx:id="textFieldId" layoutX="300.0" layoutY="100.0" />
+    <Button layoutX="460.0" layoutY="100.0" mnemonicParsing="false" onAction="#onRandomButtonClick" text="Random id" />
     <TextField fx:id="textFieldName" layoutX="300.0" layoutY="130.0" />
     <TextField fx:id="textFieldPrice" layoutX="300.0" layoutY="160.0" />
     <TextField fx:id="textFieldQuantity" layoutX="300.0" layoutY="190.0" />
@@ -25,5 +26,4 @@
     <Text layoutX="242.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:" />
     <Text layoutX="239.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Warranty:" />
     <Button layoutX="275.0" layoutY="320.0" mnemonicParsing="false" onAction="#onButtonClick" text="Button" />
-    <Button layoutX="460.0" layoutY="100.0" mnemonicParsing="false" onAction="#onRandomButtonClick" text="Random id" />
 </Pane>

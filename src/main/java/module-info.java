@@ -4,8 +4,8 @@ module com.example.javaproject {
     requires java.sql;
 
 
-    opens com.example.javaproject to javafx.fxml;
-    exports com.example.javaproject;
     exports com.example.javaproject.controllers;
     opens com.example.javaproject.controllers to javafx.fxml;
+    exports com.example.javaproject.main;
+    opens com.example.javaproject.main to javafx.fxml;
 }

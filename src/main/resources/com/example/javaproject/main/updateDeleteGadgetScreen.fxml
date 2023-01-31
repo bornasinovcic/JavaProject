@@ -10,6 +10,7 @@
 <Pane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javaproject.controllers.UpdateDeleteGadgetController">
     <fx:include source="menuBar.fxml" />
     <TextField fx:id="textFieldId" layoutX="145.0" layoutY="33.0" />
+    <Button layoutX="300.0" layoutY="33.0" mnemonicParsing="false" onAction="#onRandomButtonClick" text="Random id" />
     <TextField fx:id="textFieldName" layoutX="145.0" layoutY="63.0" />
     <TextField fx:id="textFieldPrice" layoutX="145.0" layoutY="93.0" />
     <TextField fx:id="textFieldQuantity" layoutX="145.0" layoutY="123.0" />
@@ -30,5 +31,4 @@
     <Text layoutX="107.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price:" />
     <Text layoutX="87.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:" />
     <Text layoutX="84.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Warranty:" />
-    <Button layoutX="300.0" layoutY="33.0" mnemonicParsing="false" onAction="#onRandomButtonClick" text="Random id" />
 </Pane>

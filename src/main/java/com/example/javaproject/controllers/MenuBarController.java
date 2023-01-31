@@ -1,6 +1,6 @@
 package com.example.javaproject.controllers;
 
-import com.example.javaproject.Main;
+import com.example.javaproject.main.Main;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 
