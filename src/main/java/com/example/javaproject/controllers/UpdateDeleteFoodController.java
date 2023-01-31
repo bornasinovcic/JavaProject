@@ -86,6 +86,13 @@ public class UpdateDeleteFoodController {
 
             List<Food> list = getAllFoodItems();
 
+            System.out.println("itemId -> " + itemId);
+            System.out.println("itemName -> " + itemName);
+
+            if (selectedItem.getItemId().equals(itemId)) itemId = "";
+            if (selectedItem.getItemName().equals(itemName)) itemName = "";
+
+
             testForDuplicateFoodId(list, itemId);
             testForDuplicateFoodName(list, itemName);
 

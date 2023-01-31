@@ -72,6 +72,12 @@ public class UpdateDeleteGadgetController {
 
             List<Gadget> list = getAllGadgetItems();
 
+            System.out.println("itemId -> " + itemId);
+            System.out.println("itemName -> " + itemName);
+
+            if (selectedItem.getItemId().equals(itemId)) itemId = "";
+            if (selectedItem.getItemName().equals(itemName)) itemName = "";
+
             testForDuplicateGadgetId(list, itemId);
             testForDuplicateGadgetName(list, itemName);
 
