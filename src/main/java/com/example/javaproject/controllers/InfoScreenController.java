@@ -29,6 +29,8 @@ public class InfoScreenController {
     private Label totalCaloricValue;
     @FXML
     private Label totalFoodCost;
+    @FXML
+    private Label totalGadgetCost;
 
 
     public void initialize() {
@@ -64,10 +66,15 @@ public class InfoScreenController {
                 .mapToInt(Food::getCaloricValueOfAllItems)
                 .sum();
         totalCaloricValue.setText(totalCalories + " kcal");
-        BigDecimal bigDecimal = BigDecimal.ZERO;
+        BigDecimal bigDecimalFoodCost = BigDecimal.ZERO;
         for (Food food : foodlist)
-            bigDecimal = bigDecimal.add(food.getItemPrice().multiply(BigDecimal.valueOf(food.getItemQuantity())));
+            bigDecimalFoodCost = bigDecimalFoodCost.add(food.getItemPrice().multiply(BigDecimal.valueOf(food.getItemQuantity())));
 
-        totalFoodCost.setText(bigDecimal + " €");
+        BigDecimal bigDecimalGadgetCost = BigDecimal.ZERO;
+        for (Gadget gadget : gadgetlist)
+            bigDecimalGadgetCost = bigDecimalGadgetCost.add(gadget.getItemPrice().multiply(BigDecimal.valueOf(gadget.getItemQuantity())));
+
+        totalFoodCost.setText(bigDecimalFoodCost + " €");
+        totalGadgetCost.setText(bigDecimalGadgetCost + " €");
     }
 }
