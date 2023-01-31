@@ -49,5 +49,5 @@
          <Font name="System Bold Italic" size="14.0" />
       </font>
    </Label>
-   <Label fx:id="totalCost" layoutX="416.0" layoutY="197.0" text="Label" />
+   <Label fx:id="totalCost" layoutX="416.0" layoutY="197.0" />
 </Pane>
