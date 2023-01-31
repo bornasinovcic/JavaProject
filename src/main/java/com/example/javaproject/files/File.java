@@ -20,7 +20,13 @@ public class File {
             BigDecimal itemPrice = new BigDecimal(bufferedReader.readLine());
             Integer itemQuantity = Integer.valueOf(bufferedReader.readLine());
             Integer itemWarrantyInMonths = Integer.valueOf(bufferedReader.readLine());
-            list.add(new Gadget.GadgetBuilder().setItemId(line).setItemName(itemName).setItemPrice(itemPrice).setItemQuantity(itemQuantity).setItemWarrantyInMonths(itemWarrantyInMonths).createGadget());
+            list.add(new Gadget.GadgetBuilder()
+                    .setItemId(line)
+                    .setItemName(itemName)
+                    .setItemPrice(itemPrice)
+                    .setItemQuantity(itemQuantity)
+                    .setItemWarrantyInMonths(itemWarrantyInMonths)
+                    .createGadget());
         }
         return list;
     }
@@ -36,7 +42,17 @@ public class File {
             Integer amountOfProteins = Integer.valueOf(bufferedReader.readLine());
             Integer amountOfCarbohydrates = Integer.valueOf(bufferedReader.readLine());
             Integer amountOfFats = Integer.valueOf(bufferedReader.readLine());
-            list.add(new Food.FoodBuilder().setItemId(line).setItemName(itemName).setItemPrice(itemPrice).setItemQuantity(itemQuantity).setNutritionalValue(new NutritionalValue.NutritionalValueBuilder().setAmountOfProteins(amountOfProteins).setAmountOfCarbohydrates(amountOfCarbohydrates).setAmountOfFats(amountOfFats).createNutritionalValue()).createFood());
+            list.add(new Food.FoodBuilder()
+                    .setItemId(line)
+                    .setItemName(itemName)
+                    .setItemPrice(itemPrice)
+                    .setItemQuantity(itemQuantity)
+                    .setNutritionalValue(new NutritionalValue.NutritionalValueBuilder()
+                            .setAmountOfProteins(amountOfProteins)
+                            .setAmountOfCarbohydrates(amountOfCarbohydrates)
+                            .setAmountOfFats(amountOfFats)
+                            .createNutritionalValue()).
+                    createFood());
         }
         return list;
     }
