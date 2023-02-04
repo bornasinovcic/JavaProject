@@ -11,6 +11,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -21,6 +23,8 @@ import static com.example.javaproject.database.DatabaseHandling.*;
 import static com.example.javaproject.entities.Random.randomString;
 
 public class UpdateDeleteFoodController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(UpdateDeleteFoodController.class);
+
     @FXML
     private TextField textFieldId;
     @FXML
@@ -109,6 +113,7 @@ public class UpdateDeleteFoodController {
             Optional<ButtonType> buttonType = alert.showAndWait();
             if (buttonType.isPresent() && buttonType.get() == ButtonType.OK) {
                 updateFoodWithId(newMadeItem, selectedItem.getItemId());
+                LOGGER.info("Food item updated.");
                 initialize();
                 textFieldId.clear();
                 textFieldName.clear();
@@ -119,16 +124,19 @@ public class UpdateDeleteFoodController {
                 textFieldFats.clear();
             }
         } catch (DuplicateItemIdException | DuplicateItemNameException e) {
+            LOGGER.error(e.getMessage());
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error alert message");
             alert.setHeaderText(e.getMessage());
             alert.showAndWait();
         } catch (SelectedItemException e) {
+            LOGGER.error(e.getMessage());
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle(e.getMessage());
             alert.setHeaderText(e.getMessage());
             alert.showAndWait();
         } catch (NumberFormatException e) {
+            LOGGER.warn("Some of the fields have a wrong data type.");
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning alert message");
             alert.setHeaderText("Some of the fields have a wrong data type.\n" +
@@ -151,7 +159,7 @@ public class UpdateDeleteFoodController {
 
     private void isSelectedItemNull(Food selectedItem) throws SelectedItemException {
         if (selectedItem == null)
-            throw new SelectedItemException("You did not select an item in table view");
+            throw new SelectedItemException("You did not select an item in table view.");
     }
 
     @FXML
@@ -165,10 +173,12 @@ public class UpdateDeleteFoodController {
             Optional<ButtonType> buttonType = alert.showAndWait();
             if (buttonType.isPresent() && buttonType.get() == ButtonType.OK) {
                 deleteFoodWithId(food.getItemId());
+                LOGGER.info("Food item deleted.");
                 initialize();
             }
         } catch (SelectedItemException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
+            LOGGER.error(e.getMessage());
             alert.setTitle(e.getMessage());
             alert.setHeaderText(e.getMessage());
             alert.showAndWait();

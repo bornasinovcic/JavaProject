@@ -10,6 +10,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ import static com.example.javaproject.database.DatabaseHandling.*;
 import static com.example.javaproject.entities.Random.randomString;
 
 public class UpdateDeleteGadgetController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(UpdateDeleteFoodController.class);
     @FXML
     private TextField textFieldId;
     @FXML
@@ -92,6 +95,7 @@ public class UpdateDeleteGadgetController {
             Optional<ButtonType> buttonType = alert.showAndWait();
             if (buttonType.isPresent() && buttonType.get() == ButtonType.OK) {
                 updateGadgetWithId(newMadeItem, selectedItem.getItemId());
+                LOGGER.info("Gadget item updated.");
                 initialize();
                 textFieldId.clear();
                 textFieldName.clear();
@@ -100,16 +104,19 @@ public class UpdateDeleteGadgetController {
                 textFieldWarranty.clear();
             }
         } catch (DuplicateItemIdException | DuplicateItemNameException e) {
+            LOGGER.error(e.getMessage());
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error alert message");
             alert.setHeaderText(e.getMessage());
             alert.showAndWait();
         } catch (SelectedItemException e) {
+            LOGGER.error(e.getMessage());
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle(e.getMessage());
             alert.setHeaderText(e.getMessage());
             alert.showAndWait();
         } catch (NumberFormatException e) {
+            LOGGER.warn("Some of the fields have a wrong data type.");
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning alert message");
             alert.setHeaderText("Some of the fields have a wrong data type.\n" +
@@ -121,18 +128,18 @@ public class UpdateDeleteGadgetController {
     private void testForDuplicateGadgetId(List<Gadget> list, String id) throws DuplicateItemIdException {
         for (Gadget gadget : list)
             if (gadget.getItemId().equals(id))
-                throw new DuplicateItemIdException("This food id already exists.");
+                throw new DuplicateItemIdException("This gadget id already exists.");
     }
 
     private void testForDuplicateGadgetName(List<Gadget> list, String itemName) throws DuplicateItemNameException {
         for (Gadget gadget : list)
             if (gadget.getItemName().equals(itemName))
-                throw new DuplicateItemNameException("This food name already exists.");
+                throw new DuplicateItemNameException("This gadget name already exists.");
     }
 
     private void isSelectedItemNull(Gadget selectedItem) throws SelectedItemException {
         if (selectedItem == null)
-            throw new SelectedItemException("You did not select an item in table view");
+            throw new SelectedItemException("You did not select an item in table view.");
     }
 
     @FXML
@@ -146,10 +153,12 @@ public class UpdateDeleteGadgetController {
             Optional<ButtonType> buttonType = alert.showAndWait();
             if (buttonType.isPresent() && buttonType.get() == ButtonType.OK) {
                 deleteGadgetWithId(gadget.getItemId());
+                LOGGER.info("Gadget item deleted.");
                 initialize();
             }
         } catch (SelectedItemException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
+            LOGGER.error(e.getMessage());
             alert.setTitle(e.getMessage());
             alert.setHeaderText(e.getMessage());
             alert.showAndWait();

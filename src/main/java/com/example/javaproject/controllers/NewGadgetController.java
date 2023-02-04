@@ -6,6 +6,8 @@ import com.example.javaproject.exceptions.DuplicateItemNameException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -15,6 +17,7 @@ import static com.example.javaproject.database.DatabaseHandling.insertNewGadgetI
 import static com.example.javaproject.entities.Random.randomString;
 
 public class NewGadgetController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(NewGadgetController.class);
     @FXML
     private TextField textFieldId;
     @FXML
@@ -76,17 +79,20 @@ public class NewGadgetController {
                 alert.setContentText(string);
                 alert.showAndWait();
                 insertNewGadgetItem(gadget);
+                LOGGER.info("Inserted new gadget item.");
                 textFieldId.clear();
                 textFieldName.clear();
                 textFieldPrice.clear();
                 textFieldQuantity.clear();
                 textFieldWarranty.clear();
             } catch (DuplicateItemIdException | DuplicateItemNameException e) {
+                LOGGER.error(e.getMessage());
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error alert message");
                 alert.setHeaderText(e.getMessage());
                 alert.showAndWait();
             } catch (NumberFormatException e) {
+                LOGGER.warn("Some of the fields have a wrong data type.");
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning alert message");
                 alert.setHeaderText("Some of the fields have a wrong data type.\n" +
