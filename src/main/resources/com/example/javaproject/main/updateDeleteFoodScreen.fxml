@@ -7,34 +7,35 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javaproject.controllers.UpdateDeleteFoodController">
-    <fx:include source="menuBar.fxml" />
-    <Label layoutX="30.0" layoutY="50.0" text="Id:" />
-    <Label layoutX="30.0" layoutY="80.0" text="Name:" />
-    <Label layoutX="30.0" layoutY="110.0" text="Price:" />
-    <Label layoutX="30.0" layoutY="140.0" text="Quantity:" />
-    <TextField fx:id="textFieldId" layoutX="86.0" layoutY="48.0" />
-    <Button layoutX="240.0" layoutY="48.0" mnemonicParsing="false" onAction="#onRandomButtonClick" text="Random id" />
-    <TextField fx:id="textFieldName" layoutX="86.0" layoutY="78.0" />
-    <TextField fx:id="textFieldPrice" layoutX="86.0" layoutY="108.0" />
-    <TextField fx:id="textFieldQuantity" layoutX="86.0" layoutY="138.0" />
-    <Label layoutX="241.0" layoutY="80.0" text="Proteins" />
-    <Label layoutX="241.0" layoutY="110.0" text="Carbohydrates:" />
-    <Label layoutX="241.0" layoutY="140.0" text="Fats:" />
-    <TextField fx:id="textFieldProteins" layoutX="327.0" layoutY="76.0" />
-    <TextField fx:id="textFieldCarbohydrates" layoutX="327.0" layoutY="106.0" />
-    <TextField fx:id="textFieldFats" layoutX="327.0" layoutY="136.0" />
-    <Button layoutX="500.0" layoutY="80.0" mnemonicParsing="false" onAction="#onUpdateButtonClick" text="Update" />
-    <Button layoutX="500.0" layoutY="120.0" mnemonicParsing="false" onAction="#onDeleteButtonClick" text="Delete" />
+<Pane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.javaproject.controllers.UpdateDeleteFoodController">
+    <fx:include source="menuBar.fxml"/>
+    <Label layoutX="30.0" layoutY="50.0" text="Id:"/>
+    <Label layoutX="30.0" layoutY="80.0" text="Name:"/>
+    <Label layoutX="30.0" layoutY="110.0" text="Price:"/>
+    <Label layoutX="30.0" layoutY="140.0" text="Quantity:"/>
+    <TextField fx:id="textFieldId" layoutX="86.0" layoutY="48.0"/>
+    <Button layoutX="240.0" layoutY="48.0" mnemonicParsing="false" onAction="#onRandomButtonClick" text="Random id"/>
+    <TextField fx:id="textFieldName" layoutX="86.0" layoutY="78.0"/>
+    <TextField fx:id="textFieldPrice" layoutX="86.0" layoutY="108.0"/>
+    <TextField fx:id="textFieldQuantity" layoutX="86.0" layoutY="138.0"/>
+    <Label layoutX="241.0" layoutY="80.0" text="Proteins"/>
+    <Label layoutX="241.0" layoutY="110.0" text="Carbohydrates:"/>
+    <Label layoutX="241.0" layoutY="140.0" text="Fats:"/>
+    <TextField fx:id="textFieldProteins" layoutX="327.0" layoutY="76.0"/>
+    <TextField fx:id="textFieldCarbohydrates" layoutX="327.0" layoutY="106.0"/>
+    <TextField fx:id="textFieldFats" layoutX="327.0" layoutY="136.0"/>
+    <Button layoutX="500.0" layoutY="80.0" mnemonicParsing="false" onAction="#onUpdateButtonClick" text="Update"/>
+    <Button layoutX="500.0" layoutY="120.0" mnemonicParsing="false" onAction="#onDeleteButtonClick" text="Delete"/>
     <TableView fx:id="tableViewFood" layoutY="200.0" prefHeight="200.0" prefWidth="600.0">
         <columns>
-            <TableColumn fx:id="tableColumnId" prefWidth="129.0" text="Id" />
-            <TableColumn fx:id="tableColumnName" prefWidth="190.0" text="Name" />
-            <TableColumn fx:id="tableColumnPrice" prefWidth="60.0" text="Price" />
-            <TableColumn fx:id="tableColumnQuantity" prefWidth="54.0" text="Quantity" />
-            <TableColumn fx:id="tableColumnProteins" prefWidth="51.0" text="Proteins" />
-            <TableColumn fx:id="tableColumnCarbohydrates" prefWidth="87.0" text="Carbohydrates" />
-            <TableColumn fx:id="tableColumnFats" prefWidth="27.0" text="Fats" />
+            <TableColumn fx:id="tableColumnId" prefWidth="129.0" text="Id"/>
+            <TableColumn fx:id="tableColumnName" prefWidth="190.0" text="Name"/>
+            <TableColumn fx:id="tableColumnPrice" prefWidth="60.0" text="Price"/>
+            <TableColumn fx:id="tableColumnQuantity" prefWidth="54.0" text="Quantity"/>
+            <TableColumn fx:id="tableColumnProteins" prefWidth="51.0" text="Proteins"/>
+            <TableColumn fx:id="tableColumnCarbohydrates" prefWidth="87.0" text="Carbohydrates"/>
+            <TableColumn fx:id="tableColumnFats" prefWidth="27.0" text="Fats"/>
         </columns>
     </TableView>
 </Pane>

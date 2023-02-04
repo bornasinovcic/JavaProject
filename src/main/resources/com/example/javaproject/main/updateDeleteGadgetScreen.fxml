@@ -7,28 +7,29 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javaproject.controllers.UpdateDeleteGadgetController">
-    <fx:include source="menuBar.fxml" />
-    <TextField fx:id="textFieldId" layoutX="145.0" layoutY="33.0" />
-    <Button layoutX="300.0" layoutY="33.0" mnemonicParsing="false" onAction="#onRandomButtonClick" text="Random id" />
-    <TextField fx:id="textFieldName" layoutX="145.0" layoutY="63.0" />
-    <TextField fx:id="textFieldPrice" layoutX="145.0" layoutY="93.0" />
-    <TextField fx:id="textFieldQuantity" layoutX="145.0" layoutY="123.0" />
-    <TextField fx:id="textFieldWarranty" layoutX="145.0" layoutY="153.0" />
-    <Button layoutX="450.0" layoutY="80.0" mnemonicParsing="false" onAction="#onUpdateButtonClick" text="Update" />
-    <Button layoutX="450.0" layoutY="120.0" mnemonicParsing="false" onAction="#onDeleteButtonClick" text="Delete" />
+<Pane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.javaproject.controllers.UpdateDeleteGadgetController">
+    <fx:include source="menuBar.fxml"/>
+    <TextField fx:id="textFieldId" layoutX="145.0" layoutY="33.0"/>
+    <Button layoutX="300.0" layoutY="33.0" mnemonicParsing="false" onAction="#onRandomButtonClick" text="Random id"/>
+    <TextField fx:id="textFieldName" layoutX="145.0" layoutY="63.0"/>
+    <TextField fx:id="textFieldPrice" layoutX="145.0" layoutY="93.0"/>
+    <TextField fx:id="textFieldQuantity" layoutX="145.0" layoutY="123.0"/>
+    <TextField fx:id="textFieldWarranty" layoutX="145.0" layoutY="153.0"/>
+    <Button layoutX="450.0" layoutY="80.0" mnemonicParsing="false" onAction="#onUpdateButtonClick" text="Update"/>
+    <Button layoutX="450.0" layoutY="120.0" mnemonicParsing="false" onAction="#onDeleteButtonClick" text="Delete"/>
     <TableView fx:id="tableViewGadget" layoutY="200.0" prefHeight="200.0" prefWidth="600.0">
         <columns>
-            <TableColumn fx:id="tableColumnId" prefWidth="150.0" text="Id" />
-            <TableColumn fx:id="tableColumnName" prefWidth="230.0" text="Name" />
-            <TableColumn fx:id="tableColumnPrice" prefWidth="78" text="Price" />
-            <TableColumn fx:id="tableColumnQuantity" prefWidth="70.0" text="Quantity" />
-            <TableColumn fx:id="tableColumnWarranty" prefWidth="70.0" text="Warranty" />
+            <TableColumn fx:id="tableColumnId" prefWidth="150.0" text="Id"/>
+            <TableColumn fx:id="tableColumnName" prefWidth="230.0" text="Name"/>
+            <TableColumn fx:id="tableColumnPrice" prefWidth="78" text="Price"/>
+            <TableColumn fx:id="tableColumnQuantity" prefWidth="70.0" text="Quantity"/>
+            <TableColumn fx:id="tableColumnWarranty" prefWidth="70.0" text="Warranty"/>
         </columns>
     </TableView>
-    <Text layoutX="122.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id:" />
-    <Text layoutX="101.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
-    <Text layoutX="107.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price:" />
-    <Text layoutX="87.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:" />
-    <Text layoutX="84.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Warranty:" />
+    <Text layoutX="122.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id:"/>
+    <Text layoutX="101.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:"/>
+    <Text layoutX="107.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price:"/>
+    <Text layoutX="87.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:"/>
+    <Text layoutX="84.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Warranty:"/>
 </Pane>
