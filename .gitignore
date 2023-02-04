@@ -13,7 +13,6 @@ target/
 *.ipr
 *.class
 logs/
-files/database.properties
 
 ### Eclipse ###
 .apt_generated
