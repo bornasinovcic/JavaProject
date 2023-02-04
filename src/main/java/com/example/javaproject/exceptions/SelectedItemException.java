@@ -1,6 +1,6 @@
 package com.example.javaproject.exceptions;
 
-public class SelectedItemException extends Exception {
+public class SelectedItemException extends RuntimeException {
     public SelectedItemException() {
     }
 

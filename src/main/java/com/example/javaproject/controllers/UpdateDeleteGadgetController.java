@@ -137,7 +137,7 @@ public class UpdateDeleteGadgetController {
                 throw new DuplicateItemNameException("This gadget name already exists.");
     }
 
-    private void isSelectedItemNull(Gadget selectedItem) throws SelectedItemException {
+    private void isSelectedItemNull(Gadget selectedItem) {
         if (selectedItem == null)
             throw new SelectedItemException("You did not select an item in table view.");
     }

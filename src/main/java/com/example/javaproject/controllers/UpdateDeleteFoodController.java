@@ -157,7 +157,7 @@ public class UpdateDeleteFoodController {
                 throw new DuplicateItemNameException("This food name already exists.");
     }
 
-    private void isSelectedItemNull(Food selectedItem) throws SelectedItemException {
+    private void isSelectedItemNull(Food selectedItem) {
         if (selectedItem == null)
             throw new SelectedItemException("You did not select an item in table view.");
     }
