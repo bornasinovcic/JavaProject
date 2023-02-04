@@ -3,7 +3,6 @@ package com.example.javaproject.entities;
 import java.math.BigDecimal;
 
 public class Food extends Item implements CaloricValues {
-
     private NutritionalValue nutritionalValue;
 
     public Food(String itemId, String itemName, BigDecimal itemPrice, Integer itemQuantity, NutritionalValue nutritionalValue) {

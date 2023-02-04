@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class File {
+public class FilesHandling {
     public static List<Gadget> getGadgetItems() throws IOException {
         List<Gadget> list = new ArrayList<>();
         FileReader fileReader = new FileReader("files/gadgets.txt");
