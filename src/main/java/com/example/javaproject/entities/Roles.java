@@ -1,8 +1,8 @@
 package com.example.javaproject.entities;
 
 public enum Roles {
-    admin("ADMIN"),
-    user("USER");
+    ADMIN("admin"),
+    USER("user");
     private final String role;
     Roles(String role) {
         this.role = role;

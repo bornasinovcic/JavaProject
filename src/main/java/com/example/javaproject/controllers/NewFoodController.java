@@ -94,7 +94,6 @@ public class NewFoodController {
                         "\nProteins -> [" + food.getNutritionalValue().getAmountOfProtein() + "]" +
                         "\nCarbohydrates -> [" + food.getNutritionalValue().getAmountOfCarbohydrate() + "]" +
                         "\nFats -> [" + food.getNutritionalValue().getAmountOfFat() + "]";
-
                 alert.setContentText(string);
                 alert.showAndWait();
                 insertNewFoodItem(food);
@@ -121,9 +120,10 @@ public class NewFoodController {
                 alert.showAndWait();
             }
         } else {
+            LOGGER.error("Please fill out empty fields.");
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error alert message");
-            alert.setHeaderText("Please fill out empty fields");
+            alert.setHeaderText("Please fill out empty fields.");
             alert.setContentText(stringBuilder.toString());
             alert.showAndWait();
         }

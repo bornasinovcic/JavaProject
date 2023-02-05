@@ -1,9 +1,9 @@
 package com.example.javaproject.entities;
 
-public abstract class ItemId {
+public abstract class Id {
     private String itemId;
 
-    public ItemId(String itemId) {
+    public Id(String itemId) {
         this.itemId = itemId;
     }
 

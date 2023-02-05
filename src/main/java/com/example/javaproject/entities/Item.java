@@ -3,7 +3,7 @@ package com.example.javaproject.entities;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class Item extends ItemId {
+public class Item extends Id {
     private String itemName;
     private BigDecimal itemPrice;
     private Integer itemQuantity;

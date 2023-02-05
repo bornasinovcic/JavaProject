@@ -21,6 +21,9 @@
             <Font size="18.0" />
         </font>
     </Label>
+   <Label layoutX="14.0" layoutY="140.0" text="User name:" />
+   <ComboBox fx:id="comboBoxUsers" layoutX="84.0" layoutY="136.0" prefWidth="150.0" />
+   <Label layoutX="14.0" layoutY="170.0" text="User password:" />
    <PasswordField fx:id="passwordFieldLogIn" layoutX="105.0" layoutY="166.0" />
    <Button layoutX="106.0" layoutY="218.0" mnemonicParsing="false" onAction="#signInButton" text="Log in" />
     <Line endX="-100.0" endY="280.0" layoutX="370.0" layoutY="90.0" startX="-100.0" />
@@ -39,7 +42,4 @@
    <PasswordField fx:id="passwordField" layoutX="371.0" layoutY="196.0" />
     <ComboBox fx:id="comboBox" layoutX="341.0" layoutY="226.0" prefWidth="150.0" />
    <Button layoutX="360.0" layoutY="280.0" mnemonicParsing="false" onAction="#makeAccountButton" text="Make account" />
-   <Label layoutX="14.0" layoutY="140.0" text="User name:" />
-   <Label layoutX="14.0" layoutY="170.0" text="User password:" />
-   <ComboBox fx:id="comboBoxUsers" layoutX="84.0" layoutY="136.0" prefWidth="150.0" />
 </Pane>

@@ -100,6 +100,7 @@ public class NewGadgetController {
                 alert.showAndWait();
             }
         } else {
+            LOGGER.error("Please fill out empty fields.");
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error alert message");
             alert.setHeaderText("Please fill out empty fields");

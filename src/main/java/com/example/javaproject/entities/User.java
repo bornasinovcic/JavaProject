@@ -1,6 +1,6 @@
 package com.example.javaproject.entities;
 
-public class User extends ItemId {
+public class User extends Id {
     private final String userName, userPassword;
     private final Roles role;
 
@@ -52,5 +52,10 @@ public class User extends ItemId {
         public User createUser() {
             return new User(itemId, userName, userPassword, role);
         }
+    }
+
+    @Override
+    public String toString() {
+        return userName;
     }
 }
