@@ -56,6 +56,6 @@ public class User extends Id {
 
     @Override
     public String toString() {
-        return userName;
+        return userName + " [" + getItemId() + "]";
     }
 }

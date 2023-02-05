@@ -69,6 +69,20 @@ public class FilesHandling {
         return list;
     }
 
+    public static void addNewFoodItem(List<Food>list) throws IOException {
+        PrintWriter printWriter = new PrintWriter(new FileWriter("files/foods.txt"));
+        for (Food food : list) {
+            printWriter.println(food.getItemId());
+            printWriter.println(food.getItemName());
+            printWriter.println(food.getItemPrice());
+            printWriter.println(food.getItemQuantity());
+            printWriter.println(food.getNutritionalValue().getAmountOfProtein());
+            printWriter.println(food.getNutritionalValue().getAmountOfCarbohydrate());
+            printWriter.println(food.getNutritionalValue().getAmountOfFat());
+        }
+        printWriter.flush();
+    }
+
     public static List<User> getUsers() throws IOException {
         List<User> list = new ArrayList<>();
         BufferedReader bufferedReader = new BufferedReader(new FileReader("files/users.txt"));
@@ -89,22 +103,8 @@ public class FilesHandling {
                     .createUser());
         }
         return list;
-
-
     }
-    public static void addNewFoodItem(List<Food>list) throws IOException {
-        PrintWriter printWriter = new PrintWriter(new FileWriter("files/foods.txt"));
-        for (Food food : list) {
-            printWriter.println(food.getItemId());
-            printWriter.println(food.getItemName());
-            printWriter.println(food.getItemPrice());
-            printWriter.println(food.getItemQuantity());
-            printWriter.println(food.getNutritionalValue().getAmountOfProtein());
-            printWriter.println(food.getNutritionalValue().getAmountOfCarbohydrate());
-            printWriter.println(food.getNutritionalValue().getAmountOfFat());
-        }
-        printWriter.flush();
-    }
+
 
     public static void addNewUser(List<User> list) throws IOException {
         FileWriter fileWriter = new FileWriter("files/users.txt");
@@ -113,7 +113,7 @@ public class FilesHandling {
             printWriter.println(user.getItemId());
             printWriter.println(user.getUserName());
             printWriter.println(user.getUserPassword());
-            printWriter.println(user.getRole());
+            printWriter.println(user.getRole().getRole());
         }
         printWriter.flush();
     }

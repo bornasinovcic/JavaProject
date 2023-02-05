@@ -2,6 +2,8 @@ package com.example.javaproject.controllers;
 
 import com.example.javaproject.entities.Roles;
 import com.example.javaproject.entities.User;
+import com.example.javaproject.exceptions.DuplicateItemIdException;
+import com.example.javaproject.exceptions.DuplicateItemNameException;
 import com.example.javaproject.exceptions.WrongPasswordException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -14,7 +16,6 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static com.example.javaproject.entities.Hash.*;
 import static com.example.javaproject.entities.Random.randomString;
@@ -51,16 +52,15 @@ public class MainController {
         String passwordLogIn = passwordFieldLogIn.getText();
         try {
             List<User> list = getUsers();
-            for (User user : list) {
+            for (User user : list)
                 if (user.getUserName().equals(logInUser.getUserName()))
                     isPasswordCorrect(user, passwordLogIn);
-            }
-            comboBoxUsers.valueProperty().set(null);
             LOGGER.error("Successfully logged in.");
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Logged in");
             alert.setHeaderText("Successfully logged in.");
             alert.showAndWait();
+            comboBoxUsers.valueProperty().set(null);
         } catch (WrongPasswordException | IOException e) {
             LOGGER.error(e.getMessage());
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -92,6 +92,9 @@ public class MainController {
             if (password.isEmpty()) stringBuilder.append("You forgot to input password for that user.\n");
             if (roleInput == null) stringBuilder.append("You forgot to input role for that user.\n");
 
+            testForDuplicateUserId(list, id);
+            testForDuplicateUserName(list, name);
+
             if (stringBuilder.isEmpty()) {
                 Roles role = null;
                 for (Roles roles : Roles.values())
@@ -110,7 +113,7 @@ public class MainController {
                 String string = "Id -> [" + id + "]" +
                         "\nName -> [" + name + "]" +
                         "\nPassword -> [" + password + "]" +
-                        "\nRole -> [" + roleInput.getRole();
+                        "\nRole -> [" + roleInput.getRole() + "]";
                 alert.setContentText(string);
                 alert.showAndWait();
                 addNewUser(list);
@@ -127,10 +130,29 @@ public class MainController {
                 alert.setContentText(stringBuilder.toString());
                 alert.showAndWait();
             }
+        } catch (DuplicateItemIdException | DuplicateItemNameException e) {
+            LOGGER.error(e.getMessage());
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error alert message");
+            alert.setHeaderText(e.getMessage());
+            alert.showAndWait();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
+    private void testForDuplicateUserId(List<User> list, String id) throws DuplicateItemIdException {
+        for (User user : list)
+            if (user.getItemId().equals(id))
+                throw new DuplicateItemIdException("This user id already exists.");
+    }
+
+    private void testForDuplicateUserName(List<User> list, String itemName) throws DuplicateItemNameException {
+        for (User user : list)
+            if (user.getUserName().equals(itemName))
+                throw new DuplicateItemNameException("This user name already exists.");
+    }
+
 
     @FXML
     public void initialize() {
