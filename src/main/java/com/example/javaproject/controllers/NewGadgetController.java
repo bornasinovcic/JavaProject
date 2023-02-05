@@ -5,12 +5,14 @@ import com.example.javaproject.exceptions.DuplicateItemIdException;
 import com.example.javaproject.exceptions.DuplicateItemNameException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 import static com.example.javaproject.database.DatabaseHandling.getAllGadgetItems;
 import static com.example.javaproject.database.DatabaseHandling.insertNewGadgetItem;
@@ -77,14 +79,16 @@ public class NewGadgetController {
                         "\nQuantity -> [" + itemQuantity + "]" +
                         "\nWarranty -> [" + itemWarrantyInMonths + "]";
                 alert.setContentText(string);
-                alert.showAndWait();
-                insertNewGadgetItem(gadget);
-                LOGGER.info("Inserted new gadget item.");
-                textFieldId.clear();
-                textFieldName.clear();
-                textFieldPrice.clear();
-                textFieldQuantity.clear();
-                textFieldWarranty.clear();
+                Optional<ButtonType> buttonType = alert.showAndWait();
+                if (buttonType.isPresent() && buttonType.get() == ButtonType.OK) {
+                    insertNewGadgetItem(gadget);
+                    LOGGER.info("Inserted new gadget item.");
+                    textFieldId.clear();
+                    textFieldName.clear();
+                    textFieldPrice.clear();
+                    textFieldQuantity.clear();
+                    textFieldWarranty.clear();
+                }
             } catch (DuplicateItemIdException | DuplicateItemNameException e) {
                 LOGGER.error(e.getMessage());
                 Alert alert = new Alert(Alert.AlertType.ERROR);

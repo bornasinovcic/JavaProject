@@ -6,12 +6,14 @@ import com.example.javaproject.exceptions.DuplicateItemIdException;
 import com.example.javaproject.exceptions.DuplicateItemNameException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 import static com.example.javaproject.database.DatabaseHandling.getAllFoodItems;
 import static com.example.javaproject.database.DatabaseHandling.insertNewFoodItem;
@@ -95,16 +97,18 @@ public class NewFoodController {
                         "\nCarbohydrates -> [" + food.getNutritionalValue().getAmountOfCarbohydrate() + "]" +
                         "\nFats -> [" + food.getNutritionalValue().getAmountOfFat() + "]";
                 alert.setContentText(string);
-                alert.showAndWait();
-                insertNewFoodItem(food);
-                LOGGER.info("Inserted new food item.");
-                textFieldId.clear();
-                textFieldName.clear();
-                textFieldPrice.clear();
-                textFieldQuantity.clear();
-                textFieldProteins.clear();
-                textFieldCarbohydrates.clear();
-                textFieldFats.clear();
+                Optional<ButtonType> buttonType = alert.showAndWait();
+                if (buttonType.isPresent() && buttonType.get() == ButtonType.OK) {
+                    insertNewFoodItem(food);
+                    LOGGER.info("Inserted new food item.");
+                    textFieldId.clear();
+                    textFieldName.clear();
+                    textFieldPrice.clear();
+                    textFieldQuantity.clear();
+                    textFieldProteins.clear();
+                    textFieldCarbohydrates.clear();
+                    textFieldFats.clear();
+                }
             } catch (DuplicateItemIdException | DuplicateItemNameException e) {
                 LOGGER.error(e.getMessage());
                 Alert alert = new Alert(Alert.AlertType.ERROR);
