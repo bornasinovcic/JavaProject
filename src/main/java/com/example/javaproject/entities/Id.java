@@ -1,6 +1,8 @@
 package com.example.javaproject.entities;
 
-public abstract class Id {
+import java.io.Serializable;
+
+public abstract class Id implements Serializable {
     private String itemId;
 
     public Id(String itemId) {

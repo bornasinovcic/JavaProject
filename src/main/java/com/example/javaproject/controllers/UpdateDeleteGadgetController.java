@@ -1,6 +1,7 @@
 package com.example.javaproject.controllers;
 
 import com.example.javaproject.entities.Gadget;
+import com.example.javaproject.entities.User;
 import com.example.javaproject.exceptions.DuplicateItemIdException;
 import com.example.javaproject.exceptions.DuplicateItemNameException;
 import com.example.javaproject.exceptions.SelectedItemException;
@@ -13,6 +14,10 @@ import javafx.scene.control.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -95,6 +100,12 @@ public class UpdateDeleteGadgetController {
             Optional<ButtonType> buttonType = alert.showAndWait();
             if (buttonType.isPresent() && buttonType.get() == ButtonType.OK) {
                 updateGadgetWithId(newMadeItem, selectedItem.getItemId());
+                FileInputStream fileInputStream = new FileInputStream("files/loggedUser.ser");
+                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+                User object = (User) objectInputStream.readObject();
+                objectInputStream.close();
+                fileInputStream.close();
+                System.out.println("User has been deserialized.");
                 LOGGER.info("Gadget item updated.");
                 initialize();
                 textFieldId.clear();
@@ -122,6 +133,8 @@ public class UpdateDeleteGadgetController {
             alert.setHeaderText("Some of the fields have a wrong data type.\n" +
                     "Please make sure you have inputted everything correctly.");
             alert.showAndWait();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 

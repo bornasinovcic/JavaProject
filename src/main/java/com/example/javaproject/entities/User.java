@@ -1,6 +1,8 @@
 package com.example.javaproject.entities;
 
-public class User extends Id {
+import java.io.Serializable;
+
+public class User extends Id implements Serializable {
     private final String userName, userPassword;
     private final Roles role;
 

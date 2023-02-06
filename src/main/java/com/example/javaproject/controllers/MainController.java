@@ -6,16 +6,16 @@ import com.example.javaproject.exceptions.DuplicateItemIdException;
 import com.example.javaproject.exceptions.DuplicateItemNameException;
 import com.example.javaproject.exceptions.WrongPasswordException;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static com.example.javaproject.entities.Hash.*;
 import static com.example.javaproject.entities.Random.randomString;
@@ -50,22 +50,44 @@ public class MainController {
     protected void signInButton() {
         User logInUser = comboBoxUsers.getValue();
         String passwordLogIn = passwordFieldLogIn.getText();
-        try {
-            List<User> list = getUsers();
-            for (User user : list)
-                if (user.getUserName().equals(logInUser.getUserName()))
-                    isPasswordCorrect(user, passwordLogIn);
-            LOGGER.error("Successfully logged in.");
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Logged in");
-            alert.setHeaderText("Successfully logged in.");
-            alert.showAndWait();
-            comboBoxUsers.valueProperty().set(null);
-        } catch (WrongPasswordException | IOException e) {
-            LOGGER.error(e.getMessage());
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        if (logInUser == null) stringBuilder.append("You did not choose a user.\n");
+        if (passwordLogIn.isEmpty()) stringBuilder.append("You did not input a passwordLogIn.\n");
+
+        if (stringBuilder.isEmpty()) {
+            try {
+                List<User> list = getUsers();
+                for (User user : list)
+                    if (user.getUserName().equals(logInUser.getUserName())) {
+                        isPasswordCorrect(user, passwordLogIn);
+                        FileOutputStream file = new FileOutputStream("files/loggedUser.ser");
+                        ObjectOutputStream out = new ObjectOutputStream(file);
+                        out.writeObject(user);
+                        out.close();
+                        file.close();
+                        System.out.println("User has been serialized.");
+                    }
+                LOGGER.error("Successfully logged in.");
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Logged in");
+                alert.setHeaderText("Successfully logged in.");
+                alert.showAndWait();
+                comboBoxUsers.valueProperty().set(null);
+            } catch (WrongPasswordException | IOException e) {
+                LOGGER.error(e.getMessage());
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error in user authentication.");
+                alert.setHeaderText(e.getMessage());
+                alert.showAndWait();
+            }
+        } else {
+            LOGGER.error("Please fill out empty fields.");
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error in user authentication.");
-            alert.setHeaderText(e.getMessage());
+            alert.setTitle("Error alert message");
+            alert.setHeaderText("Please fill out empty fields.");
+            alert.setContentText(stringBuilder.toString());
             alert.showAndWait();
         }
         passwordFieldLogIn.clear();
@@ -115,13 +137,15 @@ public class MainController {
                         "\nPassword -> [" + password + "]" +
                         "\nRole -> [" + roleInput.getRole() + "]";
                 alert.setContentText(string);
-                alert.showAndWait();
-                addNewUser(list);
-                LOGGER.info("Made account for new user");
-                textFieldId.clear();
-                textFieldName.clear();
-                passwordField.clear();
-                comboBox.valueProperty().set(null);
+                Optional<ButtonType> buttonType = alert.showAndWait();
+                if (buttonType.isPresent() && buttonType.get() == ButtonType.OK) {
+                    addNewUser(list);
+                    LOGGER.info("Made account for new user");
+                    textFieldId.clear();
+                    textFieldName.clear();
+                    passwordField.clear();
+                    comboBox.valueProperty().set(null);
+                }
             } else {
                 LOGGER.error("Please fill out empty fields.");
                 Alert alert = new Alert(Alert.AlertType.ERROR);
