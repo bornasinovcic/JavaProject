@@ -58,4 +58,15 @@ public class Food extends Item implements CaloricValues {
             return new Food(itemId, itemName, itemPrice, itemQuantity, nutritionalValue);
         }
     }
+
+    @Override
+    public String toString() {
+        return getItemId() + ";" +
+                getItemName() + ";" +
+                getItemPrice() + ";" +
+                getItemQuantity() + ";" +
+                getNutritionalValue().getAmountOfProtein() + ";" +
+                getNutritionalValue().getAmountOfCarbohydrate() + ";" +
+                getNutritionalValue().getAmountOfFat();
+    }
 }

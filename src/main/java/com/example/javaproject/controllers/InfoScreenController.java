@@ -34,8 +34,8 @@ public class InfoScreenController {
     @FXML
     private Label totalCost;
 
-
-    public void initialize() {
+    @FXML
+    private void initialize() {
         List<Food> foodlist = getAllFoodItems();
         List<Gadget> gadgetlist = getAllGadgetItems();
 

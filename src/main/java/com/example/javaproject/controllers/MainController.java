@@ -62,11 +62,12 @@ public class MainController {
                 for (User user : list)
                     if (user.getUserName().equals(logInUser.getUserName())) {
                         isPasswordCorrect(user, passwordLogIn);
-                        FileOutputStream file = new FileOutputStream("files/loggedUser.ser");
-                        ObjectOutputStream out = new ObjectOutputStream(file);
-                        out.writeObject(user);
-                        out.close();
-                        file.close();
+                        try (FileOutputStream file = new FileOutputStream("files/loggedUser.ser");
+                             ObjectOutputStream out = new ObjectOutputStream(file)) {
+                            out.writeObject(user);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                         System.out.println("User has been serialized.");
                     }
                 LOGGER.error("Successfully logged in.");
@@ -179,7 +180,8 @@ public class MainController {
 
 
     @FXML
-    public void initialize() {
+    private void initialize() {
+//        TODO: removed user that is signed in on every app startup
         try {
             list.clear();
             list = getUsers();

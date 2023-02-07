@@ -180,7 +180,7 @@ public class UpdateDeleteGadgetController {
 
 
     @FXML
-    public void initialize() {
+    private void initialize() {
         gadgetList.clear();
         gadgetList = getAllGadgetItems();
         gadgetList.sort(new SortingGadgets());

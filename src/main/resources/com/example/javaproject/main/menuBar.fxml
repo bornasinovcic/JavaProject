@@ -25,6 +25,7 @@
         <Menu mnemonicParsing="false" text="Info">
             <items>
                 <MenuItem mnemonicParsing="false" onAction="#showInfoScreen" text="Show info screen"/>
+                <MenuItem mnemonicParsing="false" onAction="#showChangesScreen" text="Show changes screen"/>
             </items>
         </Menu>
     </menus>

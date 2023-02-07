@@ -46,7 +46,7 @@ public class GadgetController {
         tableViewGadget.setItems(FXCollections.observableList(list));
     }
     @FXML
-    public void initialize() {
+    private void initialize() {
         gadgetList.clear();
         gadgetList = getAllGadgetItems();
         gadgetList.sort(new SortingGadgets());

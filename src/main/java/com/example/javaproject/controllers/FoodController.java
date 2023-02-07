@@ -48,7 +48,7 @@ public class FoodController {
     }
 
     @FXML
-    public void initialize() {
+    private void initialize() {
         foodList.clear();
         foodList = getAllFoodItems();
         foodList.sort(new SortingFoods());

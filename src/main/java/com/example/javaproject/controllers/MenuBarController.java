@@ -91,4 +91,16 @@ public class MenuBarController {
         Main.getStage().setScene(scene);
         Main.getStage().show();
     }
+    public void showChangesScreen() {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("changesScreen.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 600, 400);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Main.getStage().setTitle("Changes Screen");
+        Main.getStage().setScene(scene);
+        Main.getStage().show();
+    }
 }

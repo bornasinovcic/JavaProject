@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javaproject.controllers.ChangesController">
+    <fx:include source="menuBar.fxml" />
+    <TableView fx:id="tableView" layoutY="59.0" prefHeight="165.0" prefWidth="600.0">
+        <columns>
+            <TableColumn fx:id="before" prefWidth="172.0" text="Before" />
+            <TableColumn fx:id="after" prefWidth="174.0" text="After" />
+            <TableColumn fx:id="role" prefWidth="89.0" text="Role" />
+            <TableColumn fx:id="localDateTime" prefWidth="111.0" text="Date and time" />
+        </columns>
+    </TableView>
+</Pane>

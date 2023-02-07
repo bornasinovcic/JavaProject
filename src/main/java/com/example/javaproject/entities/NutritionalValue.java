@@ -1,6 +1,8 @@
 package com.example.javaproject.entities;
 
-public class NutritionalValue {
+import java.io.Serializable;
+
+public class NutritionalValue implements Serializable {
     private final Integer caloriesPerProtein = 4, caloriesPerCarbohydrate = 4, caloriesPerFat = 9;
     private Integer amountOfProtein, amountOfCarbohydrate, amountOfFat, finalCaloricValue;
 
