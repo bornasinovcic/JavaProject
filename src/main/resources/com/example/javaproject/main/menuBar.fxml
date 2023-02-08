@@ -8,11 +8,17 @@
          fx:controller="com.example.javaproject.controllers.MenuBarController"
          prefHeight="25.0" prefWidth="600.0">
     <menus>
+        <Menu mnemonicParsing="false" text="Main">
+            <items>
+                <MenuItem mnemonicParsing="false" onAction="#showMainScreen" text="Log/Sign up"/>
+            </items>
+        </Menu>
         <Menu mnemonicParsing="false" text="Food">
             <items>
                 <MenuItem mnemonicParsing="false" onAction="#showFoodScreen" text="Search food items"/>
                 <MenuItem mnemonicParsing="false" onAction="#showNewFoodScreen" text="Insert new food item"/>
-                <MenuItem mnemonicParsing="false" onAction="#showUpdateDeleteFoodScreen" text="Delete/Update food item"/>
+                <MenuItem mnemonicParsing="false" onAction="#showUpdateDeleteFoodScreen"
+                          text="Delete/Update food item"/>
             </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Gadget">

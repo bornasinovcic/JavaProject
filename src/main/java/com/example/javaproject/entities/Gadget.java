@@ -54,4 +54,13 @@ public class Gadget extends Item {
             return new Gadget(itemId, itemName, itemPrice, itemQuantity, itemWarrantyInMonths);
         }
     }
+
+    @Override
+    public String toString() {
+        return getItemId() + ";" +
+                getItemName() + ";" +
+                getItemPrice() + ";" +
+                getItemQuantity() + ";" +
+                getItemWarrantyInMonths();
+    }
 }

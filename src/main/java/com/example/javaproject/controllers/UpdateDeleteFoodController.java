@@ -1,7 +1,6 @@
 package com.example.javaproject.controllers;
 
-import com.example.javaproject.entities.Food;
-import com.example.javaproject.entities.NutritionalValue;
+import com.example.javaproject.entities.*;
 import com.example.javaproject.exceptions.DuplicateItemIdException;
 import com.example.javaproject.exceptions.DuplicateItemNameException;
 import com.example.javaproject.exceptions.SelectedItemException;
@@ -14,7 +13,10 @@ import javafx.scene.control.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -113,7 +115,18 @@ public class UpdateDeleteFoodController {
             Optional<ButtonType> buttonType = alert.showAndWait();
             if (buttonType.isPresent() && buttonType.get() == ButtonType.OK) {
                 updateFoodWithId(newMadeItem, selectedItem.getItemId());
-                System.out.println("User has been deserialized.");
+                try (FileInputStream file = new FileInputStream("files/loggedUser.ser");
+                     ObjectInputStream in = new ObjectInputStream(file)) {
+                    User user = (User) in.readObject();
+                    savingChanges(newMadeItem, selectedItem, user);
+                } catch (IOException | ClassNotFoundException e) {
+                    LOGGER.error("No user is signed in.");
+                    alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error alert message");
+                    alert.setHeaderText("No user is signed in.\nPlease sign in on the main screen.");
+                    alert.showAndWait();
+
+                }
                 LOGGER.info("Food item updated.");
                 initialize();
                 textFieldId.clear();
@@ -143,6 +156,34 @@ public class UpdateDeleteFoodController {
             alert.setHeaderText("Some of the fields have a wrong data type.\n" +
                     "Please make sure you have inputted everything correctly.");
             alert.showAndWait();
+        }
+    }
+
+    private void savingChanges(Food newMadeItem, Food selectedItem, User user) {
+        List<Change> list;
+        File filepath = new File("files/changes.ser");
+        try (FileInputStream file = new FileInputStream(filepath);
+             ObjectInputStream in = new ObjectInputStream(file);) {
+            list = (List<Change>) in.readObject();
+            System.out.println(filepath + " deserialized");
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        LocalDateTime localDateTime = LocalDateTime.now();
+        Change change = new Change(selectedItem, newMadeItem, user, localDateTime);
+        list.add(change);
+        try (FileOutputStream file = new FileOutputStream(filepath);
+             ObjectOutputStream out = new ObjectOutputStream(file);) {
+            out.writeObject(list);
+            System.out.println(filepath + " serialized");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        for (Change value : list) {
+            if (value.getBefore() instanceof Food food0 && value.getAfter() instanceof Food food1)
+                System.out.println(food0 + " -> " + food1 + " -> " + value.getUser().getRole() + " -> " + value.getLocalDateTime().format(DateTimeFormatter.ofPattern("dd.MM.yyy HH:mm")));
+            if (value.getBefore() instanceof Gadget gadget0 && value.getAfter() instanceof Gadget gadget1)
+                System.out.println(gadget0 + " -> " + gadget1 + " -> " + value.getUser().getRole() + " -> " + value.getLocalDateTime().format(DateTimeFormatter.ofPattern("dd.MM.yyy HH:mm")));
         }
     }
 

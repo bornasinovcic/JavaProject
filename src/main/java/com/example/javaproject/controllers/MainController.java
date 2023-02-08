@@ -10,9 +10,13 @@ import javafx.scene.control.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -182,7 +186,7 @@ public class MainController {
     @FXML
     private void initialize() {
 //        TODO: removed user that is signed in on every app startup
-        try {
+        try (BufferedWriter bf = Files.newBufferedWriter(Path.of("files/loggedUser.ser"), StandardOpenOption.TRUNCATE_EXISTING)) {
             list.clear();
             list = getUsers();
             comboBoxUsers.getItems().removeAll(list);
