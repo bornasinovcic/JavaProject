@@ -111,7 +111,7 @@ public class MenuBarController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Main.getStage().setTitle("Change Screen");
+        Main.getStage().setTitle("Changes Screen");
         Main.getStage().setScene(scene);
         Main.getStage().show();
     }

@@ -74,7 +74,7 @@ public class MainController {
                         }
                         System.out.println("User has been serialized.");
                     }
-                LOGGER.error("Successfully logged in.");
+                LOGGER.info("Successfully logged in.");
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Logged in");
                 alert.setHeaderText("Successfully logged in.");
