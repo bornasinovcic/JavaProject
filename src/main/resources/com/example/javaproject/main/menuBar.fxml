@@ -10,7 +10,7 @@
     <menus>
         <Menu mnemonicParsing="false" text="Main">
             <items>
-                <MenuItem mnemonicParsing="false" onAction="#showMainScreen" text="Log/Sign up"/>
+                <MenuItem mnemonicParsing="false" onAction="#showMainScreen" text="Log in/Sign up"/>
             </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Food">

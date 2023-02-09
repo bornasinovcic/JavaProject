@@ -1,12 +1,10 @@
 package com.example.javaproject.controllers;
 
-import com.example.javaproject.entities.Change;
-import com.example.javaproject.entities.Food;
-import com.example.javaproject.entities.Gadget;
-import com.example.javaproject.entities.User;
+import com.example.javaproject.entities.*;
 import com.example.javaproject.exceptions.DuplicateItemIdException;
 import com.example.javaproject.exceptions.DuplicateItemNameException;
 import com.example.javaproject.exceptions.SelectedItemException;
+import com.example.javaproject.generics.Changes;
 import com.example.javaproject.sorters.SortingGadgets;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -69,7 +67,9 @@ public class UpdateDeleteGadgetController {
         String itemWarrantyInMonthsString = textFieldWarranty.getText();
 
         Gadget selectedItem = tableViewGadget.getSelectionModel().getSelectedItem();
-        try {
+        try (FileInputStream file = new FileInputStream("files/loggedUser.ser");
+             ObjectInputStream in = new ObjectInputStream(file)) {
+            User user = (User) in.readObject();
             isSelectedItemNull(selectedItem);
             Gadget newMadeItem = new Gadget.GadgetBuilder()
                     .setItemId(itemId.isEmpty() ? selectedItem.getItemId() : itemId)
@@ -100,18 +100,8 @@ public class UpdateDeleteGadgetController {
             alert.setContentText(string);
             Optional<ButtonType> buttonType = alert.showAndWait();
             if (buttonType.isPresent() && buttonType.get() == ButtonType.OK) {
+                savingChanges(newMadeItem, selectedItem, user);
                 updateGadgetWithId(newMadeItem, selectedItem.getItemId());
-                try (FileInputStream file = new FileInputStream("files/loggedUser.ser");
-                     ObjectInputStream in = new ObjectInputStream(file)) {
-                    User user = (User) in.readObject();
-                    savingChanges(newMadeItem, selectedItem, user);
-                } catch (IOException | ClassNotFoundException e) {
-                    LOGGER.error("No user is signed in.");
-                    alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error alert message");
-                    alert.setHeaderText("No user is signed in.\nPlease sign in on the main screen.");
-                    alert.showAndWait();
-                }
                 LOGGER.info("Gadget item updated.");
                 initialize();
                 textFieldId.clear();
@@ -139,22 +129,28 @@ public class UpdateDeleteGadgetController {
             alert.setHeaderText("Some of the fields have a wrong data type.\n" +
                     "Please make sure you have inputted everything correctly.");
             alert.showAndWait();
+        } catch (IOException | ClassNotFoundException e) {
+            LOGGER.error("No user is signed in.");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error alert message");
+            alert.setHeaderText("No user is signed in.\nPlease sign in on the main screen.");
+            alert.showAndWait();
         }
     }
 
     private void savingChanges(Gadget newMadeItem, Gadget selectedItem, User user) {
-        List<Change> list;
+        List<Changes<Item>> list;
         File filepath = new File("files/changes.ser");
         try (FileInputStream file = new FileInputStream(filepath);
-             ObjectInputStream in = new ObjectInputStream(file)) {
-            list = (List<Change>) in.readObject();
+             ObjectInputStream in = new ObjectInputStream(file);) {
+            list = (List<Changes<Item>>) in.readObject();
             System.out.println(filepath + " deserialized");
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
         LocalDateTime localDateTime = LocalDateTime.now();
-        Change change = new Change(selectedItem, newMadeItem, user, localDateTime);
-        list.add(change);
+        Changes<Item> changes = new Changes<>(selectedItem, newMadeItem, user, localDateTime);
+        list.add(changes);
         try (FileOutputStream file = new FileOutputStream(filepath);
              ObjectOutputStream out = new ObjectOutputStream(file);) {
             out.writeObject(list);
@@ -162,11 +158,27 @@ public class UpdateDeleteGadgetController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        for (Change value : list) {
-            if (value.getBefore() instanceof Food food0 && value.getAfter() instanceof Food food1)
-                System.out.println(food0 + " -> " + food1 + " -> " + value.getUser().getRole() + " -> " + value.getLocalDateTime().format(DateTimeFormatter.ofPattern("dd.MM.yyy HH:mm")));
-            if (value.getBefore() instanceof Gadget gadget0 && value.getAfter() instanceof Gadget gadget1)
-                System.out.println(gadget0 + " -> " + gadget1 + " -> " + value.getUser().getRole() + " -> " + value.getLocalDateTime().format(DateTimeFormatter.ofPattern("dd.MM.yyy HH:mm")));
+        for (Changes<Item> itemChanges : list) {
+            if (itemChanges.getBefore().getClass() == Food.class && itemChanges.getBefore().getClass() == Food.class) {
+                Food food0 = (Food) itemChanges.getBefore();
+                Food food1 = (Food) itemChanges.getAfter();
+                System.out.println(food0.getClass().getSimpleName() + " " +
+                        food1.getClass().getSimpleName() + " " +
+                        food0 + " " +
+                        food1 + " " +
+                        itemChanges.getUser().getRole() + " " +
+                        itemChanges.getLocalDateTime().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH.mm")));
+            }
+            if (itemChanges.getBefore().getClass() == Gadget.class && itemChanges.getBefore().getClass() == Gadget.class) {
+                Gadget gadget0 = (Gadget) itemChanges.getBefore();
+                Gadget gadget1 = (Gadget) itemChanges.getAfter();
+                System.out.println(gadget0.getClass().getSimpleName() + " " +
+                        gadget1.getClass().getSimpleName() + " " +
+                        gadget0 + " " +
+                        gadget1 + " " +
+                        itemChanges.getUser().getRole() + " " +
+                        itemChanges.getLocalDateTime().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH.mm")));
+            }
         }
     }
 
