@@ -168,6 +168,7 @@ public class MainController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        initialize();
     }
 
     private void testForDuplicateUserId(List<User> list, String id) throws DuplicateItemIdException {
@@ -185,13 +186,11 @@ public class MainController {
 
     @FXML
     private void initialize() {
-//        TODO: removed user that is signed in on every app startup
         try (BufferedWriter bf = Files.newBufferedWriter(Path.of("files/loggedUser.ser"), StandardOpenOption.TRUNCATE_EXISTING)) {
-            list.clear();
-            list = getUsers();
             comboBoxUsers.getItems().removeAll(list);
-            comboBoxUsers.getItems().addAll(list);
             comboBox.getItems().removeAll(Roles.values());
+            list = getUsers();
+            comboBoxUsers.getItems().addAll(list);
             comboBox.getItems().addAll(Roles.values());
         } catch (IOException e) {
             throw new RuntimeException(e);
