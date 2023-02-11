@@ -221,7 +221,9 @@ public class UpdateDeleteFoodController {
     @FXML
     protected void onDeleteButtonClick() {
         Food food = tableViewFood.getSelectionModel().getSelectedItem();
-        try {
+        try (FileInputStream file = new FileInputStream("files/loggedUser.ser");
+             ObjectInputStream in = new ObjectInputStream(file)) {
+            User user = (User) in.readObject();
             isSelectedItemNull(food);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Deletion of item");
@@ -237,6 +239,12 @@ public class UpdateDeleteFoodController {
             LOGGER.error(e.getMessage());
             alert.setTitle(e.getMessage());
             alert.setHeaderText(e.getMessage());
+            alert.showAndWait();
+        } catch (IOException | ClassNotFoundException e) {
+            LOGGER.error("No user is signed in.");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error alert message");
+            alert.setHeaderText("No user is signed in.\nPlease sign in on the main screen.");
             alert.showAndWait();
         }
     }

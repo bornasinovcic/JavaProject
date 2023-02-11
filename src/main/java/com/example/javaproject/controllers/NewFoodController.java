@@ -2,6 +2,7 @@ package com.example.javaproject.controllers;
 
 import com.example.javaproject.entities.Food;
 import com.example.javaproject.entities.NutritionalValue;
+import com.example.javaproject.entities.User;
 import com.example.javaproject.exceptions.DuplicateItemIdException;
 import com.example.javaproject.exceptions.DuplicateItemNameException;
 import javafx.fxml.FXML;
@@ -11,6 +12,9 @@ import javafx.scene.control.TextField;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
@@ -66,7 +70,9 @@ public class NewFoodController {
         if (itemFatsString.isEmpty()) stringBuilder.append("You forgot to input fat value of that food.\n");
 
         if (stringBuilder.isEmpty()) {
-            try {
+            try (FileInputStream file = new FileInputStream("files/loggedUser.ser");
+                 ObjectInputStream in = new ObjectInputStream(file)) {
+                User user = (User) in.readObject();
                 BigDecimal itemPrice = new BigDecimal(itemPriceString);
                 Integer itemQuantity = Integer.valueOf(itemQuantityString);
                 Integer amountOfProteins = Integer.valueOf(itemProteinsString);
@@ -121,6 +127,12 @@ public class NewFoodController {
                 alert.setTitle("Warning alert message");
                 alert.setHeaderText("Some of the fields have a wrong data type.\n" +
                         "Please make sure you have inputted everything correctly.");
+                alert.showAndWait();
+            } catch (IOException | ClassNotFoundException e) {
+                LOGGER.error("No user is signed in.");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error alert message");
+                alert.setHeaderText("No user is signed in.\nPlease sign in on the main screen.");
                 alert.showAndWait();
             }
         } else {
