@@ -7,29 +7,27 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-      prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.javaproject.controllers.NewFoodController">
-    <fx:include source="menuBar.fxml"/>
-    <Label layoutX="191.0" layoutY="50.0" text="Insert new food item">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javaproject.controllers.NewFoodController">
+    <fx:include source="menuBar.fxml" />
+    <Label layoutX="321.0" layoutY="50.0" text="Insert new food item">
         <font>
-            <Font size="24.0"/>
+            <Font size="24.0" />
         </font>
     </Label>
-    <TextField fx:id="textFieldId" layoutX="300.0" layoutY="100.0"/>
-    <Button layoutX="460.0" layoutY="100.0" mnemonicParsing="false" onAction="#onRandomButtonClick" text="Random id"/>
-    <TextField fx:id="textFieldName" layoutX="300.0" layoutY="130.0"/>
-    <TextField fx:id="textFieldPrice" layoutX="300.0" layoutY="160.0"/>
-    <TextField fx:id="textFieldQuantity" layoutX="300.0" layoutY="190.0"/>
-    <TextField fx:id="textFieldProteins" layoutX="300.0" layoutY="220.0"/>
-    <TextField fx:id="textFieldCarbohydrates" layoutX="300.0" layoutY="250.0"/>
-    <TextField fx:id="textFieldFats" layoutX="300.0" layoutY="280.0"/>
-    <Text layoutX="277.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id:"/>
-    <Text layoutX="256.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:"/>
-    <Text layoutX="262.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price:"/>
-    <Text layoutX="242.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:"/>
-    <Text layoutX="244.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Proteins:"/>
-    <Text layoutX="210.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Carbohydrates:"/>
-    <Text layoutX="266.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fats:"/>
-    <Button layoutX="275.0" layoutY="320.0" mnemonicParsing="false" onAction="#onButtonClick" text="Button"/>
+    <TextField fx:id="textFieldId" layoutX="430.0" layoutY="100.0" />
+    <Button layoutX="590.0" layoutY="100.0" mnemonicParsing="false" onAction="#onRandomButtonClick" text="Random id" />
+    <TextField fx:id="textFieldName" layoutX="430.0" layoutY="130.0" />
+    <TextField fx:id="textFieldPrice" layoutX="430.0" layoutY="160.0" />
+    <TextField fx:id="textFieldQuantity" layoutX="430.0" layoutY="190.0" />
+    <TextField fx:id="textFieldProteins" layoutX="430.0" layoutY="220.0" />
+    <TextField fx:id="textFieldCarbohydrates" layoutX="430.0" layoutY="250.0" />
+    <TextField fx:id="textFieldFats" layoutX="430.0" layoutY="280.0" />
+    <Text layoutX="407.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id:" />
+    <Text layoutX="386.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
+    <Text layoutX="392.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price:" />
+    <Text layoutX="372.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:" />
+    <Text layoutX="374.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Proteins:" />
+    <Text layoutX="340.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Carbohydrates:" />
+    <Text layoutX="396.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fats:" />
+    <Button layoutX="405.0" layoutY="320.0" mnemonicParsing="false" onAction="#onButtonClick" text="Button" />
 </Pane>

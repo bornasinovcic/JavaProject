@@ -6,7 +6,7 @@
 
 <MenuBar xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19"
          fx:controller="com.example.javaproject.controllers.MenuBarController"
-         prefHeight="25.0" prefWidth="600.0">
+         prefHeight="25.0" prefWidth="900.0">
     <menus>
         <Menu mnemonicParsing="false" text="Main">
             <items>

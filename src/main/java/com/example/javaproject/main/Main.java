@@ -22,7 +22,7 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         Main.stage = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("mainScreen.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        Scene scene = new Scene(fxmlLoader.load(), 900, 500);
         stage.setTitle("Checklist application");
         stage.setScene(scene);
         stage.show();

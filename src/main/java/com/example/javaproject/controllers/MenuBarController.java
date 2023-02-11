@@ -7,11 +7,12 @@ import javafx.scene.Scene;
 import java.io.IOException;
 
 public class MenuBarController {
+    private final int SCREEN_WIDTH = 900, SCREEN_HEIGHT = 500;
     public void showMainScreen() {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("mainScreen.fxml"));
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 600, 400);
+            scene = new Scene(fxmlLoader.load(), SCREEN_WIDTH, SCREEN_HEIGHT);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -23,7 +24,7 @@ public class MenuBarController {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("newFoodScreen.fxml"));
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 600, 400);
+            scene = new Scene(fxmlLoader.load(), SCREEN_WIDTH, SCREEN_HEIGHT);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -35,7 +36,7 @@ public class MenuBarController {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("newGadgetScreen.fxml"));
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 600, 400);
+            scene = new Scene(fxmlLoader.load(), SCREEN_WIDTH, SCREEN_HEIGHT);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -47,7 +48,7 @@ public class MenuBarController {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("foodScreen.fxml"));
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 600, 400);
+            scene = new Scene(fxmlLoader.load(), SCREEN_WIDTH, SCREEN_HEIGHT);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -59,7 +60,7 @@ public class MenuBarController {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("gadgetScreen.fxml"));
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 600, 400);
+            scene = new Scene(fxmlLoader.load(), SCREEN_WIDTH, SCREEN_HEIGHT);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -71,7 +72,7 @@ public class MenuBarController {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("updateDeleteFoodScreen.fxml"));
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 600, 400);
+            scene = new Scene(fxmlLoader.load(), SCREEN_WIDTH, SCREEN_HEIGHT);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -83,7 +84,7 @@ public class MenuBarController {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("updateDeleteGadgetScreen.fxml"));
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 600, 400);
+            scene = new Scene(fxmlLoader.load(), SCREEN_WIDTH, SCREEN_HEIGHT);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -95,7 +96,7 @@ public class MenuBarController {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("infoScreen.fxml"));
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 600, 400);
+            scene = new Scene(fxmlLoader.load(), SCREEN_WIDTH, SCREEN_HEIGHT);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -107,7 +108,7 @@ public class MenuBarController {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("changesScreen.fxml"));
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 600, 400);
+            scene = new Scene(fxmlLoader.load(), SCREEN_WIDTH, SCREEN_HEIGHT);
         } catch (IOException e) {
             e.printStackTrace();
         }
