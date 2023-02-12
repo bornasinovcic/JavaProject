@@ -99,9 +99,12 @@ public class MainController {
     }
 
     private void isPasswordCorrect(User user, String passwordLogIn) {
-        String decryptedPass = decryption(user.getUserPassword());
-        if (!decryptedPass.equals(passwordLogIn))
+        String passwordLogInHashed = encryption(passwordLogIn);
+        if (!user.getUserPassword().equals(passwordLogInHashed))
             throw new WrongPasswordException("Wrong password for user " + user.getUserName() + ".");
+//        String decryptedPass = decryption(user.getUserPassword());
+//        if (!decryptedPass.equals(passwordLogIn))
+//            throw new WrongPasswordException("Wrong password for user " + user.getUserName() + ".");
     }
 
     @FXML
