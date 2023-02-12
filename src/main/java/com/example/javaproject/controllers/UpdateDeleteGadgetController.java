@@ -26,6 +26,8 @@ import static com.example.javaproject.database.DatabaseHandling.*;
 import static com.example.javaproject.entities.Random.randomString;
 
 public class UpdateDeleteGadgetController {
+
+    private static final String PATH_NAME = "files/changes.ser";
     private static final Logger LOGGER = LoggerFactory.getLogger(UpdateDeleteFoodController.class);
     @FXML
     private TextField textFieldId;
@@ -140,45 +142,22 @@ public class UpdateDeleteGadgetController {
 
     private void savingChanges(Gadget newMadeItem, Gadget selectedItem, User user) {
         List<Changes<Item>> list = new ArrayList<>();
-        File filepath = new File("files/changes.ser");
-        try (FileInputStream file = new FileInputStream(filepath);
+        try (FileInputStream file = new FileInputStream(PATH_NAME);
              ObjectInputStream in = new ObjectInputStream(file);) {
             list = (List<Changes<Item>>) in.readObject();
-            System.out.println(filepath + " deserialized");
+            System.out.println(PATH_NAME + " deserialized");
         } catch (IOException | ClassNotFoundException e) {
 //            throw new RuntimeException(e);
         }
         LocalDateTime localDateTime = LocalDateTime.now();
         Changes<Item> changes = new Changes<>(selectedItem, newMadeItem, user, localDateTime);
         list.add(changes);
-        try (FileOutputStream file = new FileOutputStream(filepath);
+        try (FileOutputStream file = new FileOutputStream(PATH_NAME);
              ObjectOutputStream out = new ObjectOutputStream(file);) {
             out.writeObject(list);
-            System.out.println(filepath + " serialized");
+            System.out.println(PATH_NAME + " serialized");
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
-        for (Changes<Item> itemChanges : list) {
-            if (itemChanges.getBefore().getClass() == Food.class && itemChanges.getBefore().getClass() == Food.class) {
-                Food food0 = (Food) itemChanges.getBefore();
-                Food food1 = (Food) itemChanges.getAfter();
-                System.out.println(food0.getClass().getSimpleName() + " " +
-                        food1.getClass().getSimpleName() + " " +
-                        food0 + " " +
-                        food1 + " " +
-                        itemChanges.getUser().getRole() + " " +
-                        itemChanges.getLocalDateTime().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH.mm")));
-            }
-            if (itemChanges.getBefore().getClass() == Gadget.class && itemChanges.getBefore().getClass() == Gadget.class) {
-                Gadget gadget0 = (Gadget) itemChanges.getBefore();
-                Gadget gadget1 = (Gadget) itemChanges.getAfter();
-                System.out.println(gadget0.getClass().getSimpleName() + " " +
-                        gadget1.getClass().getSimpleName() + " " +
-                        gadget0 + " " +
-                        gadget1 + " " +
-                        itemChanges.getUser().getRole() + " " +
-                        itemChanges.getLocalDateTime().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH.mm")));
-            }
         }
     }
 

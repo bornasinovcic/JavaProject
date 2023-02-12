@@ -161,7 +161,7 @@ public class UpdateDeleteFoodController {
         List<Changes<Item>> list = new ArrayList<>();
         File filepath = new File("files/changes.ser");
         try (FileInputStream file = new FileInputStream(filepath);
-             ObjectInputStream in = new ObjectInputStream(file);) {
+             ObjectInputStream in = new ObjectInputStream(file)) {
             list = (List<Changes<Item>>) in.readObject();
             System.out.println(filepath + " deserialized");
         } catch (IOException | ClassNotFoundException e) {
@@ -171,33 +171,11 @@ public class UpdateDeleteFoodController {
         Changes<Item> changes = new Changes<>(selectedItem, newMadeItem, user, localDateTime);
         list.add(changes);
         try (FileOutputStream file = new FileOutputStream(filepath);
-             ObjectOutputStream out = new ObjectOutputStream(file);) {
+             ObjectOutputStream out = new ObjectOutputStream(file)) {
             out.writeObject(list);
             System.out.println(filepath + " serialized");
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
-        for (Changes<Item> itemChanges : list) {
-            if (itemChanges.getBefore().getClass() == Food.class && itemChanges.getBefore().getClass() == Food.class) {
-                Food food0 = (Food) itemChanges.getBefore();
-                Food food1 = (Food) itemChanges.getAfter();
-                System.out.println(food0.getClass().getSimpleName() + " " +
-                        food1.getClass().getSimpleName() + " " +
-                        food0 + " " +
-                        food1 + " " +
-                        itemChanges.getUser().getRole() + " " +
-                        itemChanges.getLocalDateTime().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH.mm")));
-            }
-            if (itemChanges.getBefore().getClass() == Gadget.class && itemChanges.getBefore().getClass() == Gadget.class) {
-                Gadget gadget0 = (Gadget) itemChanges.getBefore();
-                Gadget gadget1 = (Gadget) itemChanges.getAfter();
-                System.out.println(gadget0.getClass().getSimpleName() + " " +
-                        gadget1.getClass().getSimpleName() + " " +
-                        gadget0 + " " +
-                        gadget1 + " " +
-                        itemChanges.getUser().getRole() + " " +
-                        itemChanges.getLocalDateTime().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH.mm")));
-            }
         }
     }
 
