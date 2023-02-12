@@ -4,7 +4,6 @@ import com.example.javaproject.entities.*;
 import com.example.javaproject.exceptions.DuplicateItemIdException;
 import com.example.javaproject.exceptions.DuplicateItemNameException;
 import com.example.javaproject.exceptions.SelectedItemException;
-import com.example.javaproject.generics.Changes;
 import com.example.javaproject.sorters.SortingGadgets;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -16,18 +15,16 @@ import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import static com.example.javaproject.database.DatabaseHandling.*;
+import static com.example.javaproject.entities.DataRefresh.serialization;
 import static com.example.javaproject.entities.Random.randomString;
 
 public class UpdateDeleteGadgetController {
 
-    private static final String PATH_NAME = "files/changes.ser";
     private static final Logger LOGGER = LoggerFactory.getLogger(UpdateDeleteFoodController.class);
     @FXML
     private TextField textFieldId;
@@ -102,7 +99,13 @@ public class UpdateDeleteGadgetController {
             alert.setContentText(string);
             Optional<ButtonType> buttonType = alert.showAndWait();
             if (buttonType.isPresent() && buttonType.get() == ButtonType.OK) {
-                savingChanges(newMadeItem, selectedItem, user);
+                Thread thread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        serialization(newMadeItem, selectedItem, user);
+                    }
+                });
+                thread.start();
                 updateGadgetWithId(newMadeItem, selectedItem.getItemId());
                 LOGGER.info("Gadget item updated.");
                 initialize();
@@ -137,27 +140,6 @@ public class UpdateDeleteGadgetController {
             alert.setTitle("Error alert message");
             alert.setHeaderText("No user is signed in.\nPlease sign in on the main screen.");
             alert.showAndWait();
-        }
-    }
-
-    private void savingChanges(Gadget newMadeItem, Gadget selectedItem, User user) {
-        List<Changes<Item>> list = new ArrayList<>();
-        try (FileInputStream file = new FileInputStream(PATH_NAME);
-             ObjectInputStream in = new ObjectInputStream(file);) {
-            list = (List<Changes<Item>>) in.readObject();
-            System.out.println(PATH_NAME + " deserialized");
-        } catch (IOException | ClassNotFoundException e) {
-//            throw new RuntimeException(e);
-        }
-        LocalDateTime localDateTime = LocalDateTime.now();
-        Changes<Item> changes = new Changes<>(selectedItem, newMadeItem, user, localDateTime);
-        list.add(changes);
-        try (FileOutputStream file = new FileOutputStream(PATH_NAME);
-             ObjectOutputStream out = new ObjectOutputStream(file);) {
-            out.writeObject(list);
-            System.out.println(PATH_NAME + " serialized");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 

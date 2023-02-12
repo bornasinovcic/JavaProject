@@ -1,10 +1,11 @@
 package com.example.javaproject.controllers;
 
-import com.example.javaproject.entities.*;
+import com.example.javaproject.entities.Food;
+import com.example.javaproject.entities.NutritionalValue;
+import com.example.javaproject.entities.User;
 import com.example.javaproject.exceptions.DuplicateItemIdException;
 import com.example.javaproject.exceptions.DuplicateItemNameException;
 import com.example.javaproject.exceptions.SelectedItemException;
-import com.example.javaproject.generics.Changes;
 import com.example.javaproject.sorters.SortingFoods;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -14,16 +15,18 @@ import javafx.scene.control.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import static com.example.javaproject.database.DatabaseHandling.*;
+import static com.example.javaproject.entities.DataRefresh.serialization;
 import static com.example.javaproject.entities.Random.randomString;
+
 
 public class UpdateDeleteFoodController {
     private static final Logger LOGGER = LoggerFactory.getLogger(UpdateDeleteFoodController.class);
@@ -117,7 +120,13 @@ public class UpdateDeleteFoodController {
             alert.setContentText(string);
             Optional<ButtonType> buttonType = alert.showAndWait();
             if (buttonType.isPresent() && buttonType.get() == ButtonType.OK) {
-                savingChanges(newMadeItem, selectedItem, user);
+                Thread thread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        serialization(newMadeItem, selectedItem, user);
+                    }
+                });
+                thread.start();
                 updateFoodWithId(newMadeItem, selectedItem.getItemId());
                 LOGGER.info("Food item updated.");
                 initialize();
@@ -154,28 +163,6 @@ public class UpdateDeleteFoodController {
             alert.setTitle("Error alert message");
             alert.setHeaderText("No user is signed in.\nPlease sign in on the main screen.");
             alert.showAndWait();
-        }
-    }
-
-    private void savingChanges(Food newMadeItem, Food selectedItem, User user) {
-        List<Changes<Item>> list = new ArrayList<>();
-        File filepath = new File("files/changes.ser");
-        try (FileInputStream file = new FileInputStream(filepath);
-             ObjectInputStream in = new ObjectInputStream(file)) {
-            list = (List<Changes<Item>>) in.readObject();
-            System.out.println(filepath + " deserialized");
-        } catch (IOException | ClassNotFoundException e) {
-//            throw new RuntimeException(e);
-        }
-        LocalDateTime localDateTime = LocalDateTime.now();
-        Changes<Item> changes = new Changes<>(selectedItem, newMadeItem, user, localDateTime);
-        list.add(changes);
-        try (FileOutputStream file = new FileOutputStream(filepath);
-             ObjectOutputStream out = new ObjectOutputStream(file)) {
-            out.writeObject(list);
-            System.out.println(filepath + " serialized");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 
