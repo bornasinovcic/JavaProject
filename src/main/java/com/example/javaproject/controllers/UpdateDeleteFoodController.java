@@ -158,14 +158,14 @@ public class UpdateDeleteFoodController {
     }
 
     private void savingChanges(Food newMadeItem, Food selectedItem, User user) {
-        List<Changes<Item>> list;
+        List<Changes<Item>> list = new ArrayList<>();
         File filepath = new File("files/changes.ser");
         try (FileInputStream file = new FileInputStream(filepath);
              ObjectInputStream in = new ObjectInputStream(file);) {
             list = (List<Changes<Item>>) in.readObject();
             System.out.println(filepath + " deserialized");
         } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+//            throw new RuntimeException(e);
         }
         LocalDateTime localDateTime = LocalDateTime.now();
         Changes<Item> changes = new Changes<>(selectedItem, newMadeItem, user, localDateTime);

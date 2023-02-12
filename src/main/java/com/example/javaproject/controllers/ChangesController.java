@@ -61,7 +61,7 @@ public class ChangesController {
             tableView.setItems(FXCollections.observableList(list));
 
         } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+//            throw new RuntimeException(e);
         }
 
     }
