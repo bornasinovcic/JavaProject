@@ -28,7 +28,7 @@ public class DataRefresh {
             list = (List<Changes<Item>>) in.readObject();
             System.out.println(PATH_NAME + " deserialized");
         } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            System.out.println("No data inputted yet in list.");
         }
         return list;
     }

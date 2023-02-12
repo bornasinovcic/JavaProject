@@ -1,10 +1,12 @@
 package com.example.javaproject.controllers;
 
+import com.example.javaproject.entities.Item;
 import com.example.javaproject.entities.Roles;
 import com.example.javaproject.entities.User;
 import com.example.javaproject.exceptions.DuplicateItemIdException;
 import com.example.javaproject.exceptions.DuplicateItemNameException;
 import com.example.javaproject.exceptions.WrongPasswordException;
+import com.example.javaproject.generics.Changes;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import org.slf4j.Logger;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static com.example.javaproject.entities.DataRefresh.deserialization;
 import static com.example.javaproject.entities.Hash.*;
 import static com.example.javaproject.entities.Random.randomString;
 import static com.example.javaproject.files.FilesHandling.addNewUser;
@@ -102,9 +105,6 @@ public class MainController {
         String passwordLogInHashed = encryption(passwordLogIn);
         if (!user.getUserPassword().equals(passwordLogInHashed))
             throw new WrongPasswordException("Wrong password for user " + user.getUserName() + ".");
-//        String decryptedPass = decryption(user.getUserPassword());
-//        if (!decryptedPass.equals(passwordLogIn))
-//            throw new WrongPasswordException("Wrong password for user " + user.getUserName() + ".");
     }
 
     @FXML
@@ -189,6 +189,13 @@ public class MainController {
 
     @FXML
     private void initialize() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                List<Changes<Item>> changesList = deserialization();
+            }
+        });
+        thread.start();
         try (BufferedWriter bf = Files.newBufferedWriter(Path.of("files/loggedUser.ser"), StandardOpenOption.TRUNCATE_EXISTING)) {
             comboBoxUsers.getItems().removeAll(list);
             comboBox.getItems().removeAll(Roles.values());
