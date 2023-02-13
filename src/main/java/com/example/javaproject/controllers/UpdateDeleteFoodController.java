@@ -123,7 +123,7 @@ public class UpdateDeleteFoodController {
                 Thread thread = new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        serialization(newMadeItem, selectedItem, user);
+                        serialization(selectedItem, newMadeItem, user);
                     }
                 });
                 thread.start();

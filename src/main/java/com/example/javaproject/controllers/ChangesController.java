@@ -4,6 +4,7 @@ import com.example.javaproject.entities.Food;
 import com.example.javaproject.entities.Gadget;
 import com.example.javaproject.entities.Item;
 import com.example.javaproject.generics.Changes;
+import com.example.javaproject.sorters.SortingChanges;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -36,7 +37,7 @@ public class ChangesController {
         list.clear();
         Thread thread = new Thread(() -> {
             list = deserialization();
-            list = list.stream().sorted((o1, o2) -> o2.getLocalDateTime().compareTo(o1.getLocalDateTime())).toList();
+            list.sort(new SortingChanges());
             before.setCellValueFactory(changeItemCellDataFeatures -> {
                 if (changeItemCellDataFeatures.getValue().getBefore().getClass() == Food.class) {
                     return new SimpleObjectProperty<>(changeItemCellDataFeatures.getValue().getBefore());

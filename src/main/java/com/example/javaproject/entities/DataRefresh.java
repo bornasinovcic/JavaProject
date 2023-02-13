@@ -11,7 +11,7 @@ public class DataRefresh {
     private static final String PATH_NAME = "files/changes.ser";
     private static List<Changes<Item>> list = new ArrayList<>();
 
-    public static synchronized void serialization(Item newMadeItem, Item selectedItem, User user) {
+    public static synchronized void serialization(Item selectedItem, Item newMadeItem, User user) {
         try (FileOutputStream file = new FileOutputStream(PATH_NAME);
              ObjectOutputStream out = new ObjectOutputStream(file)) {
             list.add(new Changes<>(selectedItem, newMadeItem, user, LocalDateTime.now()));
