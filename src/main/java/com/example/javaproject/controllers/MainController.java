@@ -128,7 +128,7 @@ public class MainController {
             if (stringBuilder.isEmpty()) {
                 Roles role = null;
                 for (Roles roles : Roles.values())
-                    if (roleInput.getRole().equals(roles.getRole()))
+                    if (roleInput.equals(roles))
                         role = roles;
                 User user = new User.UserBuilder()
                         .setItemId(id)
@@ -143,7 +143,7 @@ public class MainController {
                 String string = "Id -> [" + id + "]" +
                         "\nName -> [" + name + "]" +
                         "\nPassword -> [" + password + "]" +
-                        "\nRole -> [" + roleInput.getRole() + "]";
+                        "\nRole -> [" + roleInput + "]";
                 alert.setContentText(string);
                 Optional<ButtonType> buttonType = alert.showAndWait();
                 if (buttonType.isPresent() && buttonType.get() == ButtonType.OK) {

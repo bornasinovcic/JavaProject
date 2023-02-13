@@ -89,11 +89,7 @@ public class FilesHandling {
         while ((line = bufferedReader.readLine()) != null) {
             String userName = bufferedReader.readLine();
             String userPassword = bufferedReader.readLine();
-            String roleString = bufferedReader.readLine();
-            Roles role = null;
-            for (Roles roles : Roles.values())
-                if (roleString.equals(roles.getRole()))
-                    role = roles;
+            Roles role = Roles.valueOf(bufferedReader.readLine());
             list.add(new User.UserBuilder()
                     .setItemId(line)
                     .setUserName(userName)
@@ -112,7 +108,7 @@ public class FilesHandling {
             printWriter.println(user.getItemId());
             printWriter.println(user.getUserName());
             printWriter.println(user.getUserPassword());
-            printWriter.println(user.getRole().getRole());
+            printWriter.println(user.getRole());
         }
         printWriter.flush();
     }

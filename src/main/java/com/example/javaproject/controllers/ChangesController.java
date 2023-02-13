@@ -55,7 +55,7 @@ public class ChangesController {
                 }
                 return null;
             });
-            role.setCellValueFactory(changeItemCellDataFeatures -> new SimpleStringProperty(changeItemCellDataFeatures.getValue().getUser().getRole().getRole()));
+            role.setCellValueFactory(changeItemCellDataFeatures -> new SimpleObjectProperty<>(changeItemCellDataFeatures.getValue().getUser().getRole().name()));
             localDateTime.setCellValueFactory(changeLocalDateTimeCellDataFeatures -> new SimpleObjectProperty<>(changeLocalDateTimeCellDataFeatures.getValue().getLocalDateTime().format(DateTimeFormatter.ofPattern("dd.MM.yyy HH:mm"))));
             tableView.setItems(FXCollections.observableList(list));
         });

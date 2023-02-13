@@ -58,6 +58,6 @@ public class User extends Id implements Serializable {
 
     @Override
     public String toString() {
-        return userName + " [" + getItemId() + "]";
+        return userName + " [" + getItemId() + "] [" + getRole() + "]";
     }
 }
