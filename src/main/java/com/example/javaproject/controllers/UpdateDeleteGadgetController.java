@@ -106,6 +106,11 @@ public class UpdateDeleteGadgetController {
                     }
                 });
                 thread.start();
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
                 updateGadgetWithId(newMadeItem, selectedItem.getItemId());
                 LOGGER.info("Gadget item updated.");
                 initialize();

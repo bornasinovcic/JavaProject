@@ -61,5 +61,10 @@ public class ChangesController {
             tableView.setItems(FXCollections.observableList(list));
         });
         thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -127,6 +127,11 @@ public class UpdateDeleteFoodController {
                     }
                 });
                 thread.start();
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
                 updateFoodWithId(newMadeItem, selectedItem.getItemId());
                 LOGGER.info("Food item updated.");
                 initialize();
