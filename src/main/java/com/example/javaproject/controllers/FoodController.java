@@ -38,7 +38,7 @@ public class FoodController {
     private static List<Food> foodList = new ArrayList<>();
 
     @FXML
-    protected void onKeyTyped() {
+    private void onKeyTyped() {
         String s = textField.getText().toLowerCase();
         List<Food> list = new ArrayList<>(foodList);
         list = list.stream()

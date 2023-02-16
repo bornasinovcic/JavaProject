@@ -64,13 +64,13 @@ public class UpdateDeleteFoodController {
     private static List<Food> foodList = new ArrayList<>();
 
     @FXML
-    protected void onRandomButtonClick() {
+    private void onRandomButtonClick() {
         String madeString = randomString();
         textFieldId.setText(madeString);
     }
 
     @FXML
-    protected void onUpdateButtonClick() {
+    private void onUpdateButtonClick() {
         String itemId = textFieldId.getText();
         String itemName = textFieldName.getText();
         String itemPriceString = textFieldPrice.getText();
@@ -189,7 +189,7 @@ public class UpdateDeleteFoodController {
     }
 
     @FXML
-    protected void onDeleteButtonClick() {
+    private void onDeleteButtonClick() {
         Food food = tableViewFood.getSelectionModel().getSelectedItem();
         try (FileInputStream file = new FileInputStream("files/loggedUser.ser");
              ObjectInputStream in = new ObjectInputStream(file)) {

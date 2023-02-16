@@ -48,13 +48,13 @@ public class MainController {
     List<User> list = new ArrayList<>();
 
     @FXML
-    protected void onRandomButtonClick() {
+    private void onRandomButtonClick() {
         String madeString = randomString();
         textFieldId.setText(madeString);
     }
 
     @FXML
-    protected void signInButton() {
+    private void signInButton() {
         User logInUser = comboBoxUsers.getValue();
         String passwordLogIn = passwordFieldLogIn.getText();
 
@@ -108,7 +108,7 @@ public class MainController {
     }
 
     @FXML
-    protected void makeAccountButton() {
+    private void makeAccountButton() {
         try {
             List<User> list = getUsers();
             String id = textFieldId.getText();

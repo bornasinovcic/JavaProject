@@ -52,13 +52,13 @@ public class UpdateDeleteGadgetController {
     private static List<Gadget> gadgetList = new ArrayList<>();
 
     @FXML
-    protected void onRandomButtonClick() {
+    private void onRandomButtonClick() {
         String madeString = randomString();
         textFieldId.setText(madeString);
     }
 
     @FXML
-    protected void onUpdateButtonClick() {
+    private void onUpdateButtonClick() {
         String itemId = textFieldId.getText();
         String itemName = textFieldName.getText();
         String itemPriceString = textFieldPrice.getText();
@@ -167,7 +167,7 @@ public class UpdateDeleteGadgetController {
     }
 
     @FXML
-    protected void onDeleteButtonClick() {
+    private void onDeleteButtonClick() {
         Gadget gadget = tableViewGadget.getSelectionModel().getSelectedItem();
         try (FileInputStream file = new FileInputStream("files/loggedUser.ser");
              ObjectInputStream in = new ObjectInputStream(file)) {

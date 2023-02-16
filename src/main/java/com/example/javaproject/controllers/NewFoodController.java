@@ -43,13 +43,13 @@ public class NewFoodController {
 
 
     @FXML
-    protected void onRandomButtonClick() {
+    private void onRandomButtonClick() {
         String madeString = randomString();
         textFieldId.setText(madeString);
     }
 
     @FXML
-    protected void onButtonClick() {
+    private void onButtonClick() {
         String itemId = textFieldId.getText();
         String itemName = textFieldName.getText();
         String itemPriceString = textFieldPrice.getText();

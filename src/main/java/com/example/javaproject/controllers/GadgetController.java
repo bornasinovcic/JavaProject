@@ -35,7 +35,7 @@ public class GadgetController {
     private TableView<Gadget> tableViewGadget;
     private static List<Gadget> gadgetList = new ArrayList<>();
     @FXML
-    protected void onKeyTyped() {
+    private void onKeyTyped() {
         String name = textFieldName.getText().toLowerCase();
         String warranty = textFieldWarranty.getText().toLowerCase();
         List<Gadget> list = new ArrayList<>(gadgetList);

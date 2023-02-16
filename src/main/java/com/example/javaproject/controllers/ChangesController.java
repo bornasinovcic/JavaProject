@@ -6,7 +6,6 @@ import com.example.javaproject.entities.Item;
 import com.example.javaproject.generics.Changes;
 import com.example.javaproject.sorters.SortingChanges;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
